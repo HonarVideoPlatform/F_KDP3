@@ -1,7 +1,11 @@
 package com.kaltura.kdpfl.plugin
 {
 	import org.puremvc.as3.interfaces.IFacade;
-	
+	/**
+	 * Interface for the KDP plugins. 
+	 * @author Hila
+	 * 
+	 */	
 	public interface IPlugin
 	{
 		/**
@@ -13,9 +17,9 @@ package com.kaltura.kdpfl.plugin
 		function initializePlugin( facade : IFacade ) : void
 		
 		/**
-		 * 
-		 * @param styleName
-		 * @param setSkinSize
+		 * Function sets the visual assets of the plugin according to styleName.
+		 * @param styleName - state of the plugin to assign a skin class to (i.e overSkin, upSkin, etc).
+		 * @param setSkinSize - optional flag indicating whether the skin size should be changed to the component size.
 		 * 
 		 */		
 		function setSkin( styleName : String , setSkinSize : Boolean = false) : void;

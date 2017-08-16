@@ -21,6 +21,10 @@ package com.kaltura.kdpfl.plugin.component
  
 	public class ClosedCaptions extends KHBox //implements IComponent
 	{
+		public static const ERROR_PARSING_SRT : String = "errorParsingSRT";
+		
+		public static const ERROR_PARSING_TT : String = "errorParsingTT";
+		
 		private var _label:TextField;
 		private var _captionsURLLoader:URLLoader;
 		private var _ccLines:Array;
@@ -58,21 +62,21 @@ package com.kaltura.kdpfl.plugin.component
 		
 		public function setDimensions(w:Number, h:Number):void
 		{
-			this.width = w ? w : 0;
 			
-			this.height = h ? h : 0;
-			
-			var heightRatio : Number = 1;
-			if (_label.height != h)
-			{
-				heightRatio = h/_label.height;
-				//trace ("height ratio ", heightRatio);
-			}
-			
-			_label.height = h ? h : 0;
-			_fontSize = Math.round(_fontSize * heightRatio);
-			//trace ("font size: ", _fontSize);
-			setText (null);
+			 if ( w && h)
+			 {
+				this.width = w;
+				this.height = h;
+				var heightRatio : Number = 1;
+				if (_label.height != h)
+				{
+					heightRatio = h/_label.height;
+				}
+				
+				_label.height = h;
+				_fontSize = Math.round(_fontSize * heightRatio);
+				setText (null);
+			 }
 		}
 		
 		public function setFontSize(fontSize:int):void
@@ -122,7 +126,7 @@ package com.kaltura.kdpfl.plugin.component
 
 		private function onError(event:Event):void
 		{
-			trace(event);
+			this.dispatchEvent( event.clone() );
 		}
 
 		public function updatePlayhead (pos:Number):void
@@ -165,73 +169,85 @@ package com.kaltura.kdpfl.plugin.component
 		
 		private function parseSRT (e:Event):void
 		{
-			var lines:Array = _captionsURLLoader.data.split ("\n");
-			var currLine:CCLine = null;
-			_ccLines = new Array ();
-			var ccLineInd:int = 0;
-
-			for (var i:int = 0; i < lines.length; i++)
-			{
-				var str:String = lines [i].replace (/^\s+|\s+$/g, "");
-				if (str == "")
+			try{
+				if (_captionsURLLoader.data)
 				{
-					if (currLine != null)
+					var lines:Array = _captionsURLLoader.data.split ("\n");
+					var currLine:CCLine = null;
+					_ccLines = new Array ();
+					var ccLineInd:int = 0;
+		
+					for (var i:int = 0; i < lines.length; i++)
 					{
-						_ccLines.push (currLine);
-						currLine = null;
+						var str:String = lines [i].replace (/^\s+|\s+$/g, "");
+						if (str == "")
+						{
+							if (currLine != null)
+							{
+								_ccLines.push (currLine);
+								currLine = null;
+							}
+							
+							ccLineInd = 0;
+							continue;
+						}
+						
+						if (ccLineInd == 0)
+						{
+							currLine = new CCLine ();
+						}
+						else if (ccLineInd == 1)
+						{
+							var times:Array = str.split (" --> ");
+							currLine.start = _parseStrTime (times [0]);
+							currLine.end = _parseStrTime (times [1]);
+						}
+						else
+						{
+							if (currLine.text != "")
+							{
+								currLine.text += "<br>";
+							}
+		
+							currLine.text += str;
+						}
+						
+						ccLineInd++;
 					}
-					
-					ccLineInd = 0;
-					continue;
 				}
-				
-				if (ccLineInd == 0)
-				{
-					currLine = new CCLine ();
-				}
-				else if (ccLineInd == 1)
-				{
-					var times:Array = str.split (" --> ");
-					currLine.start = _parseStrTime (times [0]);
-					currLine.end = _parseStrTime (times [1]);
-				}
-				else
-				{
-					if (currLine.text != "")
-					{
-						currLine.text += "<br>";
-					}
-
-					currLine.text += str;
-				}
-				
-				ccLineInd++;
+			}catch (e : Error) {
+				this.dispatchEvent( new ErrorEvent (ERROR_PARSING_SRT) );
 			}
 		}
 		
 		private function parseTimedText (e:Event):void
 		{
-			if (!_captionsURLLoader.data)
-				return;
-			var docElem:XML = new XML (_captionsURLLoader.data);
-			var collElem:XMLList = docElem.children();
-			var body:XML = collElem [1];
-			collElem = body.children();
-			var div:XML = collElem [0];
-			collElem = div.children();
-			var numOfLines:int = collElem.length ();
-			_ccLines = new Array ();
-
-			for (var i:int = 0; i < numOfLines; i++)
-			{
-				var resultElem:XML = collElem [i];
-				var currLine:CCLine = new CCLine ();
+			try{
+				if (!_captionsURLLoader.data)
+					return;
+				var docElem:XML = new XML (_captionsURLLoader.data);
+				var collElem:XMLList = docElem.children();
+				var body:XML = collElem [1];
+				collElem = body.children();
+				var div:XML = collElem [0];
+				collElem = div.children();
+				var numOfLines:int = collElem.length ();
+				_ccLines = new Array ();
+	
+				for (var i:int = 0; i < numOfLines; i++)
+				{
+					var resultElem:XML = collElem [i];
+					var currLine:CCLine = new CCLine ();
+					
+					currLine.start = _parseStrTime (resultElem.attribute ("begin") [0].toString ());
+					currLine.end = _parseStrTime (resultElem.attribute ("end") [0].toString ());
+					currLine.text = resultElem.text ()[0];
+					
+					_ccLines.push (currLine);
+				}
+			} catch ( e:Error ) {
 				
-				currLine.start = _parseStrTime (resultElem.attribute ("begin") [0].toString ());
-				currLine.end = _parseStrTime (resultElem.attribute ("end") [0].toString ());
-				currLine.text = resultElem.text ()[0];
-				
-				_ccLines.push (currLine);
+				this.dispatchEvent( new ErrorEvent (ERROR_PARSING_TT) );
 			}
 		}
 		

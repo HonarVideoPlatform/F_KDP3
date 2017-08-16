@@ -34,7 +34,7 @@ package com.kaltura.kdpfl.style
 				catch(e:Error)
 				{
 					textFormats[styleName] = new TextField();
-					//trace("getTextFormat", e);
+					trace("getTextFormat", e);
 				}
 			}
 			

@@ -1,5 +1,10 @@
 package com.kaltura.kdpfl.plugin
 {
+	/**
+	 * Interface for the KDP PluginFactory class. 
+	 * @author Hila
+	 * 
+	 */	
 	public interface IPluginFactory
 	{
 		/**

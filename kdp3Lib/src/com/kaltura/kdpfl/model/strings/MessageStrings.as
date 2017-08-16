@@ -16,7 +16,7 @@ package com.kaltura.kdpfl.model.strings
 
 		/**
 		 * Function initiates the class. 
-		 * @param o
+		 * @param o - the KDP flashvars.
 		 * 
 		 */		
 		public static function init(o:Object):void {
@@ -41,8 +41,9 @@ package com.kaltura.kdpfl.model.strings
     	}
 		
 		// Values of the constant keys.
-		private static var UNAUTHORIZED_DOMAIN_TITLE  	: String = "Un authorized domain";
-		private static var UNAUTHORIZED_COUNTRY_TITLE 	: String = "Un authorized country";
+		private static var UNAUTHORIZED_DOMAIN_TITLE  	: String = "Unauthorized domain";
+		private static var UNAUTHORIZED_COUNTRY_TITLE 	: String = "Unauthorized country";
+		private static var UNAUTHORIZED_IP_ADDRESS_TITLE 	: String = "Unauthorized IP address";
 		private static var OUT_OF_SCHEDULING_TITLE    	: String = "Out of scheduling  ";
 		private static var NO_KS_TITLE				 	: String = "No KS where KS is required ";
 		private static var ENTRY_CONVERTING_TITLE     	: String = "Entry is converting";
@@ -63,6 +64,7 @@ package com.kaltura.kdpfl.model.strings
 		
 		private static var UNAUTHORIZED_DOMAIN  			: String = "We're sorry, this content is only available on certain domains.";
 		private static var UNAUTHORIZED_COUNTRY 			: String = "We're sorry, this content is only available in certain countries.";
+		private static var UNAUTHORIZED_IP_ADDRESS 			: String = "We're sorry, this content is only available for ceratin IP addresses.";
 		private static var OUT_OF_SCHEDULING    			: String = "We're sorry, this content is currently unavailable.";
 		private static var NO_KS  				 		: String = "We're sorry, access to this content is restricted. ";
 		private static var ENTRY_CONVERTING     			: String = "Media is currently being converted, please try again in a few minutes.";

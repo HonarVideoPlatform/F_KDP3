@@ -558,8 +558,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("DÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  Override the timer 
-  </td>
+  controls the amount of time that passes from rollout until the slider fades out from view.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html#_delay">_delay</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html">ToolTipManager</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html#delay">delay</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html">ToolTipManager</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('mx/events/class-list.html');" href="mx/events/PropertyChangeEventKind.html#DELETE">DELETE</a> &mdash; Constant static property in class mx.events.<a onclick="javascript:loadClassListFrame('mx/events/class-list.html');" href="mx/events/PropertyChangeEventKind.html">PropertyChangeEventKind</a></td>
@@ -593,6 +604,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("DÂ
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html#destroyToolTip()">destroyToolTip</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/ToolTipManager.html">ToolTipManager</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KFlavorComboBox.html#determineEnabled()">determineEnabled</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KFlavorComboBox.html">KFlavorComboBox</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -728,6 +745,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("DÂ
       Dispatches an event into the event flow.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/PlayerStatusProxy.html#dispatchKDPEmpty()">dispatchKDPEmpty</a>() &mdash; Method in class com.kaltura.kdpfl.model.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/PlayerStatusProxy.html">PlayerStatusProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   function dispatches the KDP_EMPTY notification once in the player's lifetime, if the KDP was initiated with the
+   flashvar <code>entryId</code> was set to "" or "-1", or if the entry was so restricted as to be unplayable.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/PlayerStatusProxy.html#dispatchKDPReady()">dispatchKDPReady</a>() &mdash; Method in class com.kaltura.kdpfl.model.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/PlayerStatusProxy.html">PlayerStatusProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   function dispatches the KDP_READY notification once in the player's lifetime, if the KDP was initiated with the
+   flashvar <code>entryId</code> was set to a real value and the entry was not restricted.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/carouselClasses/class-list.html');" href="com/yahoo/astra/fl/controls/carouselClasses/BoxCarouselRenderer.html#displayedItemCount">displayedItemCount</a> &mdash; Property in class com.yahoo.astra.fl.controls.carouselClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/carouselClasses/class-list.html');" href="com/yahoo/astra/fl/controls/carouselClasses/BoxCarouselRenderer.html">BoxCarouselRenderer</a></td>
 </tr>
 <tr>
@@ -804,6 +837,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("DÂ
 </tr>
 <tr>
 <td width="20"></td><td>
+   DEPRECATED IN KDP3
    This is the actually play command on the video player.</td>
 </tr>
 <tr>
@@ -950,12 +984,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("DÂ
 <tr>
 <td width="20"></td><td>
          Shows or hides the focus indicator on this component.</td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html#drawLayout()">drawLayout</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html">KLabel</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html#drawLayout()">drawLayout</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html">KScrubber</a></td>

@@ -3,6 +3,8 @@ package com.kaltura.kdpfl.view.containers
 	import com.kaltura.kdpfl.component.IComponent;
 	import com.kaltura.kdpfl.util.KColorUtil;
 	import com.yahoo.astra.fl.containers.VBoxPane;
+	
+	import fl.core.InvalidationType;
 
 	public dynamic class KVBox extends VBoxPane implements IComponent
 	{
@@ -49,17 +51,18 @@ package com.kaltura.kdpfl.view.containers
 			return !visible;
 		}
 		[Bindable]
-		public function set bgColor(str:String):void
+		public function set bgColor(color:Number):void
 		{
-			_bgColor = Number(str);
+			_bgColor = color;
+			drawBackground();
 			
 		}
 		/**
 		 * This parameter will flat color the container skin
 		 */
-		public function get bgColor():String
+		public function get bgColor():Number
 		{
-			return _bgColor.toString();
+			return _bgColor;
 		}
 		public function set bgAlpha(str:String):void
 		{

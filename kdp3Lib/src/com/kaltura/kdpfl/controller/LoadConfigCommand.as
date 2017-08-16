@@ -53,7 +53,18 @@ package com.kaltura.kdpfl.controller
 	import com.kaltura.vo.KalturaFilter;
 	import com.kaltura.types.KalturaMetadataOrderBy;
 	import com.kaltura.vo.KalturaFilterPager;
+	import com.kaltura.kdpfl.view.controls.ToolTipManager;
+	import com.yahoo.astra.fl.managers.AlertManager;
+	import com.kaltura.kdpfl.view.controls.AlertMediator;
+	import com.kaltura.kdpfl.model.strings.MessageStrings;
+	import flash.utils.getQualifiedClassName;
+	import com.yahoo.astra.containers.formClasses.RequiredIndicator;
 
+	/**
+	 * This class handles the retrieval of the player groundwork - the KS (Kaltura Session),KWidget and the uiConf.xml
+	 * @author Hila
+	 * 
+	 */
 	public class LoadConfigCommand extends AsyncCommand implements IResponder
 	{
 		public static const LOCAL : String = "local";
@@ -67,9 +78,7 @@ package com.kaltura.kdpfl.controller
 		private var _numPreInitPlugins : Number;
 		
 		/**
-		 * try using the wrapper embedded data for setting up the widget and uiconf
-		 * in case the embedded uiconf id is different from the one passed via flashvars drop the embedded data
-		 * and request the data from the server  
+		 * Function tries to retrieve the uiconf from the KDP embedded data.
 		 * @return true if embedded data was used and we can skip requesting the widget and uiconf from the server 
 		 * 
 		 */
@@ -105,7 +114,7 @@ package com.kaltura.kdpfl.controller
 		}
 		
 		/**
-		 * 
+		 * This function uses the Kaltura Client to retrieve the KS, Widget data and UIConf from the Kaltura CMS.
 		 * @param notification
 		 * 
 		 */		
@@ -249,9 +258,9 @@ package com.kaltura.kdpfl.controller
 		}
 		
 		/**
-		 * When the multi request to kaltura is done we get a hold on the result
-		 * and KDP model 
-		 * @param data
+		 * Response to successful call to the Kaltura CMS. This function assigns the result to the value objects used
+		 * by the PureMVC components comprising the player.
+		 * @param data - object returned by the server.
 		 * 
 		 */		
 		public function result(data:Object):void
@@ -314,7 +323,7 @@ package com.kaltura.kdpfl.controller
 					{
 						++i; //procced anyway
 						trace("Error in Get Entry");
-						//sendNotification( NotificationType.ALERT , {message: DefaultStrings.SERVICE_GET_ENTRY_ERROR, title: DefaultStrings.SERVICE_ERROR} );
+						//sendNotification( NotificationType.ALERT , {message: MessageStrings.getString(MessageStrings., title: DefaultStrings.SERVICE_ERROR} );
 						//hasError = true;
 					}
 					else
@@ -381,44 +390,47 @@ package com.kaltura.kdpfl.controller
 					{
 						_mediaProxy.vo.entryExtraData = arr[i++];
 					} 
-					if(arr[i] is KalturaError)
+					if (_flashvars.requiredMetadataFields)
 					{
-						++i;
-						trace("Error in Get metadata");
-					}
-					else
-					{
-						var mediaProxy : MediaProxy = facade.retrieveProxy(MediaProxy.NAME) as MediaProxy;
-						
-						mediaProxy.vo.entryMetadata = new Object();
-						
-						var listResponse : KalturaMetadataListResponse = arr[i++] as KalturaMetadataListResponse;
-						if (listResponse && listResponse.objects[listResponse.objects.length - 1])
+						if(arr[i] is KalturaError)
 						{
-							var metadataXml : XMLList = XML(listResponse.objects[listResponse.objects.length - 1]["xml"]).children();
-							var metaDataObj : Object = new Object();
-							for each (var node : XML in metadataXml)
+							++i;
+							trace("Error in Get metadata");
+						}
+						else
+						{
+							var mediaProxy : MediaProxy = facade.retrieveProxy(MediaProxy.NAME) as MediaProxy;
+							
+							mediaProxy.vo.entryMetadata = new Object();
+							
+							var listResponse : KalturaMetadataListResponse = arr[i++] as KalturaMetadataListResponse;
+							if (listResponse && listResponse.objects[listResponse.objects.length - 1])
 							{
-								if (!metaDataObj.hasOwnProperty(node.name().toString()))
+								var metadataXml : XMLList = XML(listResponse.objects[listResponse.objects.length - 1]["xml"]).children();
+								var metaDataObj : Object = new Object();
+								for each (var node : XML in metadataXml)
 								{
-									metaDataObj[node.name().toString()] = node.valueOf().toString();
-								}
-								else
-								{
-									if (metaDataObj[node.name().toString()] is Array)
+									if (!metaDataObj.hasOwnProperty(node.name().toString()))
 									{
-										(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString());
+										metaDataObj[node.name().toString()] = node.valueOf().toString();
 									}
 									else
 									{
-										metaDataObj[node.name().toString()] =new Array ( metaDataObj[node.name().toString()]);
-										(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString() );
+										if (metaDataObj[node.name().toString()] is Array)
+										{
+											(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString());
+										}
+										else
+										{
+											metaDataObj[node.name().toString()] =new Array ( metaDataObj[node.name().toString()]);
+											(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString() );
+										}
 									}
 								}
+								mediaProxy.vo.entryMetadata = metaDataObj;
 							}
-							mediaProxy.vo.entryMetadata = metaDataObj;
+							sendNotification(NotificationType.METADATA_RECEIVED);
 						}
-						sendNotification(NotificationType.METADATA_RECEIVED);
 					}
 				} 
 				
@@ -426,16 +438,23 @@ package com.kaltura.kdpfl.controller
 
 			fetchLayout();			
 		}
-		
+		/**
+		 * Fault handler. 
+		 * @param data - error object returned by the server.
+		 * 
+		 */		
 		public function fault(data:Object):void
 		{
 			trace("LoadConfigCommand==>fault");
 			commandComplete(); //execute next command
 		}
 		
-		//PRIVATE FUNCTIONS
-		/////////////////////////////////////////////
 		
+		/**
+		 *  Resolve the retrieval of the layout xml file. It can be injected into the KDP, loaded from an external source, or it may already
+		 * have been retrieved from the CMS in the multi-request created by the <code>execute</code> function.
+		 * 
+		 */		
 		public function fetchLayout():void
 		{
 			//if we inject the xml through the init( kml : XML ) function in kdp3 class 
@@ -464,8 +483,10 @@ package com.kaltura.kdpfl.controller
 			}
 		}
 		
-		//We must implement IO Eroor to any case somwone is closing the browser in the middle of
-		//Loading, if not it might crash the browser.
+		//PRIVATE FUNCTIONS
+		/////////////////////////////////////////////
+		
+		
 		private function onIOError( event : Event ) : void
 		{
 			
@@ -570,7 +591,7 @@ package com.kaltura.kdpfl.controller
 		}
 		
 		/**
-		 * Converts all flashvars with dot syntax (e.g. watermark.path) to objects 
+		 * Converts all flashvars with <code>host.property</code> syntax (e.g. watermark.path) to objects.
 		 * 
 		 */
 		private function buildFlashvarsTree():void
@@ -625,8 +646,8 @@ package com.kaltura.kdpfl.controller
 		}
 		
 		/**
-		 * override layout and proxy attributes using flashvars
-		 * originally dotted variables are now container objects (after calling buildFlashvarsTree).
+		 * override layout and proxy attributes using flashvars.
+		 * Originally dotted variables are now container objects (after calling buildFlashvarsTree).
 		 * these parameters override components using their id's as the first part of the flashvar dotted name
 		 * if a component wasnt found we try to retrieve a proxy object with the container name (e.g. mediaProxy)   
 		 * @param layoutXML the whole kdp layout
@@ -666,12 +687,13 @@ package com.kaltura.kdpfl.controller
 		}
 		
 		/**
-		 * analyzes the layout xml:
-		 * 1. add strings and uiVars sections to flashvars
-		 * 2. add partner data variables from retrieved widget
-		 * 3. convert all flashvars with dot syntax (e.g. watermark.path) to objects 
-		 * 4. append plugins into actual layout from flashvars and plugins section
-		 * 
+		 * Analyzes the layout xml:
+		 * 1. Implicitly add the Akamai http-streaming plugin to the player layout, in order to support the <code>hdnetwork</code> streamer type.
+		 * 2. Add strings and uiVars sections to flashvars
+		 * 3. Add partner data variables from retrieved widget
+		 * 4. Convert all flashvars with dot syntax (e.g. watermark.path) to objects 
+		 * 5. Append plugins into actual layout from flashvars and plugins section
+		 * 6. Parse parameters related to the KDP managers : TooltipManager and AlertMediator
 		 * @param xml the layout xml received from either uiconf or local configuration
 		 * 
 		 */
@@ -680,7 +702,7 @@ package com.kaltura.kdpfl.controller
 			// add a top level layouts node so our searches within the xml will find
 			// the layout node itself (for overriding skinPath) and not only its descendants
 			xml = new XML("<layouts>" + xml.toString() + "</layouts>");
-
+			
 			// if xml...doesnt include plugin with akamaiHD id
 			if (xml..Plugin.(attribute("id") == "akamaiHD").length() <= 0) {
 				// add the following
@@ -694,7 +716,7 @@ package com.kaltura.kdpfl.controller
 					playerXMLList[0].prependChild(akamaiPluginTag);
 				}
 			}
-
+			
 			// add the strings section of the layout to the flashvars
 			addLayoutVars(xml..strings.children(), "strings.");
 			
@@ -721,6 +743,11 @@ package com.kaltura.kdpfl.controller
 			
 			_layoutProxy.vo.layoutXML = xml.child(0)[0];
 			
+			//Parse tooltip manager properties
+			parseTooltipManager();
+			//Parse AlertManager properties
+			parseAlertManager();
+			
 			//Load plugin with loadingPolicy="preInitialize"
 			loadPreInitPlugins ();
 			
@@ -733,7 +760,8 @@ package com.kaltura.kdpfl.controller
 			setLayout(new XML(event.target.data));
 		}
 		/**
-		 * 
+		 * Function to load certain plugins before loading the skin.swf file. Such plugins are identified in the config.xml
+		 * by the property <code>loadingPolicy</code> set to <code>preInitialize</code>.
 		 * 
 		 */		
 		private function loadPreInitPlugins () : void
@@ -756,10 +784,64 @@ package com.kaltura.kdpfl.controller
 			pm.updateAllLoaded(preInitPluginsLoaded);
 			
 		}
-		
+		/**
+		 * Handler for the preInit plugins load complete.
+		 * @param e - event received from the PluginManager class
+		 * 
+		 */		
 		private function preInitPluginsLoaded (e : Event ) : void
 		{
 			commandComplete();
+		}
+		/**
+		 * Function which parses the layout xml tag which belongs tp the Tooltip manager	
+		 * 
+		 */		
+		private function parseTooltipManager () : void
+		{
+			var layoutXml : XML = _layoutProxy.vo.layoutXML;
+			//Only tooltip manager for now..
+			var tooltipManagerXml : XML = layoutXml..manager.(attribute("id")=="tooltipManager")[0];
+			
+			addAttributesToManager (ToolTipManager.getInstance(), tooltipManagerXml);
+			
+		}
+		/**
+		 * Function which parses the layout xml tag which belongs to the AlertMediator
+		 * 
+		 */		
+		private function parseAlertManager () : void
+		{
+			var layoutXml : XML = _layoutProxy.vo.layoutXML;
+			//Only tooltip manager for now..
+			var alertManagerXML : XML = layoutXml..manager.(attribute("id")=="alertManager")[0];
+			
+			addAttributesToManager( facade.retrieveMediator(AlertMediator.NAME) as AlertMediator, alertManagerXML );
+			
+		}
+		
+		/**
+		 * Function which receives an object and an XML tag and parses the xml tag properties into the object. 
+		 * @param manager - object that the xml needs to be parsed into.
+		 * @param managerXML - the xml tag to be parsed into the object.
+		 * 
+		 */		
+		private function addAttributesToManager (manager : Object, managerXML:XML) : void
+		{
+			if (managerXML && managerXML.attributes())
+			{
+				for each (var prop : XML in managerXML.attributes())
+				{
+					try
+					{
+						manager[prop.localName()] = managerXML.attribute(prop.localName())[0];
+					}
+					catch (e: Error)
+					{
+						trace ("LoadConfigCommand::parseAlertManager >> property " +prop.localName()+" not found on " + getQualifiedClassName(manager));
+					}
+				}
+			}
 		}
 		
 	}

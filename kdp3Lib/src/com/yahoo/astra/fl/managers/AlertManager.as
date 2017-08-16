@@ -4,19 +4,24 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 */
 ﻿package com.yahoo.astra.fl.managers
 {
+	import com.kaltura.kdpfl.view.controls.AlertMediator;
 	import com.yahoo.astra.fl.controls.containerClasses.DialogBox;
-	import flash.display.Sprite;
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.display.Stage;
-	import flash.events.MouseEvent;
+	import com.yahoo.astra.fl.events.AlertEvent;
+	import com.yahoo.astra.utils.TextUtil;
+	
 	import fl.core.UIComponent;
+	
+	import flash.display.DisplayObject;
+	import flash.display.Sprite;
+	import flash.display.Stage;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.filters.BitmapFilter;
 	import flash.filters.BitmapFilterQuality;
 	import flash.filters.BlurFilter;
-	import flash.filters.BitmapFilter;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	import com.yahoo.astra.utils.TextUtil;
+
 	//--------------------------------------
 	//  Class description
 	//--------------------------------------
@@ -172,6 +177,12 @@ The copyrights embodied in the content of this file are licensed under the BSD (
    		 * Color of the text for the title bar on the alert
    		 */		
 		private static var _titleTextColor:uint;
+		
+		/**
+		 * Flag to indicate whether the alert should show a button if an empty button array was passed
+		 * to the alert manager.
+		 */		
+		public static var showButtonIfEmpty : Boolean;
 		
 		/**
 		 * Gets or sets the text color for the title bar. <strong>Note:</strong> Text color can now be styled by passing 
@@ -421,7 +432,15 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 			_alertManager.setButtonStyles(_alertManager.buttonStyles);
 			_alertManager.copyRendererStylesToChild(_alert, _alertManager.alertStyles);
 			
-			if(buttons == null) buttons = ["OK"];
+			if(buttons == null)
+			{
+				buttons = ["OK"];
+				if (!showButtonIfEmpty)
+				{
+					_alert.buttonBar.visible = false;
+				}
+			}
+				
 			var functions:Array = [];
 			if(callBackFunction != null) functions.push(callBackFunction);
 			functions.push(_alertManager.manageQueue);
@@ -487,7 +506,8 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 				return;
 			}
 			_alertQueue.splice(0, 1);
-			_alertManager.container.filters = _alertManager.parentFilters;
+			if (_alertManager.parentFilters)
+				_alertManager.container.filters = _alertManager.parentFilters;
 			if(_alertQueue.length > 0)
 			{
 				_stage.setChildIndex(this, _stage.numChildren - 1);
@@ -525,6 +545,8 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 				
 				_overlay.visible = false;
 			}
+			
+			dispatchEvent( new AlertEvent(AlertEvent.ALERT_REMOVED) );
 		}
 		
 		/**

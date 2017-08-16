@@ -20,6 +20,15 @@ package com.kaltura.kdpfl.view.controls
 		private var _dataTip:ToolTip;
 		private var _zeroPoint : Point = new Point(0,0);
 		
+		protected var _offsetX : Number = 0;
+		protected var _offsetY : Number = 30;
+		protected var _tooltipWidth : Number = 100;
+		protected var _tooltipHeight : Number;
+		//Tooltip delay in milliseconds
+		protected var _delay : Number;
+		protected var _paddingX : Number = 0;
+		
+		
 		public function ToolTipManager(enforcer:Enforcer){}
 
         public static function getInstance():ToolTipManager
@@ -37,28 +46,47 @@ package com.kaltura.kdpfl.view.controls
       
 		public function showToolTip(message:String,target:DisplayObject):void
 		{
+		    //Set the parameters for the tooltip
+			_dataTip= new ToolTip();
+		    _dataTip.tipWidth= _tooltipWidth;
+			
+			if (_tooltipHeight)
+				_dataTip.tipHeight = _tooltipHeight;
+			if (_delay)
+				_dataTip.delay = _delay;
+			
+			_dataTip.buffer = 0;
 			//getting the possition of the stage	
 			var positionX : int = target.stage.mouseX;
 			var targetPoint:Point=new Point(target.x,target.y);
 			
-			if(positionX<(target.stage.localToGlobal(targetPoint).x)+ target.width)
-			     positionX=((target.stage.localToGlobal(targetPoint).x)+ target.width)+5
+			var rightLimitX : Number = target.root.parent.localToGlobal(new Point(target.root.parent.x, target.root.parent.y) ).x + target.root.parent.width;
 			
-			if(positionX>target.stage.stageWidth-100)
-			     positionX=target.stage.stageWidth-105;
-			     
+			var leftLimitX : Number = target.root.parent.x;
+			
+			if (target.parent.localToGlobal(targetPoint).x + _tooltipWidth + offsetX  > rightLimitX)
+			{
+				positionX = rightLimitX - tooltipWidth + offsetX + paddingX;
+			}
+			else if (target.parent.localToGlobal(targetPoint).x + offsetX  < leftLimitX)
+			{
+				//In case of negative offsetX
+				positionX = - target.parent.localToGlobal(targetPoint).x - offsetX + paddingX;
+			}
+			else
+			{
+				positionX = target.parent.localToGlobal(targetPoint).x + offsetX + paddingX;
+			}
 			var positionY : int = target.stage.mouseY 
 			
-			if(positionY>target.localToGlobal(targetPoint).y)
-			   positionY=(target.localToGlobal(targetPoint).y-30);
-			   
-			 if(positionY>target.stage.stageHeight-60)
-			    positionY=target.stage.stageHeight-60
-			
-		    _dataTip= new ToolTip();
-		    _dataTip.tipWidth=100;
-		    _dataTip.alpha=0;
-		    _dataTip.buffer=0;
+			if(target.localToGlobal(targetPoint).y - _offsetY >0)
+			{
+			   	positionY=(target.localToGlobal(targetPoint).y-_offsetY);
+			}
+			else
+			{
+				positionY=(target.localToGlobal(targetPoint).y+_offsetY);
+			}	
 		    _dataTip.titleFormat = TextFormatManager.getInstance().getTextFormat( "toolTip_label" );
 			  
 		    if(message!="")
@@ -70,6 +98,68 @@ package com.kaltura.kdpfl.view.controls
 			if (_dataTip)
 		 		_dataTip.hide()
 		}
+
+		public function get offsetX():Number
+		{
+			return _offsetX;
+		}
+
+		public function set offsetX(value:Number):void
+		{
+			_offsetX = value;
+		}
+
+		public function get offsetY():Number
+		{
+			return _offsetY;
+		}
+
+		public function set offsetY(value:Number):void
+		{
+			_offsetY = value;
+		}
+
+		public function get tooltipWidth():Number
+		{
+			return _tooltipWidth;
+		}
+
+		public function set tooltipWidth(value:Number):void
+		{
+			_tooltipWidth = value;
+		}
+
+		public function get tooltipHeight():Number
+		{
+			return _tooltipHeight;
+		}
+
+		public function set tooltipHeight(value:Number):void
+		{
+			_tooltipHeight = value;
+		}
+
+		public function get delay():Number
+		{
+			return _delay;
+		}
+
+		public function set delay(value:Number):void
+		{
+			_delay = value;
+		}
+
+		public function get paddingX():Number
+		{
+			return _paddingX;
+		}
+
+		public function set paddingX(value:Number):void
+		{
+			_paddingX = value;
+		}
+
+
 	}
 }
 

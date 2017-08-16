@@ -10,10 +10,12 @@ package com
 	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.external.ExternalInterface;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	import org.puremvc.as3.patterns.proxy.Proxy;
+
 	/**
 	 * Class starsMediator manages the communication between the KDP and the Stars component. 
 	 * @author Hila
@@ -38,9 +40,19 @@ package com
 		 */		
 		public var mediaProxy : Proxy;
 		/**
+		 *Name of the optional, external rating function 
+		 */		
+		public var externalSetRatingFunction : String;
+		/**
+		 * Name of the optional, external function which returns the current rank of the entry 
+		 */		
+		public var externalGetRatingFunction : String;
+		/**
 		 * This parameter holds the entryId of the last entry rated. 
 		 */		
 		private var lastEntryId : String = "";
+		
+		private var _useExternalRatingSystem : Boolean = false;
 		/**
 		 * Name of the mediator. 
 		 */		
@@ -52,9 +64,9 @@ package com
 		 * @param startRank the initial rank the stars should display.
 		 * 
 		 */			
-		public function starsMediator(newStars : Stars, isEditable : Boolean, startRank : Number)
+		public function starsMediator( newStars : Stars, isEditable : Boolean, startRank : Number )
 		{
-			super(NAME,newStars);
+			super(NAME, viewComponent);
 			stars = newStars;
 			rating = startRank;
 			editable = isEditable;
@@ -112,13 +124,20 @@ package com
 			var kClient : Object = facade.retrieveProxy("servicesProxy")["kalturaClient"];
 			var mr:MultiRequest = new MultiRequest();
 			var entryId : String = mediaProxy["vo"]["entry"]["id"];
- 			var starsRate : BaseEntryAnonymousRank = new BaseEntryAnonymousRank(entryId , stars.rating);
-			mr.addAction(starsRate);
-			var getEntry : BaseEntryGet = new BaseEntryGet(entryId);
-			mr.addAction(getEntry);
-			mr.addEventListener(KalturaEvent.COMPLETE , onRateComplete);
-			mr.addEventListener(KalturaEvent.FAILED , onRateFailed);
-			(kClient as KalturaClient).post(mr);
+			if (!useExternalRatingSystem)
+			{
+	 			var starsRate : BaseEntryAnonymousRank = new BaseEntryAnonymousRank(entryId , stars.rating);
+				mr.addAction(starsRate);
+				var getEntry : BaseEntryGet = new BaseEntryGet(entryId);
+				mr.addAction(getEntry);
+				mr.addEventListener(KalturaEvent.COMPLETE , onRateComplete);
+				mr.addEventListener(KalturaEvent.FAILED , onRateFailed);
+				(kClient as KalturaClient).post(mr);
+			}
+			else
+			{
+				ExternalInterface.call(externalSetRatingFunction , [mediaProxy["vo"]["entry"]["id"], stars.rating]);
+			}
 		}
 		
 		private function onRateComplete (e : KalturaEvent) : void
@@ -129,5 +148,22 @@ package com
 		{
 			trace("Rate failed");
 		}  
+
+		/**
+		 * Flag indicating whether the rating request should be opposite the Kaltura CMS or an external data base. 
+		 */
+		public function get useExternalRatingSystem():Boolean
+		{
+			return _useExternalRatingSystem;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set useExternalRatingSystem(value:Boolean):void
+		{
+			_useExternalRatingSystem = value;
+		}
+
 	}
 }

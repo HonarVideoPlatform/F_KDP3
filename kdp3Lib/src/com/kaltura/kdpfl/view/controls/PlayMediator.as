@@ -9,7 +9,11 @@ package com.kaltura.kdpfl.view.controls
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-
+	/**
+	 * Mediator for the <code>play/pause</code> button. 
+	 * @author Hila
+	 * 
+	 */
 	public dynamic class PlayMediator extends Mediator
 	{
 		public static var NAME:String = "playMediator";
@@ -42,6 +46,11 @@ package com.kaltura.kdpfl.view.controls
 			event.stopPropagation();
 		}
 		
+		/**
+		 * Handler for clicking the "play/pause" button. 
+		 * @param e
+		 * 
+		 */		
 		private function clickHandler(e:MouseEvent):void
 		{
 			if( (e.target as Button).selected )

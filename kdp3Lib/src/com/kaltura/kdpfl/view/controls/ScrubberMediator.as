@@ -16,7 +16,11 @@ import flash.events.Event;
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
 
-
+/**
+ * Mediator for the scrubber component of the KDP. 
+ * @author Hila
+ * 
+ */
 public class ScrubberMediator extends Mediator
 {
 	public static const NAME:String = "scrubberMediator";
@@ -52,11 +56,20 @@ public class ScrubberMediator extends Mediator
 		scrubber.addEventListener( KScrubber.EVENT_DRAG, onStartDrag, false, 0, true );
 		scrubber.addEventListener( KScrubber.EVENT_DRAG_END, onEndDrag, false, 0, true );
 	}
-
+	/**
+	 * Event handler for the Scubber dragging event. 
+	 * @param evt
+	 * 
+	 */
 	private function onStartDrag( evt:Event ):void
 	{
 		sendNotification( NotificationType.SCRUBBER_DRAG_START );
 	}
+	/**
+	 * Event listener for the Scrubber_drag_stop event. 
+	 * @param evt
+	 * 
+	 */	
 	private function onEndDrag( evt:Event ):void
 	{
 		sendNotification( NotificationType.SCRUBBER_DRAG_END);
@@ -68,13 +81,22 @@ public class ScrubberMediator extends Mediator
 		_state = STATE_SEEKING;
 		sendNotification( NotificationType.DO_PAUSE );
 	}
-
+	/**
+	 *  Handler for the <code> KScrubber.EVENT_SEEK_START</code> event.
+	 * @param evt - event of type  KScrubber.EVENT_SEEK_STAR
+	 * 
+	 */
 	private function onSeek( evt:Event ):void
 	{
 		var seekPosition:Number = scrubber.getPosition();
 		sendNotification( NotificationType.DO_SEEK, seekPosition );
 	}
-	
+
+	/**
+ 	*  Handler for the <code> KScrubber.EVENT_SEEK_END</code> event.
+ 	* @param evt - event of type  KScrubber.EVENT_SEEK_END
+	 *	 
+ 	*/
 	private function onSeekEnd( evt:Event ):void
 	{
 		sendNotification( NotificationType.PLAYER_SEEK_END );

@@ -168,22 +168,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/PlayerStatusVO.html#kdpStatus">kdpStatus</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/PlayerStatusVO.html">PlayerStatusVO</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+    Status of the player - "ready", "empty" or null.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/class-list.html');" href="com/kaltura/kdpfl/ApplicationFacade.html#kdpVersion">kdpVersion</a> &mdash; Property in class com.kaltura.kdpfl.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/class-list.html');" href="com/kaltura/kdpfl/ApplicationFacade.html">ApplicationFacade</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The application that use the kdp3Lib should overrid this and
-   the attribute is used to populate the clientTag 
-   </td>
+   The current version of the KDP.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/PlayerStatusVO.html#kdpVersion">kdpVersion</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/PlayerStatusVO.html">PlayerStatusVO</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   Version of the player.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/media/class-list.html');" href="com/kaltura/kdpfl/view/media/KMediaPlayer.html#keepAspectRatio">keepAspectRatio</a> &mdash; Property in class com.kaltura.kdpfl.view.media.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/media/class-list.html');" href="com/kaltura/kdpfl/view/media/KMediaPlayer.html">KMediaPlayer</a></td>
@@ -284,7 +284,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html">KLabel</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Class representing the Label used by the KDP.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html#KLabel()">KLabel</a>() &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html">KLabel</a></td>
@@ -333,13 +334,41 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
    </td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html">KPluginEvent</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/package-detail.html">com.kaltura.kdpfl.plugin</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  New class for unique events fired by the KDP plug-ins 
+  </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html#KPluginEvent()">KPluginEvent</a>(type, bubbles, cancelable) &mdash; Constructor in class com.kaltura.kdpfl.plugin.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html">KPluginEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+    
+   </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html#KPLUGIN_INIT_COMPLETE">KPLUGIN_INIT_COMPLETE</a> &mdash; Constant static property in class com.kaltura.kdpfl.plugin.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html">KPluginEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Constant signifying plugin initialize complete.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html#KPLUGIN_INIT_FAILED">KPLUGIN_INIT_FAILED</a> &mdash; Constant static property in class com.kaltura.kdpfl.plugin.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/KPluginEvent.html">KPluginEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Constant signifying plugin initialize failed.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html">KScrubber</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
- Class KScrubber 
- 
- </td>
+ class describing the player's scrubber.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html#KScrubber()">KScrubber</a>() &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html">KScrubber</a></td>
@@ -384,6 +413,40 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
 </tr>
 <tr>
 <td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/proxy/class-list.html');" href="com/kaltura/osmf/proxy/KSwitchingProxyElement.html">KSwitchingProxyElement</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/osmf/proxy/class-list.html');" href="com/kaltura/osmf/proxy/package-detail.html">com.kaltura.osmf.proxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  This class is an OSMF proxy which allows to switch 2 elements, the "main"
+  media element and the "secondary" media element.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/proxy/class-list.html');" href="com/kaltura/osmf/proxy/KSwitchingProxyElement.html#KSwitchingProxyElement()">KSwitchingProxyElement</a>(proxiedElement) &mdash; Constructor in class com.kaltura.osmf.proxy.<a onclick="javascript:loadClassListFrame('com/kaltura/osmf/proxy/class-list.html');" href="com/kaltura/osmf/proxy/KSwitchingProxyElement.html">KSwitchingProxyElement</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/package-detail.html">com.kaltura.osmf.events</a></td>
+</tr>
+<tr>
+<td width="20"></td><td> 
+  Event fired by the <code>KSwitchingProxyEvent</code> class.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxyEvent.html#KSwitchingProxyEvent()">KSwitchingProxyEvent</a>(type, switchedTo, bubbles, cancelable) &mdash; Constructor in class com.kaltura.osmf.events.<a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxySwitchContext.html">KSwitchingProxySwitchContext</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/package-detail.html">com.kaltura.osmf.events</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Class containing the context types for an element switch performed by the <code>KSwitchingProxySwitchContext</code>.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KTextField.html">KTextField</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
@@ -443,13 +506,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KTimer.html">KTimer</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+ Class representing the timers used by the KDP
+ </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KTimer.html#KTimer()">KTimer</a>() &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KTimer.html">KTimer</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  C-tor 
+  
+  </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/ConfigVO.html#kuiConf">kuiConf</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/ConfigVO.html">ConfigVO</a></td>
@@ -474,13 +542,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("KÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a> &mdash; Dynamic class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+ Class representing the Volume Bar in the KDP.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#KVolumeBar()">KVolumeBar</a>() &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Constructor.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/ConfigVO.html#kw">kw</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/ConfigVO.html">ConfigVO</a></td>

@@ -116,7 +116,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/component/class-list.html');" href="com/kaltura/kdpfl/component/IComponent.html"><i>IComponent</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/component/class-list.html');" href="com/kaltura/kdpfl/component/package-detail.html">com.kaltura.kdpfl.component</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Interface for the UIComponents used be the KDP.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/mediaPlayerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/mediaPlayerClasses/IconButton.html">IconButton</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/mediaPlayerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/mediaPlayerClasses/package-detail.html">com.yahoo.astra.fl.controls.mediaPlayerClasses</a></td>
@@ -306,6 +307,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
  The IMediaView interface provides the methods and properties that a media view requires.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/IMidrollSequencePlugin.html"><i>IMidrollSequencePlugin</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/package-detail.html">com.kaltura.kdpfl.plugin</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('org/puremvc/as3/interfaces/class-list.html');" href="org/puremvc/as3/interfaces/IModel.html"><i>IModel</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('org/puremvc/as3/interfaces/class-list.html');" href="org/puremvc/as3/interfaces/package-detail.html">org.puremvc.as3.interfaces</a></td>
 </tr>
 <tr>
@@ -323,9 +330,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   This function displays or hides an element from the layout and affets its container to 
-   redraw its layout   
-   </td>
+   This function affects the <code>includeInLayout</code> property of a uiComponent.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/menuBarClasses/class-list.html');" href="com/yahoo/astra/fl/controls/menuBarClasses/MenuButtonRow.html#incrementSelection()">incrementSelection</a>(amount) &mdash; Method in class com.yahoo.astra.fl.controls.menuBarClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/menuBarClasses/class-list.html');" href="com/yahoo/astra/fl/controls/menuBarClasses/MenuButtonRow.html">MenuButtonRow</a></td>
@@ -478,15 +483,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#init()">init</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  function called when component needs to be activated externally (by the volume bar mediator).</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/media/class-list.html');" href="com/kaltura/kdpfl/controller/media/InitChangeMediaMacroCommand.html">InitChangeMediaMacroCommand</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/media/class-list.html');" href="com/kaltura/kdpfl/controller/media/package-detail.html">com.kaltura.kdpfl.controller.media</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-  This class is responsible for coordinating the different parts of changing media command
-  </td>
+  This is the command triggered by the CHANGE_MEDIA notification.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/MediaVO.html#initialBufferTime">initialBufferTime</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/MediaVO.html">MediaVO</a></td>
@@ -501,9 +506,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   
-   </td>
+   This function initializes the component behavior.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/containers/class-list.html');" href="com/kaltura/kdpfl/view/containers/KCanvas.html#initialize()">initialize</a>() &mdash; Method in class com.kaltura.kdpfl.view.containers.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/containers/class-list.html');" href="com/kaltura/kdpfl/view/containers/KCanvas.html">KCanvas</a></td>
@@ -542,6 +545,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KFlavorComboBox.html#initialize()">initialize</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KFlavorComboBox.html">KFlavorComboBox</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html#initialize()">initialize</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KLabel.html">KLabel</a></td>
 </tr>
 <tr>
@@ -575,7 +584,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#initialize()">initialize</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  function which sets the component's behavior.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/Watermark.html#initialize()">initialize</a>() &mdash; Method in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/Watermark.html">Watermark</a></td>
@@ -971,13 +981,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/IPlugin.html"><i>IPlugin</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/package-detail.html">com.kaltura.kdpfl.plugin</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Interface for the KDP plugins.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/IPluginFactory.html"><i>IPluginFactory</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin/class-list.html');" href="com/kaltura/kdpfl/plugin/package-detail.html">com.kaltura.kdpfl.plugin</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Interface for the KDP PluginFactory class.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/charts/skins/class-list.html');" href="com/yahoo/astra/fl/charts/skins/IProgrammaticSkin.html"><i>IProgrammaticSkin</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/charts/skins/class-list.html');" href="com/yahoo/astra/fl/charts/skins/package-detail.html">com.yahoo.astra.fl.charts.skins</a></td>

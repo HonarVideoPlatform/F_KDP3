@@ -153,6 +153,8 @@ package com.kaltura.kdpfl.plugin.component {
 
 		private function onWidgetFailed(evt:Object):void {
 			_loadWithNewConfig = false;
+			facade.sendNotification("enableGui", {guiEnabled: true, enableType: "full"});
+			
 		}
 
 		/**

@@ -50,11 +50,25 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    </td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/SequenceProxy.html#activateMidrollSequence()">activateMidrollSequence</a>(midrollPlugin:<a href="com/kaltura/kdpfl/plugin/IMidrollSequencePlugin.html" onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/plugin./class-list.html');">com.kaltura.kdpfl.plugin:IMidrollSequencePlugin</a>) &mdash; Method in class com.kaltura.kdpfl.model.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/SequenceProxy.html">SequenceProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   function which activates the sequence plugin's midroll sequence.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/animation/class-list.html');" href="com/yahoo/astra/animation/Animation.html#active">active</a> &mdash; Property in class com.yahoo.astra.animation.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/animation/class-list.html');" href="com/yahoo/astra/animation/Animation.html">Animation</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
    If true, the animation is currently running.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/SequenceVO.html#activeMidrollPlugin">activeMidrollPlugin</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/SequenceVO.html">SequenceVO</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Property containing the current midroll plugin playing in the player.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/SequenceProxy.html#activePlugin()">activePlugin</a>() &mdash; Method in class com.kaltura.kdpfl.model.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/SequenceProxy.html">SequenceProxy</a></td>
@@ -262,6 +276,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    Pop up an alert.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/AlertEvent.html">AlertEvent</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/package-detail.html">com.yahoo.astra.fl.events</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/AlertEvent.html#AlertEvent()">AlertEvent</a>(type, bubbles, cancelable) &mdash; Constructor in class com.yahoo.astra.fl.events.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/AlertEvent.html">AlertEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/managers/class-list.html');" href="com/yahoo/astra/fl/managers/AlertManager.html">AlertManager</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/managers/class-list.html');" href="com/yahoo/astra/fl/managers/package-detail.html">com.yahoo.astra.fl.managers</a></td>
 </tr>
 <tr>
@@ -273,10 +299,45 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  This class handles presenting KDP alerts to the user.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#AlertMediator()">AlertMediator</a>(viewComponent) &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Constructor 
+   </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#_alertPadding">_alertPadding</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#alertPadding">alertPadding</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   controls the padding of the alert - this refers to the bottom, top, left and right padding, as the Astra DialogBox component does not offer individual padding values to set.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#_alertRemovalDelay">_alertRemovalDelay</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#alertRemovalDelay">alertRemovalDelay</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   controls the number of seconds allowed to pass before the alert is removed automatically.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/AlertEvent.html#ALERT_REMOVED">ALERT_REMOVED</a> &mdash; Constant static property in class com.yahoo.astra.fl.events.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/events/class-list.html');" href="com/yahoo/astra/fl/events/AlertEvent.html">AlertEvent</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -289,7 +350,26 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
    Aligns a DisplayObject vertically and horizontally within specific bounds.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KButton.html#allowDisable">allowDisable</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KButton.html">KButton</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('fl/core/class-list.html');" href="fl/core/UIComponent.html#_allowDisable">_allowDisable</a> &mdash; Property in class fl.core.<a onclick="javascript:loadClassListFrame('fl/core/class-list.html');" href="fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('fl/core/class-list.html');" href="fl/core/UIComponent.html#allowDisable">allowDisable</a> &mdash; Property in class fl.core.<a onclick="javascript:loadClassListFrame('fl/core/class-list.html');" href="fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html#_allowMouseClicks">_allowMouseClicks</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html">KScrubber</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   flag indicating whether the scrubber can be clicked.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html#allowMouseClicks">allowMouseClicks</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KScrubber.html">KScrubber</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -420,7 +500,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/PreLoaderMediator.html#applicationLoadStyleName">applicationLoadStyleName</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/PreLoaderMediator.html">PreLoaderMediator</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html#applicationLoadStyleName">applicationLoadStyleName</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html">BufferAnimationMediator</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -486,7 +566,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/component/class-list.html');" href="com/kaltura/kdpfl/component/ComponentData.html#attr">attr</a> &mdash; Property in class com.kaltura.kdpfl.component.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/component/class-list.html');" href="com/kaltura/kdpfl/component/ComponentData.html">ComponentData</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+   The component's attributes as specified on its xml tag in the config.xml file.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/mediaPlayerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/mediaPlayerClasses/AudioClip.html">AudioClip</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/mediaPlayerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/mediaPlayerClasses/package-detail.html">com.yahoo.astra.fl.controls.mediaPlayerClasses</a></td>

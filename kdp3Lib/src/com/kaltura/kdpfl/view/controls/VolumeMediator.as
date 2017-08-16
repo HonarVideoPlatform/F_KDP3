@@ -12,6 +12,8 @@ import com.kaltura.kdpfl.model.ConfigProxy;
 import com.kaltura.kdpfl.model.LayoutProxy;
 import com.kaltura.kdpfl.model.type.NotificationType;
 
+import fl.core.UIComponent;
+
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.net.SharedObject;
@@ -33,9 +35,9 @@ public class VolumeMediator extends Mediator
 		super( NAME, viewComponent );
 		
 		_layoutProxy= Facade.getInstance().retrieveProxy( LayoutProxy.NAME ) as LayoutProxy;
-		var foreground:Sprite = _layoutProxy.vo.foreground;
+		var foreground:UIComponent = _layoutProxy.vo.foreground;
 		
-		foreground.scaleX = foreground.scaleY = 1;
+		
 		volumeBar.sliderContainer = _layoutProxy.vo.foreground;
 		volumeBar.init();
 		var flashvars : Object = (facade.retrieveProxy( ConfigProxy.NAME ) as ConfigProxy).vo.flashvars;

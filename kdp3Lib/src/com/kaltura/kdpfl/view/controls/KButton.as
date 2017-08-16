@@ -28,14 +28,12 @@ package com.kaltura.kdpfl.view.controls
 		// text format 
 		private var tf:TextFormat;
 		private var currentTf:TextFormat;
-	
 		private var iconWidth:int = 0;
 		private var iconHeight:int = 0;
 		private var recalcSize:Boolean = false;
 		private var changeTextformatOnce:Boolean;
 		private var _alwaysDisabled:Boolean = false;
 		private var _origIcon : DisplayObject;
-		private var _allowDisable : Boolean = true;	
 		private var _minWidth:Number = 0;
 		private var _minHeight:Number = 0;
 		private var _maxWidth:Number = 100000;
@@ -69,6 +67,8 @@ package com.kaltura.kdpfl.view.controls
 		public var upTooltip : String = "";
 		public var selectedTooltip : String = "";
 	
+		
+		public var showSkin:String = "false";
 		
 		private var setSkinSize:Boolean;
 
@@ -330,10 +330,11 @@ package com.kaltura.kdpfl.view.controls
 							
 						}
 					}				
-					//found a skin - make it invisible
+					//found a skin - hide it
 					if(itemClassName.indexOf("kin") > -1 && buttonType == ICON_BUTTON )
 					{
-						child.alpha = 0;
+						if (showSkin != "true")
+							child.alpha = 0;
 					}				
 				}
 				break;
@@ -403,38 +404,68 @@ package com.kaltura.kdpfl.view.controls
 		 * @param value - the minimum required width of the button.
 		 * 
 		 */		
+		public function get minWidth():Object
+		{
+			return _minWidth;
+		}
+		/**
+		 * @private
+		 */		
 		public function set minWidth(value:Object):void
 		{
 			_minWidth = Number(value);
 		}
+		
 		/**
-		 * Setter for the <code>_minHeight</code> property. This property exsits to ensure that the button in question
+		 * Setter for the <code>_minHeight</code> property. This property exists to ensure that the button in question
 		 * maintains form with the buttons around it. 
 		 * @param value - the minimum required height of the button.
 		 * 
 		 */	
+		public function get minHeight():Object
+		{
+			return _minHeight;
+		}
+		/**
+		 * @private
+		 */
 		public function set minHeight(value:Object):void
 		{
 			_minHeight = Number(value);
 			setMinMaxDImentions();
 		}
 		/**
-		 * Setter for the <code>_maxWidth</code> property. This property exsits to ensure that the button in question
+		 * Setter for the <code>_maxWidth</code> property. This property exists to ensure that the button in question
 		 * maintains form with the buttons around it. 
 		 * @param value - the maximum required width of the button.
 		 * 
 		 */	
+		public function get maxWidth():Object
+		{
+			return _maxWidth;
+		}
+		/**
+		 * @private
+		 */
 		public function set maxWidth(value:Object):void
 		{
 			_maxWidth = Number(value);
 			setMinMaxDImentions();
 		}
+		
 		/**
-		 * Setter for the <code>_maxHeight</code> property. This property exsits to ensure that the button in question
+		 * Setter for the <code>_maxHeight</code> property. This property exists to ensure that the button in question
 		 * maintains form with the buttons around it. 
 		 * @param value - the maximum required height of the button.
 		 * 
 		 */	
+		public function get maxHeight():Object
+		{
+			return _maxHeight;
+		}
+		/**
+		 * @private
+		 */
 		public function set maxHeight(value:Object):void
 		{
 			_maxHeight = Number(value);
@@ -524,24 +555,6 @@ package com.kaltura.kdpfl.view.controls
 				else
 					this.tooltip = this.upTooltip;
 			}	
-		}
-		
-		/**
-		 * Setter for the <code>allowDisable</code> property. 
-		 * @param value - <code>true</code> if the button can be disabled; <code>false</code> otherwise.
-		 * 
-		 */		
-		public function set allowDisable (value : String) : void
-		{
-			if (value == "true")
-				_allowDisable = true;
-			else
-				_allowDisable = false;
-		}
-
-		public function get allowDisable () : String
-		{
-			return _allowDisable.toString();	
 		}
 		
 		/**

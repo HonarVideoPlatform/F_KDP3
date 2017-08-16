@@ -10,7 +10,11 @@ package com.kaltura.kdpfl.view.controls
 	import flash.events.MouseEvent;
 	import flash.text.Font;
 	import flash.text.TextFormat;
-	
+	/**
+	 * Class representing the Label used by the KDP. 
+	 * @author Hila
+	 * 
+	 */	
 	public dynamic class KLabel extends Label implements IComponent
 	{
 		public var color1:Number = -1;
@@ -121,7 +125,11 @@ package com.kaltura.kdpfl.view.controls
 		{
 			return String(visible);
 		}
-		
+		/**
+		 * This function truncates the label's text so that it will fit inside its container. The full text can be viewed in the label's tooltip. 
+		 * @return <code>true</code> if the text string was truncated, <code>false</code> otherwise.
+		 * 
+		 */		
 		public function runTruncateToFit():Boolean
 		{
 			if (!truncateToFit)
@@ -174,7 +182,11 @@ package com.kaltura.kdpfl.view.controls
 			this.tooltip = "";
 			return false;
 		}
-		
+		/**
+		 * html text property of the Label. 
+		 * @return 
+		 * 
+		 */		
 		override public function get htmlText():String
 		{
 			return untruncatedText;

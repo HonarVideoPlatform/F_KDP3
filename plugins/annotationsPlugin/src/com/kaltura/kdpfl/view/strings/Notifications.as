@@ -23,10 +23,6 @@ package com.kaltura.kdpfl.view.strings
 		
 		public static const RESET_ANNOTATIONS_COMPONENT : String = "resetAnnotationsComponent";
 		
-		public static const FEEDBACK_SESSION_SUBMITTED : String = "feedbackSessionSubmitted";
-		
-		
-		
 		public function Notifications()
 		{
 		}

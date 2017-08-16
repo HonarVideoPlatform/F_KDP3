@@ -23,7 +23,7 @@ package com.kaltura.kdpfl.controller.media
 	{
 		/**
 		 * Set the model with new entry to load 
-		 * @param notification
+		 * @param notification - notification which triggered the command.
 		 * 
 		 */		
 		override public function execute(notification:INotification):void
@@ -89,7 +89,11 @@ package com.kaltura.kdpfl.controller.media
 			//only if the notification has preferedFlavorHeight 
 			setFlavorFromCookie(note);
 		}
-		
+		/**
+		 * This function selects the prefered bitrate for the requested entry 
+		 * @param note
+		 * 
+		 */		
 		private function setFlavorFromCookie (note : Object) : void
 		{
 			var mediaProxy : MediaProxy = facade.retrieveProxy( MediaProxy.NAME ) as MediaProxy;

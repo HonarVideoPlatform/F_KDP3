@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="SequenceVO,com.kaltura.kdpfl.model.vo.SequenceVO,isAdLoaded,isAdSkip,isInSequence,mainMediaVO,postCurrentIndex,postSequenceArr,postSequenceComplete,postSequenceCount,preCurrentIndex,preSequenceArr,preSequenceComplete,preSequenceCount,timeRemaining" name="keywords">
+<meta content="SequenceVO,com.kaltura.kdpfl.model.vo.SequenceVO,activeMidrollPlugin,isAdLoaded,isAdSkip,isInSequence,mainMediaVO,midrollArr,postCurrentIndex,postSequenceArr,postSequenceComplete,postSequenceCount,preCurrentIndex,preSequenceArr,preSequenceComplete,preSequenceCount,timeRemaining" name="keywords">
 <title>com.kaltura.kdpfl.model.vo.SequenceVO</title>
 </head>
 <body>
@@ -52,6 +52,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#activeMidrollPlugin">activeMidrollPlugin</a> : <a href="../../plugin/IMidrollSequencePlugin.html">IMidrollSequencePlugin</a>
+<div class="summaryTableDescription">
+   Property containing the current midroll plugin playing in the player.</div>
+</td><td class="summaryTableOwnerCol">SequenceVO</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isAdLoaded">isAdLoaded</a> : Boolean = false<div class="summaryTableDescription">
    Property signifying whether the sequencePlugin lined up to play has loaded.</div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
@@ -75,6 +81,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#midrollArr">midrollArr</a> : Array<div class="summaryTableDescription">
+   Array containing references to the PluginCode files of the sequence plugins that can play midrolls 
+   </div>
+</td><td class="summaryTableOwnerCol">SequenceVO</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#postCurrentIndex">postCurrentIndex</a> : int = -1<div class="summaryTableDescription">
    ndex of the current position in the post sequence array, initially set to -1.</div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
@@ -87,14 +99,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#postSequenceComplete">postSequenceComplete</a> : Boolean = false<div class="summaryTableDescription">
-   
+   Flag indicating whether the post sequence is complete
    </div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#postSequenceCount">postSequenceCount</a> : Number = 0<div class="summaryTableDescription">
-   
-   </div>
+   Number of post-sequence ads.</div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
 </tr>
 <tr class="">
@@ -110,14 +121,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#preSequenceComplete">preSequenceComplete</a> : Boolean = false<div class="summaryTableDescription">
-   
+   Flag indicating whether the pre-sequence is complete
    </div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#preSequenceCount">preSequenceCount</a> : Number = 0<div class="summaryTableDescription">
-   
-   </div>
+   Number of pre-sequence ads.</div>
 </td><td class="summaryTableOwnerCol">SequenceVO</td>
 </tr>
 <tr class="">
@@ -135,10 +145,22 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="activeMidrollPlugin"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">activeMidrollPlugin</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var activeMidrollPlugin:<a href="../../plugin/IMidrollSequencePlugin.html">IMidrollSequencePlugin</a></code><p>
+   Property containing the current midroll plugin playing in the player. The running assumptions are:
+   a. There is only 1 midroll plugin playing at a given time
+   b. The only way that this midroll is of interest to us is if it's playing in the KDP MediaPlayer.
+   </p></div>
 <a name="isAdLoaded"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">isAdLoaded</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">isAdLoaded</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -175,6 +197,16 @@ showHideInherited();
 <code>public var mainMediaVO:<a href="../vo/MediaVO.html">MediaVO</a></code><p>
    The original MediaVO for the main entry . Saved once in the bginning of the pre-sequence (or post-sequence)
    </p></div>
+<a name="midrollArr"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">midrollArr</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var midrollArr:Array</code><p>
+   Array containing references to the PluginCode files of the sequence plugins that can play midrolls 
+   </p></div>
 <a name="postCurrentIndex"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -203,7 +235,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var postSequenceComplete:Boolean = false</code><p>
-   
+   Flag indicating whether the post sequence is complete
    </p></div>
 <a name="postSequenceCount"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -213,7 +245,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var postSequenceCount:Number = 0</code><p>
-   
+   Number of post-sequence ads.
    </p></div>
 <a name="preCurrentIndex"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -243,7 +275,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var preSequenceComplete:Boolean = false</code><p>
-   
+   Flag indicating whether the pre-sequence is complete
    </p></div>
 <a name="preSequenceCount"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -253,7 +285,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var preSequenceCount:Number = 0</code><p>
-   
+   Number of pre-sequence ads.
    </p></div>
 <a name="timeRemaining"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

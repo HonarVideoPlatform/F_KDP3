@@ -13,7 +13,11 @@ package com.kaltura.kdpfl.view
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-
+	/**
+	 * Mediator for the root component of the KDP. 
+	 * @author Hila
+	 * 
+	 */	
 	public class RootMediator extends Mediator
 	{
 		public static const NAME:String = 'stageMediator';
@@ -56,10 +60,10 @@ package com.kaltura.kdpfl.view
 			{
 				case NotificationType.PLAYER_DIMENSION_CHANGE:
 					onResize();
-				break;
+					break;
 				case NotificationType.CLOSE_FULL_SCREEN:
 					root.stage.displayState=StageDisplayState.NORMAL;
-				break;
+					break;
 				case NotificationType.OPEN_FULL_SCREEN:
 					try{
 						root.stage.displayState=StageDisplayState.FULL_SCREEN;
@@ -67,7 +71,7 @@ package com.kaltura.kdpfl.view
 					{
 						trace("fullscrren action failed. make sure you have flash tag 'allowFullScreen' with value 'true' in your embed code");
 					}
-				break;
+					break;
 			}
 		}
 		
@@ -80,12 +84,12 @@ package com.kaltura.kdpfl.view
 			_kdp3Preloader = new BufferAnimation();
 			root.addChild(_kdp3Preloader);
 			facade.registerMediator(new BufferAnimationMediator(_kdp3Preloader));
-
+			
 			//create the alert mediator
 			
 			onResize();
 		}
-				
+		
 		/**
 		 * The notification that the root need to listen to 
 		 * @return 
@@ -94,10 +98,10 @@ package com.kaltura.kdpfl.view
 		override public function listNotificationInterests():Array
 		{
 			return [
-					NotificationType.PLAYER_DIMENSION_CHANGE,
-					NotificationType.CLOSE_FULL_SCREEN,
-					NotificationType.OPEN_FULL_SCREEN
-				   ];
+				NotificationType.PLAYER_DIMENSION_CHANGE,
+				NotificationType.CLOSE_FULL_SCREEN,
+				NotificationType.OPEN_FULL_SCREEN
+			];
 		}
 		
 		/**
@@ -128,7 +132,7 @@ package com.kaltura.kdpfl.view
 				}
 			}
 			
- 			if( _kdp3Preloader && root.contains(_kdp3Preloader) && (!_kdp3Preloader.width || !_kdp3Preloader.height) )
+			if( _kdp3Preloader && root.contains(_kdp3Preloader) && (!_kdp3Preloader.width || !_kdp3Preloader.height) )
 			{
 				_kdp3Preloader.width = size.width;
 				_kdp3Preloader.height = size.height;
@@ -147,8 +151,8 @@ package com.kaltura.kdpfl.view
 		 * 
 		 */		
 		public function get root() : DisplayObjectContainer{
-            return viewComponent as DisplayObjectContainer;
-        }
+			return viewComponent as DisplayObjectContainer;
+		}
 		
 	}
 }

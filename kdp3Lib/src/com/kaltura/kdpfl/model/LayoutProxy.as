@@ -58,10 +58,12 @@ package com.kaltura.kdpfl.model
 		}
 		
 		/**
-		 * Main KDP view builder, this function gets a uiconf xml
-		 * and create KDP instances from it and return the root parent
-		 * @param xml
-		 * @return 
+		 * Main KDP view builder, this function gets a uiconf xml, and instantiates the KDP classes according
+		 * to the mapping found on the ComponentFactory class.
+		 * @param xml - the layout xml.
+		 * @itemRendererData - if the function is constructing an item according to an item renderer, then the "scope" of the data that can be used for binding
+		 *  in this object is smaller than the entire <code>facade.bindObject</code>. This parameter contains the ObjectProxy familiar to the item renderer for binding purposes.
+		 * @return the ready uicomponent.
 		 * 
 		 */		
 		public function buildLayout( xml:XML , itemRendererData : Object = null):Object
@@ -188,10 +190,9 @@ package com.kaltura.kdpfl.model
 		}
 		
 		/**
-		 * This function displays or hides an element from the layout and affets its container to 
-		 * redraw its layout   
-		 * @param objectId
-		 * @param value
+		 * This function affects the <code>includeInLayout</code> property of a uiComponent.  
+		 * @param objectId - id of the uicomponent to affect.
+		 * @param value new value for the <code>includeInLayout</code> property of the uicomponent.
 		 * 
 		 */
 		public function includeInLayoutObject(objectId:String, value:Boolean):void
@@ -235,7 +236,14 @@ package com.kaltura.kdpfl.model
 			container['configuration'] = newConfigurationArray;	
 		}		
 
-		
+		/**
+		 * Updates the component with the data found on its related layout xml tag. 
+		 * @param uiComponent the updated uicomponent
+		 * @param xml the xml tag associated with the uicomponent to be updated.
+		 * @param itemRendererData - the ObjectProxy containing the data which can be used by the component for binding.
+		 * @return the updated uicomponent.
+		 * 
+		 */		
 		private function updateComponent( uiComponent : Object, xml:XML , itemRendererData : Object ) : Object
 		{
 			
@@ -268,6 +276,12 @@ package com.kaltura.kdpfl.model
 			return uiComponent;
 		}
 		
+		/**
+		 * Handler for the PLUGIN_READY event fired by the PluginManager class, after the plugin was loaded and its properties successfully set.
+		 * This function calls the plugins <code>initializePlugin</code> function. 
+		 * @param event event received from the PluginManager.
+		 * 
+		 */		
 		private function onPluginReady( event : Event ) : void
 		{
 			var plugin : Plugin = ( event.target as Plugin );
@@ -280,7 +294,13 @@ package com.kaltura.kdpfl.model
 			
 			
 		}
-		
+		/**
+		 * Retrieve component configuration from the  component's layout xml tag, to be used by the Astra layouting framework.
+		 * @param xml xml tag of the uicomponent.
+		 * @param ui the uicomponent.
+		 * @return returns the config object to be used when inserting the new uicomponent into its parent container.
+		 * 
+		 */		
 		private function getConfiguration(xml:XML, ui:Object):Object
 		{
 			var config:Object = {};
@@ -300,7 +320,12 @@ package com.kaltura.kdpfl.model
 			return config;
 		}
 		
-		
+		/**
+		 *  Set the non-precentage width&height properties of the uicomponent, as well as the x,y properties.
+		 * @param uiComponent the uicomponent being updated
+		 * @param xml the xml tag related to the uicomponent.
+		 * 
+		 */		
 		private function handleCoordinatesAndDimentions(uiComponent:Object, xml:XML):void
 		{ 
 			uiComponent.x = Number(xml.@x); //if not exist it's zero as default
@@ -329,7 +354,13 @@ package com.kaltura.kdpfl.model
 				uiComponent['minWidth'] =Number(xml.@minWidth);
 			}
 		}
-		
+		/**
+		 * Set the properties that require binding.
+		 * @param comp UI component being constructed.	
+		 * @param xml layout xml tag associated with the UI component being constructed
+		 * @param host the ObjectProxy which provides the binding "scope".
+		 * 
+		 */		
 		private function addAttributes(comp:Object, xml:XML, host:Object):void
 		{
 			//remove known attributes			
@@ -374,7 +405,12 @@ package com.kaltura.kdpfl.model
 				}
 			}
 		}
-		
+		/**
+		 * 
+		 * @param xml
+		 * @return 
+		 * 
+		 */		
 		private function getstyleName(xml:XML):String
 		{
 			var ret:String;

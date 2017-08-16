@@ -18,8 +18,6 @@ package com.kaltura.kdpfl.model.type
 		 * StreamerType LIVE represents media that is being streamed live.
 		 */		
 		public static const LIVE : String = "live";
-		
-		
 		/**
 		 * StreamerType HDNETWORK represents media that is being http-streamed from akamai.
 		 */		

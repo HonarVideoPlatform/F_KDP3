@@ -3,7 +3,7 @@ package com.kaltura.kdpfl.controller.media
 	import org.puremvc.as3.patterns.command.AsyncMacroCommand;
 
 	/**
-	 * This class is responsible for coordinating the different parts of changing media command
+	 * This is the command triggered by the CHANGE_MEDIA notification. It is constructed of more goal-specific sub-commands.
 	 */	
 	public class InitChangeMediaMacroCommand extends AsyncMacroCommand
 	{
@@ -16,7 +16,6 @@ package com.kaltura.kdpfl.controller.media
 			//set the new entryId to the data
 			addSubCommand( InitMediaChangeProcessCommand ); 
 			
-			//TODO: if this is playlist we don't need to get the media entry we can pass it from the playlist
 			//get all the metadata of the current entry (we don't wait for it to finish the macro command)
 			addSubCommand( GetMediaCommand );	
 		

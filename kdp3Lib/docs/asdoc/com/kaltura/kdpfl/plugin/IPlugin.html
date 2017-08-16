@@ -39,7 +39,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </tr>
 </table>
 <p></p>
-<p></p>
+  Interface for the KDP plugins. 
+  <p></p>
 <br>
 <hr>
 </div>
@@ -63,8 +64,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#setSkin()">setSkin</a>(styleName:String, setSkinSize:Boolean = false):void</div>
 <div class="summaryTableDescription">
-   
-   </div>
+   Function sets the visual assets of the plugin according to styleName.</div>
 </td><td class="summaryTableOwnerCol">IPlugin</td>
 </tr>
 </table>
@@ -101,17 +101,20 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function setSkin(styleName:String, setSkinSize:Boolean = false):void</code><p>
-   
+   Function sets the visual assets of the plugin according to styleName.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">styleName</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">styleName</span>:String</code> &mdash; - state of the plugin to assign a skin class to (i.e overSkin, upSkin, etc).
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">setSkinSize</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">setSkinSize</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; - optional flag indicating whether the skin size should be changed to the component size.
+   
+   </td>
 </tr>
 </table>
 </div>

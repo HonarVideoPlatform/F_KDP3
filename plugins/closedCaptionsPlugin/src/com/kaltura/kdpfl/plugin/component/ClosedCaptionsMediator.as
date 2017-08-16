@@ -6,8 +6,15 @@ package com.kaltura.kdpfl.plugin.component
 	import com.kaltura.kdpfl.model.SequenceProxy;
 	import com.kaltura.kdpfl.view.containers.KHBox;
 	import com.kaltura.vo.KalturaMediaEntry;
+	import com.type.ClosedCaptionsNotifications;
 	
 	import flash.display.DisplayObject;
+	import flash.errors.IOError;
+	import flash.events.AsyncErrorEvent;
+	import flash.events.ErrorEvent;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -92,6 +99,12 @@ package com.kaltura.kdpfl.plugin.component
 
 						if (_closedCaptionsDefs["ccUrl"] != null && _closedCaptionsDefs["ccUrl"] != "")
 						{
+							(view as ClosedCaptions).addEventListener(IOErrorEvent.IO_ERROR, onCCIOError);
+							(view as ClosedCaptions).addEventListener(ErrorEvent.ERROR, onCCGeneralError);
+							(view as ClosedCaptions).addEventListener(AsyncErrorEvent.ASYNC_ERROR, onCCGeneralError);
+							(view as ClosedCaptions).addEventListener(SecurityErrorEvent.SECURITY_ERROR, onCCGeneralError);
+							(view as ClosedCaptions).addEventListener( ClosedCaptions.ERROR_PARSING_SRT, onErrorParsingCC );
+							(view as ClosedCaptions).addEventListener( ClosedCaptions.ERROR_PARSING_TT, onErrorParsingCC );
 							(view as ClosedCaptions).loadCaptions(_closedCaptionsDefs["ccUrl"], _closedCaptionsDefs["type"]);
 						}
 						else if (_closedCaptionsDefs["entryID"] != null && _closedCaptionsDefs["entryID"] != "")
@@ -138,13 +151,27 @@ package com.kaltura.kdpfl.plugin.component
 					(view as ClosedCaptions).closedCaptionsClicked ();
 				break;
 				
-				case "showHideClosedCaptions":
+				case ClosedCaptionsNotifications.SHOW_HIDE_CLOSED_CAPTIONS:
 					(view as ClosedCaptions).visible = !(view as ClosedCaptions).visible;
 					break;
 					
 			}
 		}
-
+		
+		private function onCCIOError (e : Event) : void
+		{
+			sendNotification( ClosedCaptionsNotifications.CC_IO_ERROR );
+		}
+		
+		private function onCCGeneralError (e : Event) : void
+		{
+			sendNotification( ClosedCaptionsNotifications.CC_ERROR );
+		}
+		
+		private function onErrorParsingCC (e : ErrorEvent) : void
+		{
+			sendNotification( ClosedCaptionsNotifications.CC_FAILED_TO_VALIDATE );
+		}
 		
 		private function onGetEntryResult(evt:Object):void
 		{
@@ -170,7 +197,7 @@ package com.kaltura.kdpfl.plugin.component
 		
 		public function setBGColor (val : String) : void
 		{
-			(view as ClosedCaptions).bgColor = val;
+			(view as ClosedCaptions).bgColor = Number(val);
 		}
 		
 		public function setStyleName ( val : String ) : void

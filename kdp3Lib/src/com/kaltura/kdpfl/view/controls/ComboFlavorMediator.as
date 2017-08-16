@@ -1,8 +1,10 @@
 package com.kaltura.kdpfl.view.controls
 {
+	import com.kaltura.kdpfl.model.LayoutProxy;
 	import com.kaltura.kdpfl.model.MediaProxy;
 	import com.kaltura.kdpfl.model.type.NotificationType;
 	import com.kaltura.kdpfl.model.type.StreamerType;
+	import com.kaltura.kdpfl.view.media.KMediaPlayerMediator;
 	import com.kaltura.puremvc.as3.patterns.mediator.MultiMediator;
 	
 	import flash.events.Event;
@@ -12,6 +14,11 @@ package com.kaltura.kdpfl.view.controls
 	
 	import org.puremvc.as3.interfaces.INotification;
 
+	/**
+	 * Mediator for the KDP flavor selction combo box of type KFlavorComboBox.
+	 * @author Hila
+	 * 
+	 */
 	public class ComboFlavorMediator extends MultiMediator
 	{
 		//public static const AUTO_MESSAGE : String = "Automatically switches between bitrates";
@@ -20,7 +27,7 @@ package com.kaltura.kdpfl.view.controls
 		
 		
 		/**
-		 * 
+		 * Constructor.
 		 * @param viewComponent
 		 * 
 		 */		
@@ -38,7 +45,8 @@ package com.kaltura.kdpfl.view.controls
 		{
 			var re_arr : Array = [NotificationType.SWITCHING_CHANGE_STARTED,
 								  NotificationType.SWITCHING_CHANGE_COMPLETE,
-								  NotificationType.MEDIA_READY];
+								  NotificationType.MEDIA_READY,
+								  NotificationType.LAYOUT_READY];
 			return re_arr;
 		}
 		
@@ -60,19 +68,32 @@ package com.kaltura.kdpfl.view.controls
 					break;
 				case NotificationType.SWITCHING_CHANGE_COMPLETE:
 					(viewComponent as KFlavorComboBox).enabled = true;
-					(viewComponent as KFlavorComboBox).selectedMessage = "Bitrate: " + Math.round(note_body.currentBitrate/100) * 100;
+					(viewComponent as KFlavorComboBox).selectedMessage = "Bitrate: " + Math.round(Number(note_body.newBitrate)/100) * 100;
 					break;
 				case NotificationType.MEDIA_READY:
 					(viewComponent as KFlavorComboBox).determineEnabled();
 					break;
+				case NotificationType.PLAYER_PLAY_END:
+					var currBitrate : Number = (facade.retrieveMediator(KMediaPlayerMediator.NAME) as KMediaPlayerMediator).player.getBitrateForDynamicStreamIndex((facade.retrieveMediator(KMediaPlayerMediator.NAME) as KMediaPlayerMediator).player.currentDynamicStreamIndex);
+					(viewComponent as KFlavorComboBox).enabled = true;
+					(viewComponent as KFlavorComboBox).selectedMessage = "Bitrate: " + Math.round(currBitrate/100) * 100;
+					break;
 			}
 		}
 		
-		
+		/**
+		 * Handler for event dispatched when user opens the flavor combo box.
+		 * @param e
+		 * 
+		 */		
 		private function onComboBoxOpen (e : Event) : void{
 			comboBox.kisOpen = true;
 		}
-		
+		/**
+		 * Handler for event dispatched when user closes the combo box.
+		 * @param e
+		 * 
+		 */		
 		private function onComboBoxClose ( e:Event) : void{
 			comboBox.kisOpen = false;
 		}
@@ -116,7 +137,11 @@ package com.kaltura.kdpfl.view.controls
 			//call do switch
 			sendNotification( NotificationType.DO_SWITCH , preferedFlavorBitrate );
 		}
-		
+		/**
+		 * Handler for event thrown when the data provider for the flavor selection combo-box changes. 
+		 * @param event
+		 * 
+		 */		
 		private function onDataProviderChange( event : Event ) : void
 		{	
 			var mediaProxy : MediaProxy = facade.retrieveProxy( MediaProxy.NAME ) as MediaProxy;

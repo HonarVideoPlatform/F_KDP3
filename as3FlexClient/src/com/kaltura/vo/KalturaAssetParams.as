@@ -10,6 +10,8 @@ package com.kaltura.vo
 
 		public var name : String;
 
+		public var systemName : String;
+
 		public var description : String;
 
 		public var createdAt : int = int.MIN_VALUE;
@@ -20,14 +22,18 @@ package com.kaltura.vo
 
 		public var format : String;
 
+		public var origin : int = int.MIN_VALUE;
+
 		public function getUpdateableParamKeys():Array
 		{
 			var arr : Array;
 			arr = new Array();
 			arr.push('name');
+			arr.push('systemName');
 			arr.push('description');
 			arr.push('tags');
 			arr.push('format');
+			arr.push('origin');
 			return arr;
 		}
 	}

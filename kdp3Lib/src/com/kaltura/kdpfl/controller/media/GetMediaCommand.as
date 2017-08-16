@@ -38,7 +38,11 @@ package com.kaltura.kdpfl.controller.media
 	import com.kaltura.kdpfl.model.SequenceProxy;
 	import com.kaltura.types.KalturaMetadataOrderBy;
 	import com.kaltura.vo.KalturaFilterPager;
-	
+	/**
+	 * This is the class for the command used to retrieve the entry object and its related data from the Kaltura CMS. 
+	 * @author Hila
+	 * 
+	 */	
 	public class GetMediaCommand extends AsyncCommand
 	{
 		
@@ -47,10 +51,10 @@ package com.kaltura.kdpfl.controller.media
 		private var _flashvars : Object;
 		
 		/**
-		 * Using Kaltura Client to call to Get Entry and fill the Kaltura Media Entry with it's data
-		 * so the user can see title, thumbnail and more info... this command is used to change media
-		 * as well 
-		 * @param notification
+		 * The command's execution involves using the Kaltura Client to construct a multi-tiered call to the
+		 * Kaltura CMS (a MultiRequest) and populating it with single-tier calls to get the Entry object, the Flavors array,
+		 * the Entry Context Data and the Custom Metadata.
+		 * @param notification - the notifcation which triggered the command.
 		 * 
 		 */		
 		override public function execute(notification:INotification):void
@@ -69,11 +73,12 @@ package com.kaltura.kdpfl.controller.media
 				}
 				commandComplete();
 			}
-			else if( _mediaProxy.vo.entryLoadedBeforeChangeMedia) //if this is the first time we load media (not a change media)
+			else if( _mediaProxy.vo.entryLoadedBeforeChangeMedia) 
 			{
 				_mediaProxy.vo.entryLoadedBeforeChangeMedia = false;
 				_mediaProxy.vo.selectedFlavorId = _flashvars.flavorId;
-				//bypass the call at first time (won't enter here in change media)
+				
+				//If this is the first time that the player is running WITHOUT A KDP3WRAPPER, bypass this call, as the entry was retrieved in the LoadConfigCommand stage.
 				result({data:[_mediaProxy.vo.entry,_mediaProxy.vo.kalturaMediaFlavorArray,_mediaProxy.vo.entryExtraData, (_flashvars.requiredMetadataFields ? _mediaProxy.vo.entryMetadata : null)]});
 			}
 			else //else call to the get entry service again
@@ -138,8 +143,9 @@ package com.kaltura.kdpfl.controller.media
 			
 		}
 		/**
-		 * The Client retured from the server with result 
-		 * @param data
+		 * The response to the server result. This function reassigns the values returned from the server into the
+		 * mediaProxy.vo (value object) so that it is subsequently visible to any Observer-type class (proxy, mediator, command).
+		 * @param data - the server response
 		 * 
 		 */		
 		public function result(data:Object):void
@@ -173,7 +179,7 @@ package com.kaltura.kdpfl.controller.media
 				}
 			}
 			
-			if(arr[i] is KalturaError)
+			if(arr[i] is KalturaError )
 			{
 				trace("Warning : Empty Flavors");
 				_mediaProxy.vo.kalturaMediaFlavorArray = null;
@@ -210,7 +216,7 @@ package com.kaltura.kdpfl.controller.media
 				_mediaProxy.vo.kalturaMediaFlavorArray = arr[i++];
 			} 
 			
-			if(arr[i] is KalturaError)
+			if(arr[i] is KalturaError )
 			{
 				//TODO: Trace, Report, and notify the user
 				trace("Warning : Empty Extra Params");
@@ -222,51 +228,54 @@ package com.kaltura.kdpfl.controller.media
 				_mediaProxy.vo.entryExtraData = arr[i++];
 			} 
 			
-			if(arr[i] is KalturaError)
+			if (_flashvars.requiredMetadataFields)
 			{
-				//TODO: Trace, Report, and notify the user
-				trace("Warning : Empty Meta data");
-				++i;
-				//sendNotification( NotificationType.ALERT , {message: MessageStrings.getString('SERVICE_GET_EXTRA_ERROR'), title: MessageStrings.getString('SERVICE_GET_EXTRA_ERROR_TITLE')} );
-			}
-			else
-			{
-				var mediaProxy : MediaProxy = facade.retrieveProxy(MediaProxy.NAME) as MediaProxy;
-				
-				if (mediaProxy.vo.entryMetadata != arr[i] )
+				if(arr[i] is KalturaError)
 				{
+					//TODO: Trace, Report, and notify the user
+					trace("Warning : Empty Meta data");
+					++i;
+					//sendNotification( NotificationType.ALERT , {message: MessageStrings.getString('SERVICE_GET_EXTRA_ERROR'), title: MessageStrings.getString('SERVICE_GET_EXTRA_ERROR_TITLE')} );
+				}
+				else
+				{
+					var mediaProxy : MediaProxy = facade.retrieveProxy(MediaProxy.NAME) as MediaProxy;
 					
-					mediaProxy.vo.entryMetadata = new Object();
-					
-					var listResponse : KalturaMetadataListResponse = arr[i] as KalturaMetadataListResponse;
-					if (listResponse && listResponse.objects[listResponse.objects.length - 1])
+					if (mediaProxy.vo.entryMetadata != arr[i] )
 					{
-						var metadataXml : XMLList = XML(listResponse.objects[listResponse.objects.length - 1]["xml"]).children();
-						var metaDataObj : Object = new Object();
-						for each (var node : XML in metadataXml)
+						
+						mediaProxy.vo.entryMetadata = new Object();
+						
+						var listResponse : KalturaMetadataListResponse = arr[i] as KalturaMetadataListResponse;
+						if (listResponse && listResponse.objects[listResponse.objects.length - 1])
 						{
-							if (!metaDataObj.hasOwnProperty(node.name().toString()))
+							var metadataXml : XMLList = XML(listResponse.objects[listResponse.objects.length - 1]["xml"]).children();
+							var metaDataObj : Object = new Object();
+							for each (var node : XML in metadataXml)
 							{
-								metaDataObj[node.name().toString()] = node.valueOf().toString();
-							}
-							else
-							{
-								if (metaDataObj[node.name().toString()] is Array)
+								if (!metaDataObj.hasOwnProperty(node.name().toString()))
 								{
-									(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString());
+									metaDataObj[node.name().toString()] = node.valueOf().toString();
 								}
 								else
 								{
-									metaDataObj[node.name().toString()] =new Array ( metaDataObj[node.name().toString()]);
-									(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString() );
+									if (metaDataObj[node.name().toString()] is Array)
+									{
+										(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString());
+									}
+									else
+									{
+										metaDataObj[node.name().toString()] =new Array ( metaDataObj[node.name().toString()]);
+										(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString() );
+									}
 								}
 							}
+							mediaProxy.vo.entryMetadata = metaDataObj;
 						}
-						mediaProxy.vo.entryMetadata = metaDataObj;
+						sendNotification(NotificationType.METADATA_RECEIVED);
 					}
-					sendNotification(NotificationType.METADATA_RECEIVED);
-				}
-			} 
+				} 
+			}
 			
 			var entry : KalturaBaseEntry  = _mediaProxy.vo.entry;
 			
@@ -275,17 +284,29 @@ package com.kaltura.kdpfl.controller.media
 				//switch the entry status to print the right error to the screen
 				switch( entry.status )
 				{
-					case KalturaEntryStatus.BLOCKED: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_REJECTED'), title: MessageStrings.getString('ENTRY_REJECTED_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;	
-					case KalturaEntryStatus.DELETED: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_DELETED'), title: MessageStrings.getString('ENTRY_DELETED_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;	
-					case KalturaEntryStatus.ERROR_CONVERTING: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ERROR_PROCESSING_MEDIA'), title: MessageStrings.getString('ERROR_PROCESSING_MEDIA_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;	
-					case KalturaEntryStatus.ERROR_IMPORTING: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ERROR_PROCESSING_MEDIA'), title: MessageStrings.getString('ERROR_PROCESSING_MEDIA_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;	
-					case KalturaEntryStatus.IMPORT: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_CONVERTING'), title: MessageStrings.getString('ENTRY_CONVERTING_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;	
-					case KalturaEntryStatus.PRECONVERT: sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_CONVERTING'), title: MessageStrings.getString('ENTRY_CONVERTING_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; break;
+					case KalturaEntryStatus.BLOCKED: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_REJECTED'), title: MessageStrings.getString('ENTRY_REJECTED_TITLE')}); _mediaProxy.vo.isMediaDisabled = true;
+						break;	
+					case KalturaEntryStatus.DELETED: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_DELETED'), title: MessageStrings.getString('ENTRY_DELETED_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; 
+						break;	
+					case KalturaEntryStatus.ERROR_CONVERTING: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ERROR_PROCESSING_MEDIA'), title: MessageStrings.getString('ERROR_PROCESSING_MEDIA_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; 
+						break;	
+					case KalturaEntryStatus.ERROR_IMPORTING: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ERROR_PROCESSING_MEDIA'), title: MessageStrings.getString('ERROR_PROCESSING_MEDIA_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; 
+						break;	
+					case KalturaEntryStatus.IMPORT: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_CONVERTING'), title: MessageStrings.getString('ENTRY_CONVERTING_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; 
+						break;	
+					case KalturaEntryStatus.PRECONVERT: 
+						sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('ENTRY_CONVERTING'), title: MessageStrings.getString('ENTRY_CONVERTING_TITLE')}); _mediaProxy.vo.isMediaDisabled = true; 
+						break;
 					
-					case KalturaEntryStatus.READY: /* DO NOTHING */ ;break/* sendNotification( NotificationType.ALERT,{message:"this is the a message test" ,title:"my title"}); */ 
+					case KalturaEntryStatus.READY: 
+						break;
 					
 					default: 
-						trace( MessageStrings.getString('UNKNOWN_STATUS') );
 						//sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('UNKNOWN_STATUS'), title: MessageStrings.getString('UNKNOWN_STATUS_TITLE')}); break;
 						break;
 				}
@@ -309,28 +330,34 @@ package com.kaltura.kdpfl.controller.media
 								break;
 						}
 					}
-					
+					//If the requesting user is not the admin, check for entry restrictions
 					if(!_mediaProxy.vo.entryExtraData.isAdmin)
 					{
-						//if you are not an admin we will check if this entry is restricted by country
+						//The player is running in a restricted country.
 						if(_mediaProxy.vo.entryExtraData.isCountryRestricted){
 							sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('UNAUTHORIZED_COUNTRY'), title: MessageStrings.getString('UNAUTHORIZED_COUNTRY_TITLE')});
 							sendNotification(NotificationType.CANCEL_ALERTS);//
 							_mediaProxy.vo.isMediaDisabled = true;
 						}
-						//if you are not an admin we will check if this entry is out of scheduling
+						//The entry is out of scheduling.
 						if(!_mediaProxy.vo.entryExtraData.isScheduledNow){
 							sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('OUT_OF_SCHEDULING'), title: MessageStrings.getString('OUT_OF_SCHEDULING_TITLE')});	
 							sendNotification(NotificationType.CANCEL_ALERTS);
 							_mediaProxy.vo.isMediaDisabled = true;
 						}
-						//if you are not an admin we will check if this site is restricted
+						//the player is running on a restricted site.
 						if(_mediaProxy.vo.entryExtraData.isSiteRestricted){
 							sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('UNAUTHORIZED_DOMAIN'), title: MessageStrings.getString('UNAUTHORIZED_DOMAIN_TITLE')});
 							sendNotification(NotificationType.CANCEL_ALERTS);
 							_mediaProxy.vo.isMediaDisabled = true;
 						}
-						
+						// The player is running from a restricted IP address.
+						if(_mediaProxy.vo.entryExtraData.isIpAddressRestricted) {
+							sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('UNAUTHORIZED_IP_ADDRESS'), title: MessageStrings.getString('UNAUTHORIZED_IP_ADDRESS_TITLE')});
+							sendNotification(NotificationType.CANCEL_ALERTS);
+							_mediaProxy.vo.isMediaDisabled = true;
+						}
+						// The entry is restricted and the KS is not valid.
 						if(_mediaProxy.vo.entryExtraData.isSessionRestricted && _mediaProxy.vo.entryExtraData.previewLength <= 0){
 							sendNotification(NotificationType.ALERT,{message: MessageStrings.getString('NO_KS'), title: MessageStrings.getString('NO_KS_TITLE')});
 							_mediaProxy.vo.isMediaDisabled = true;
@@ -345,11 +372,7 @@ package com.kaltura.kdpfl.controller.media
 			{
 				_mediaProxy.vo.isMediaDisabled = true;
 			}
-			
-			//don't wait for the BaseEntryGet result...just continue...
-			
-			
-			
+
 			commandComplete();
 		}
 		
@@ -369,7 +392,7 @@ package com.kaltura.kdpfl.controller.media
 		}
 		
 		/**
-		 * The client request is failed 
+		 * The client request has failed
 		 * @param data
 		 * 
 		 */		

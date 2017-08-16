@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="MediaProxy,com.kaltura.kdpfl.model.MediaProxy,NAME,videoElement,vo,findDynamicStreamIndexByProp,loadComplete,loadWithMediaReady,loadWithoutMediaReady,prepareMediaElement" name="keywords">
+<meta content="MediaProxy,com.kaltura.kdpfl.model.MediaProxy,NAME,shouldCreateSwitchingProxy,videoElement,vo,findDynamicStreamIndexByProp,loadComplete,loadWithMediaReady,loadWithoutMediaReady,onSwitchPerformed,prepareMediaElement" name="keywords">
 <title>com.kaltura.kdpfl.model.MediaProxy</title>
 </head>
 <body>
@@ -56,8 +56,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#shouldCreateSwitchingProxy">shouldCreateSwitchingProxy</a> : Boolean = true<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MediaProxy</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#videoElement">videoElement</a> : VideoElement<div class="summaryTableDescription">[read-only]
-    Getter for the VideoElement of the media.</div>
+   Getter for the VideoElement of the media.</div>
 </td><td class="summaryTableOwnerCol">MediaProxy</td>
 </tr>
 <tr class="">
@@ -117,7 +121,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#MediaProxy()">MediaProxy</a>(data:Object = null)</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   onstructor 
+   </div>
 </td><td class="summaryTableOwnerCol">MediaProxy</td>
 </tr>
 <tr class="">
@@ -125,8 +131,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#findDynamicStreamIndexByProp()">findDynamicStreamIndexByProp</a>(prefPropValue:int, propName:String = "bitrate"):int</div>
 <div class="summaryTableDescription">
-         Finds the stream with the closest propName to the passed prefPropValue
-         </div>
+   Finds the stream with the closest propName to the passed prefPropValue
+   </div>
 </td><td class="summaryTableOwnerCol">MediaProxy</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -219,6 +225,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 </div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#onSwitchPerformed()">onSwitchPerformed</a>(e:<a href="../../osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">MediaProxy</td>
+</tr>
+</table>
+</div>
 <a name="constantSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Constants</div>
@@ -239,16 +261,25 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="shouldCreateSwitchingProxy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">shouldCreateSwitchingProxy</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var shouldCreateSwitchingProxy:Boolean = true</code>
+</div>
 <a name="videoElement"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">videoElement</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">videoElement</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>videoElement:VideoElement</code>&nbsp;&nbsp;[read-only]<p>
-    Getter for the VideoElement of the media.
-    </p><span class="label">Implementation</span>
+   Getter for the VideoElement of the media.
+   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get videoElement():VideoElement</code>
 <br>
@@ -278,10 +309,14 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function MediaProxy(data:Object = null)</code><span class="label">Parameters</span>
+<code>public function MediaProxy(data:Object = null)</code><p>
+   onstructor 
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">data</span>:Object</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; - value object of the Proxy.
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -295,19 +330,19 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function findDynamicStreamIndexByProp(prefPropValue:int, propName:String = "bitrate"):int</code><p>
-         Finds the stream with the closest propName to the passed prefPropValue
-         </p><span class="label">Parameters</span>
+   Finds the stream with the closest propName to the passed prefPropValue
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">prefPropValue</span>:int</code> &mdash; the prefered value of the prop by which to search for a stream
-         </td>
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">propName</span>:String</code> (default = "<code>bitrate</code>")<code></code> &mdash; The name of the property that the streamItems are sorted by. If no value is passed, the default is bitrate.
-         </td>
+   </td>
 </tr>
 </table>
 <p></p>
@@ -315,8 +350,8 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>int</code> &mdash; the DynamicStreamingItem index. if a matching stream wasnt found return -1 (auto)
-         
-         </td>
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -359,6 +394,20 @@ showHideInherited();
 <td width="20px"></td><td><code><span class="label">doPlay</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; - flag signifying whether the video should begin playing on being loaded.
    
    </td>
+</tr>
+</table>
+</div>
+<a name="onSwitchPerformed()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">onSwitchPerformed</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function onSwitchPerformed(e:<a href="../../osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">e</span>:<a href="../../osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a></code></td>
 </tr>
 </table>
 </div>

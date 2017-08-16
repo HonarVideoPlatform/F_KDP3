@@ -23,9 +23,17 @@ package com.kaltura.kdpfl.component
 	import com.kaltura.kdpfl.view.controls.KTextField;KTextField;
 
 	////////////////////////////////////////////////////////
-	
+	/**
+	 * The ComponentFactory class contains the mapping between the xml tag names used in the config.xml file
+	 * and the classes constructed for them in the layout building process. 
+	 * @author Hila
+	 * 
+	 */	
 	public class ComponentFactory
 	{
+		/**
+		 * Map object between the config.xml tag names and the KDP associated classes. 
+		 */		
 		public static var _componentMap : Object = 
 		{
 			Button:"com.kaltura.kdpfl.view.controls.KButton",
@@ -70,6 +78,7 @@ package com.kaltura.kdpfl.component
 					var ClassReference:Class = getDefinitionByName( _componentMap[type] ) as Class;
 				}
 				catch(e:Error){
+					trace ("ComponentFactory >> getComponent >> Error: class not found");
 					return null;
 				}
 				
@@ -79,7 +88,7 @@ package com.kaltura.kdpfl.component
 			}
 			else
 			{
-				//TODO: REPORT TYPE NOT FOUND TO THE LOGGER
+				trace ("ComponentFactory >> getComponent >> Error: no class is mapped for this component name.");
 			}
 			
 			return null;	

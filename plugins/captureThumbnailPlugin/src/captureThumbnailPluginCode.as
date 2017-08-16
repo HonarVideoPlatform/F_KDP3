@@ -18,8 +18,8 @@ package {
 		public var set_as_default_success : String = "New thumbnail has been set."
 		public var capture_thumbnail_not_supported : String = "Capture Thumbnail is not supported for this media";
 		public var capture_thumbnail_success_title : String = "Capture Thumbnail";
-		public var capture_thumbnail_service_forbidden_title = "Service Forbidden";
-		public var capture_thumbnail_service_forbidden = "You do not have the permission level required to set a new default thumbnail.\n Your thumbnail has been added to the list of entry thumbnails.";
+		public var capture_thumbnail_service_forbidden_title : String = "Service Forbidden";
+		public var capture_thumbnail_service_forbidden : String = "You do not have the permission level required to set a new default thumbnail.\n Your thumbnail has been added to the list of entry thumbnails.";
 		
 		public function captureThumbnailPluginCode()
 		{

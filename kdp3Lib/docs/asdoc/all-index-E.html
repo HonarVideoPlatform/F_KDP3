@@ -58,6 +58,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
    a lower priority than the default.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxyEvent.html#ELEMENT_SWITCH_PERFORMED">ELEMENT_SWITCH_PERFORMED</a> &mdash; Constant static property in class com.kaltura.osmf.events.<a onclick="javascript:loadClassListFrame('com/kaltura/osmf/events/class-list.html');" href="com/kaltura/osmf/events/KSwitchingProxyEvent.html">KSwitchingProxyEvent</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/util/class-list.html');" href="com/kaltura/kdpfl/util/KdpEmbeddedData.html#embeddedModules">embeddedModules</a> &mdash; Property in class com.kaltura.kdpfl.util.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/util/class-list.html');" href="com/kaltura/kdpfl/util/KdpEmbeddedData.html">KdpEmbeddedData</a></td>
 </tr>
 <tr>
@@ -128,7 +134,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#enabled">enabled</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Override the enabled setter/getter - in case the allowDisable property is set to <code>false</code>.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/containers/layoutClasses/class-list.html');" href="com/yahoo/astra/fl/containers/layoutClasses/AdvancedLayoutPane.html#enabled">enabled</a> &mdash; Property in class com.yahoo.astra.fl.containers.layoutClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/containers/layoutClasses/class-list.html');" href="com/yahoo/astra/fl/containers/layoutClasses/AdvancedLayoutPane.html">AdvancedLayoutPane</a></td>
@@ -178,6 +185,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
 <tr>
 <td width="20"></td><td>
      Encodes a ByteArray in Base64 and adds the result to an internal buffer.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/FuncsProxy.html#encodeUrl()">encodeUrl</a>(url) &mdash; Method in class com.kaltura.kdpfl.model.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/class-list.html');" href="com/kaltura/kdpfl/model/FuncsProxy.html">FuncsProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+    
+   </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('mx/utils/class-list.html');" href="mx/utils/Base64Encoder.html#encodeUTFBytes()">encodeUTFBytes</a>(data) &mdash; Method in class mx.utils.<a onclick="javascript:loadClassListFrame('mx/utils/class-list.html');" href="mx/utils/Base64Encoder.html">Base64Encoder</a></td>
@@ -234,7 +249,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   Get Entry failed
+   The BaseEntry object has failed to be retrieved
    </td>
 </tr>
 <tr>
@@ -261,11 +276,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
    </td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/MediaVO.html#entryMetadata">entryMetadata</a> &mdash; Property in class com.kaltura.kdpfl.model.vo.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/vo/class-list.html');" href="com/kaltura/kdpfl/model/vo/MediaVO.html">MediaVO</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   laceholder for the KDP meta-data.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html#ENTRY_READY">ENTRY_READY</a> &mdash; Constant static property in class com.kaltura.kdpfl.model.type.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html">NotificationType</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-   The Entry is set
+   The BaseEntry object has been retrieved successfully
    </td>
 </tr>
 <tr>
@@ -402,8 +424,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   
-   </td>
+   This function uses the Kaltura Client to retrieve the KS, Widget data and UIConf from the Kaltura CMS.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/class-list.html');" href="com/kaltura/kdpfl/controller/LoadSkinCommand.html#execute()">execute</a>(notification:<a href="org/puremvc/as3/interfaces/INotification.html" onclick="javascript:loadClassListFrame('org/puremvc/as3/interfaces./class-list.html');">org.puremvc.as3.interfaces:INotification</a>) &mdash; Method in class com.kaltura.kdpfl.controller.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/class-list.html');" href="com/kaltura/kdpfl/controller/LoadSkinCommand.html">LoadSkinCommand</a></td>
@@ -465,8 +486,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("EÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   Using Kaltura Client to call to Get Entry and fill the Kaltura Media Entry with it's data
-   so the user can see title, thumbnail and more info...</td>
+   The command's execution involves using the Kaltura Client to construct a multi-tiered call to the
+   Kaltura CMS (a MultiRequest) and populating it with single-tier calls to get the Entry object, the Flavors array,
+   the Entry Context Data and the Custom Metadata.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/media/class-list.html');" href="com/kaltura/kdpfl/controller/media/InitMediaChangeProcessCommand.html#execute()">execute</a>(notification:<a href="org/puremvc/as3/interfaces/INotification.html" onclick="javascript:loadClassListFrame('org/puremvc/as3/interfaces./class-list.html');">org.puremvc.as3.interfaces:INotification</a>) &mdash; Method in class com.kaltura.kdpfl.controller.media.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/controller/media/class-list.html');" href="com/kaltura/kdpfl/controller/media/InitMediaChangeProcessCommand.html">InitMediaChangeProcessCommand</a></td>

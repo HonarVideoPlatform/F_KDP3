@@ -21,11 +21,13 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.utils.getDefinitionByName;
 
+
+[Bindable]
 /**
- * Class KScrubber 
+ * class describing the player's scrubber. 
+ * @author Hila
  * 
  */
-[Bindable]
 public dynamic class KScrubber extends UIComponent implements IComponent
 {			
 
@@ -37,6 +39,7 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 	
 	public var color1:Number = -1;
 	public var color2:Number = -1;
+	public var color3:Number=-1;
 	
 //--------------------------------------
 //  Properties
@@ -109,8 +112,10 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 	 * indicates the amount of space to the right of the cursor on the _scrubButton
 	 */
 	protected var _mouseDownRightPadding:Number;
-	
-	private var _allowMouseClicks : Boolean = true;
+	/**
+	 *  flag indicating whether the scrubber can be clicked.
+	 */	
+	protected var _allowMouseClicks : Boolean = true;
 	
 	/**
 	 * @private
@@ -394,7 +399,10 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 
 		// this displayobject is the track displayObject
   		if(_progressIndicator && color2!=-1)
-			KColorUtil.colorDisplayObject(_progressIndicator , color2);   
+			KColorUtil.colorDisplayObject(_progressIndicator , color2);
+		
+		if(_thumb && color3!=-1)
+			KColorUtil.colorDisplayObject(_thumb , color3);
 	}
 		
 	/**

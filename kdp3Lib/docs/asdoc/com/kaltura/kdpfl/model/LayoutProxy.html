@@ -150,9 +150,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#buildLayout()">buildLayout</a>(xml:XML, itemRendererData:Object = null):Object</div>
 <div class="summaryTableDescription">
-   Main KDP view builder, this function gets a uiconf xml
-   and create KDP instances from it and return the root parent
-   </div>
+   Main KDP view builder, this function gets a uiconf xml, and instantiates the KDP classes according
+   to the mapping found on the ComponentFactory class.</div>
 </td><td class="summaryTableOwnerCol">LayoutProxy</td>
 </tr>
 <tr class="">
@@ -187,9 +186,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#includeInLayoutObject()">includeInLayoutObject</a>(objectId:String, value:Boolean):void</div>
 <div class="summaryTableDescription">
-   This function displays or hides an element from the layout and affets its container to 
-   redraw its layout   
-   </div>
+   This function affects the <code>includeInLayout</code> property of a uiComponent.</div>
 </td><td class="summaryTableOwnerCol">LayoutProxy</td>
 </tr>
 <tr class="">
@@ -348,12 +345,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function buildLayout(xml:XML, itemRendererData:Object = null):Object</code><p>
-   Main KDP view builder, this function gets a uiconf xml
-   and create KDP instances from it and return the root parent
+   Main KDP view builder, this function gets a uiconf xml, and instantiates the KDP classes according
+   to the mapping found on the ComponentFactory class.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code> &mdash; - the layout xml.
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
@@ -366,7 +364,9 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Object</code></td>
+<td width="20"></td><td><code>Object</code> &mdash; the ready uicomponent.
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -404,18 +404,20 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function includeInLayoutObject(objectId:String, value:Boolean):void</code><p>
-   This function displays or hides an element from the layout and affets its container to 
-   redraw its layout   
+   This function affects the <code>includeInLayout</code> property of a uiComponent.  
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">objectId</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">objectId</span>:String</code> &mdash; - id of the uicomponent to affect.
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">value</span>:Boolean</code></td>
+<td width="20px"></td><td><code><span class="label">value</span>:Boolean</code> &mdash; new value for the <code>includeInLayout</code> property of the uicomponent.
+   
+   </td>
 </tr>
 </table>
 </div>

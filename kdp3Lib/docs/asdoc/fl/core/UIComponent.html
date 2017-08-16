@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../print.css" type="text/css" media="print">
-<meta content="UIComponent,fl.core.UIComponent,tooltip,version,enabled,focusEnabled,focusManager,height,includeInLayout,mouseFocusEnabled,scaleX,scaleY,visible,width,x,y,clearStyle,drawFocus,drawNow,getFocus,getStyle,getStyleDefinition,getStyleValue,invalidate,mergeStyles,move,setFocus,setSize,setStyle,validateNow" name="keywords">
+<meta content="UIComponent,fl.core.UIComponent,_allowDisable,tooltip,version,allowDisable,enabled,focusEnabled,focusManager,height,includeInLayout,mouseFocusEnabled,scaleX,scaleY,visible,width,x,y,clearStyle,drawFocus,drawNow,getFocus,getStyle,getStyleDefinition,getStyleValue,invalidate,mergeStyles,move,setFocus,setSize,setStyle,validateNow" name="keywords">
 <title>fl.core.UIComponent</title>
 </head>
 <body>
@@ -65,6 +65,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#allowDisable">allowDisable</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">UIComponent</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#enabled">enabled</a> : Boolean<div class="summaryTableDescription">
@@ -139,6 +143,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#y">y</a> : Number<div class="summaryTableDescription">
          Gets or sets the y coordinate that represents the position of the component along 
          the y axis within its parent container.</div>
+</td><td class="summaryTableOwnerCol">UIComponent</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_allowDisable">_allowDisable</a> : Boolean = true<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">UIComponent</td>
 </tr>
 </table>
@@ -378,10 +395,33 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="_allowDisable"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_allowDisable</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _allowDisable:Boolean = true</code>
+</div>
+<a name="allowDisable"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">allowDisable</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>allowDisable:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get allowDisable():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set allowDisable(value:String):void</code>
+<br>
+</div>
 <a name="enabled"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">enabled</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">enabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">

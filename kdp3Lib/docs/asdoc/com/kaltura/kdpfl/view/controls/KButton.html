@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="KButton,com.kaltura.kdpfl.view.controls.KButton,ICON_BUTTON,LABEL_BUTTON,NORMAL,ON_SCREEN,buttonType,color1,color2,color3,color4,color5,font,selectedTooltip,textPadding,upTooltip,allowDisable,isSelected,mouseEnable,enabled,label,maxHeight,maxWidth,minHeight,minWidth,mouseEnabled,selected,draw,getStyleValue,initialize,setSkin,setStyle" name="keywords">
+<meta content="KButton,com.kaltura.kdpfl.view.controls.KButton,ICON_BUTTON,LABEL_BUTTON,NORMAL,ON_SCREEN,buttonType,color1,color2,color3,color4,color5,font,selectedTooltip,showSkin,textPadding,upTooltip,isSelected,maxHeight,maxWidth,minHeight,minWidth,mouseEnable,enabled,label,mouseEnabled,selected,draw,getStyleValue,initialize,setSkin,setStyle" name="keywords">
 <title>com.kaltura.kdpfl.view.controls.KButton</title>
 </head>
 <body>
@@ -57,10 +57,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#allowDisable">allowDisable</a> : String<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">KButton</td>
-</tr>
-<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#buttonType">buttonType</a> : String = "normal"<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
@@ -105,22 +101,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maxHeight">maxHeight</a> : Object<div class="summaryTableDescription">[write-only]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maxHeight">maxHeight</a> : Object<div class="summaryTableDescription">
    Setter for the <code>_maxHeight</code> property.</div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maxWidth">maxWidth</a> : Object<div class="summaryTableDescription">[write-only]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#maxWidth">maxWidth</a> : Object<div class="summaryTableDescription">
    Setter for the <code>_maxWidth</code> property.</div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minHeight">minHeight</a> : Object<div class="summaryTableDescription">[write-only]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minHeight">minHeight</a> : Object<div class="summaryTableDescription">
    Setter for the <code>_minHeight</code> property.</div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minWidth">minWidth</a> : Object<div class="summaryTableDescription">[write-only]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#minWidth">minWidth</a> : Object<div class="summaryTableDescription">
    Setter for the <code>_minWidth</code> property.</div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
@@ -140,6 +136,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#selectedTooltip">selectedTooltip</a> : String = ""<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KButton</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#showSkin">showSkin</a> : String = "false"<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KButton</td>
 </tr>
 <tr class="">
@@ -269,25 +269,10 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="allowDisable"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">allowDisable</td><td class="detailHeaderType">property</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>allowDisable:String</code>&nbsp;&nbsp;[read-write]<p>This property can be used as the source for data binding.</p>
-<span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get allowDisable():String</code>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set allowDisable(value:String):void</code>
-<br>
-</div>
 <a name="buttonType"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">buttonType</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">buttonType</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -400,11 +385,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>maxHeight:Object</code>&nbsp;&nbsp;[write-only]<p>
-   Setter for the <code>_maxHeight</code> property. This property exsits to ensure that the button in question
+<code>maxHeight:Object</code>&nbsp;&nbsp;[read-write]<p>
+   Setter for the <code>_maxHeight</code> property. This property exists to ensure that the button in question
    maintains form with the buttons around it. 
    </p><p>This property can be used as the source for data binding.</p>
 <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxHeight():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxHeight(value:Object):void</code>
 <br>
@@ -416,11 +403,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>maxWidth:Object</code>&nbsp;&nbsp;[write-only]<p>
-   Setter for the <code>_maxWidth</code> property. This property exsits to ensure that the button in question
+<code>maxWidth:Object</code>&nbsp;&nbsp;[read-write]<p>
+   Setter for the <code>_maxWidth</code> property. This property exists to ensure that the button in question
    maintains form with the buttons around it. 
    </p><p>This property can be used as the source for data binding.</p>
 <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxWidth():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxWidth(value:Object):void</code>
 <br>
@@ -432,11 +421,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>minHeight:Object</code>&nbsp;&nbsp;[write-only]<p>
-   Setter for the <code>_minHeight</code> property. This property exsits to ensure that the button in question
+<code>minHeight:Object</code>&nbsp;&nbsp;[read-write]<p>
+   Setter for the <code>_minHeight</code> property. This property exists to ensure that the button in question
    maintains form with the buttons around it. 
    </p><p>This property can be used as the source for data binding.</p>
 <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minHeight():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minHeight(value:Object):void</code>
 <br>
@@ -448,11 +439,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>minWidth:Object</code>&nbsp;&nbsp;[write-only]<p>
+<code>minWidth:Object</code>&nbsp;&nbsp;[read-write]<p>
    Setter for the <code>_minWidth</code> property. This property exsits to ensure that the button in question
    maintains form with the buttons around it. 
    </p><p>This property can be used as the source for data binding.</p>
 <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minWidth():Object</code>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minWidth(value:Object):void</code>
 <br>
@@ -509,6 +502,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var selectedTooltip:String = ""</code>
+</div>
+<a name="showSkin"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">showSkin</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var showSkin:String = "false"</code>
 </div>
 <a name="textPadding"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

@@ -217,7 +217,3 @@ The following are TRIGGER events, which means that they can be fired by the exte
 	
 13. REMOVE_ALERTS - removeAlerts
 	Removes all alerts currently displayed by the player.
-
-
-
-	

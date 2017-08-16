@@ -468,9 +468,6 @@ package {
 
 
 		[Bindable]
-		/**
-		 * @private
-		 */
 		public function set searchDataProvider(value:DataProvider):void {
 			_searchDataProvider = value;
 			var val:String = _searchDataProvider.getItemAt(0).value;

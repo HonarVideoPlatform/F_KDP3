@@ -142,7 +142,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#call()">call</a>(functionName:String, ... parameters):void</div>
+<a class="signatureLink" href="#call()">call</a>(functionName:String, ... parameters):*</div>
 <div class="summaryTableDescription">
    Function wraps the <code>call</code> function of class ExternalInterface.</div>
 </td><td class="summaryTableOwnerCol">ExternalInterfaceProxy</td>
@@ -214,7 +214,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#registerKDPCallbacks()">registerKDPCallbacks</a>():void</div>
 <div class="summaryTableDescription">
-   Register the html wrapper with the basic callbacks so the wrapper can communicate with the KDP.</div>
+   This function does 1 of 2 possible things:
+   1.</div>
 </td><td class="summaryTableOwnerCol">ExternalInterfaceProxy</td>
 </tr>
 <tr class="">
@@ -398,7 +399,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function call(functionName:String, ... parameters):void</code><p>
+<code>public function call(functionName:String, ... parameters):*</code><p>
    Function wraps the <code>call</code> function of class ExternalInterface. This is done in order to prevent
    the call being made if flashvar <code>ExternalInterfaceDisabled</code> is set to <code>true</code> 
    </p><span class="label">Parameters</span>
@@ -414,6 +415,13 @@ showHideInherited();
 <td width="20px"></td><td><code>... <span class="label">parameters</span></code> &mdash; - array of parameters to pass the javascript function
    
    </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code></td>
 </tr>
 </table>
 </div>
@@ -494,7 +502,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function registerKDPCallbacks():void</code><p>
-   Register the html wrapper with the basic callbacks so the wrapper can communicate with the KDP.
+   This function does 1 of 2 possible things:
+   1. If the flashvar <code>jsInterfaceReadyFunc</code> is set to <code>true</code>, this function waits until the <body> tag of the html page surrounding the player
+   is ready before registering the KDP callbacks. It does so by starting the <code>callbackTimer</code>, and re-calling this funcion when the timer fires the COMPLETE event.
+   2. If the flashvar <code>jsInterfaceReadyFunc</code> is set to <code>false</code>, this function simply registers the KDP callbacks, without waiting for the page to report that it's ready.
    
    </p></div>
 <a name="removeJsListener()"></a>

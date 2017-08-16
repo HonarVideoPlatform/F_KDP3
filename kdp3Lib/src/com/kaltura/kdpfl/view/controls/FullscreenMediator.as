@@ -9,7 +9,12 @@ package com.kaltura.kdpfl.view.controls
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-
+	/**
+	 * Mediator for the Full Screen button. This class is responsible for firing the required KDP notifications when the user clicks the full
+	 * screen button, as well as controlling the button's <code>selected</code> property. 
+	 * @author Hila
+	 * 
+	 */
 	public class FullscreenMediator extends Mediator
 	{
 		public static var NAME:String = "FullscreenMediator";

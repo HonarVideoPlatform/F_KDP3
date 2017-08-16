@@ -837,11 +837,11 @@ package com.kaltura.kdpfl.view.media
 			trace("DynamicStreamEvent ===> " , event.type , player.currentDynamicStreamIndex);
 			if (!event.switching)
 			{
-				sendNotification( NotificationType.SWITCHING_CHANGE_COMPLETE, {currentIndex : player.currentDynamicStreamIndex, currentBitrate: player.getBitrateForDynamicStreamIndex(player.currentDynamicStreamIndex)} );
+				sendNotification( NotificationType.SWITCHING_CHANGE_COMPLETE, {newIndex : player.currentDynamicStreamIndex, newBitrate: player.getBitrateForDynamicStreamIndex(player.currentDynamicStreamIndex)}  );
 			}
 			else if (player.autoDynamicStreamSwitch)
 			{
-				sendNotification( NotificationType.SWITCHING_CHANGE_STARTED, {newIndex : player.currentDynamicStreamIndex, newBitrate: player.getBitrateForDynamicStreamIndex(player.currentDynamicStreamIndex)} );
+				sendNotification( NotificationType.SWITCHING_CHANGE_STARTED, {currentIndex : player.currentDynamicStreamIndex, currentBitrate: player.getBitrateForDynamicStreamIndex(player.currentDynamicStreamIndex)});
 			}
 		}
 		
@@ -852,7 +852,7 @@ package com.kaltura.kdpfl.view.media
 		public function cleanMedia():void
 		{
 			//we don't need to clean the media if it's empty
-			kMediaPlayer.unloadThumbnail();
+			
 			if(!player.media) return;
 			
 			if (player.media.hasOwnProperty("cleanMedia"))

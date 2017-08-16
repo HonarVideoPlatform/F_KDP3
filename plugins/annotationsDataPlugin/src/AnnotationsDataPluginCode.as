@@ -116,12 +116,12 @@ package
 					if (id) 
 					{
 						if(annotationsGroup[index].id == id) {
-							dataArray.push(annotationsGroup[index].text);
+							dataArray.push(annotationsGroup[index]);
 						}
 					}
 					else
 					{
-						dataArray.push(annotationsGroup[index].text);
+						dataArray.push(annotationsGroup[index]);
 					}
 	
 				}
@@ -131,6 +131,7 @@ package
 			
 			return null;
 		}
+		
 
 
 	}

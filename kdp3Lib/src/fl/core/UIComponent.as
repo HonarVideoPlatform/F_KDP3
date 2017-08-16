@@ -329,7 +329,7 @@ package fl.core {
          */
 		protected var startHeight:Number;
 
-
+		protected var _allowDisable : Boolean = true;	
         /**
          * @private (protected)
          *
@@ -557,6 +557,7 @@ package fl.core {
          * @langversion 3.0
          * @playerversion Flash 9.0.28.0
          */
+		
 		public function set enabled(value:Boolean):void {
 			if (value == _enabled) { return; }
 			_enabled = value;
@@ -1024,6 +1025,25 @@ package fl.core {
          */
 		public function set focusEnabled(b:Boolean):void {
 			_focusEnabled = b;
+		}
+		
+		[Bindable]
+		/**
+		 * Setter for the <code>allowDisable</code> property. 
+		 * @param value - <code>true</code> if the button can be disabled; <code>false</code> otherwise.
+		 * 
+		 */		
+		public function set allowDisable (value : String) : void
+		{
+			if (value == "true")
+				_allowDisable = true;
+			else
+				_allowDisable = false;
+		}
+		
+		public function get allowDisable () : String
+		{
+			return _allowDisable.toString();	
 		}
 
         /**

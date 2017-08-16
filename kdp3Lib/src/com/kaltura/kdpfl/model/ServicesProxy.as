@@ -17,17 +17,24 @@ package com.kaltura.kdpfl.model
 		public var kalturaClient : KalturaClient;
 		
 		private var _configService:URLLoader;
-			
+		/**
+		 * Constructor 
+		 * 
+		 */			
 		public function ServicesProxy()
 		{
 			super(NAME, null);
 		}
-		
+		/**
+		 * constructs a new KalturaClient based on a KalturaConfig object.
+		 * @param config object of type KalturaConfig used to construct the KalturaClient
+		 * 
+		 */		
 		public function createClient( config : KalturaConfig ) : void
 		{
 			kalturaClient = new KalturaClient( config );
 		}
-		
+			
 		public function getConfigService():URLLoader
 		{
 			if(!_configService)

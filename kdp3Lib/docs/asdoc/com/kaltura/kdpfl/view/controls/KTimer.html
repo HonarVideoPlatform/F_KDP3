@@ -42,7 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+ Class representing the timers used by the KDP
+ <p></p>
 <br>
 <hr>
 </div>
@@ -78,6 +79,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KTimer</td>
 </tr>
 <tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="KLabel.html#htmlText">htmlText</a> : String<div class="summaryTableDescription">
+   html text property of the Label.</div>
+</td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
+</tr>
+<tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="KLabel.html#isVisible">isVisible</a> : String<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
 </tr>
@@ -88,15 +94,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KTimer</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#timerType">timerType</a> : String<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#timerType">timerType</a> : String<div class="summaryTableDescription">
+  controls the type of the timer.</div>
 </td><td class="summaryTableOwnerCol">KTimer</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="KLabel.html#truncateToFit">truncateToFit</a> : Boolean = true<div class="summaryTableDescription">
-      If this propery is true, and the Label control size is
-      smaller than its text, the text of the Label control is truncated using 
-      the string "..."
-      If this property is false, text that does not fit is clipped.</div>
+    If this propery is true, and the Label control size is
+    smaller than its text, the text of the Label control is truncated using 
+    the string "..."
+    If this property is false, text that does not fit is clipped.</div>
+</td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="KLabel.html#width">width</a> : Number<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
 </tr>
 </table>
@@ -120,7 +131,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#KTimer()">KTimer</a>()</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  C-tor 
+  
+  </div>
 </td><td class="summaryTableOwnerCol">KTimer</td>
 </tr>
 <tr class="">
@@ -134,14 +148,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="KLabel.html#runTruncateToFit()">runTruncateToFit</a>():Boolean</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   This function truncates the label's text so that it will fit inside its container.</div>
 </td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#setDuration()">setDuration</a>(duration:Number):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Updates the duration the Timer can count up to (or down from).</div>
 </td><td class="summaryTableOwnerCol">KTimer</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -156,33 +172,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#setTime()">setTime</a>(time:Number):void</div>
 <div class="summaryTableDescription">
-  
-  </div>
+  Updates the time shown by the Timer.</div>
 </td><td class="summaryTableOwnerCol">KTimer</td>
-</tr>
-</table>
-</div>
-<a name="protectedMethodSummary"></a>
-<div class="summarySection">
-<div class="summaryTableTitle">Protected Methods</div>
-<div class="showHideLinks">
-<div class="hideInheritedProtectedMethod" id="hideInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(false,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Methods</a>
-</div>
-<div class="showInheritedProtectedMethod" id="showInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
-</div>
-</div>
-<table id="summaryTableProtectedMethod" class="summaryTable hideInheritedProtectedMethod" cellpadding="3" cellspacing="0">
-<tr>
-<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="hideInheritedProtectedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="KLabel.html#drawLayout()">drawLayout</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol"><a href="KLabel.html">KLabel</a></td>
 </tr>
 </table>
 </div>
@@ -244,7 +235,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>timerType:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>timerType:String</code>&nbsp;&nbsp;[read-write]<p>
+  controls the type of the timer. There are 2 possible types: "both" for a timer that can show both ascending and descending time, and 
+  "backwards", which can only show descending time. 
+  </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get timerType():String</code>
 <br>
@@ -260,8 +254,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function KTimer()</code>
-</div>
+<code>public function KTimer()</code><p>
+  C-tor 
+  
+  </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="initialize()"></a>
@@ -280,7 +276,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function setDuration(duration:Number):void</code><span class="label">Parameters</span>
+<code>public function setDuration(duration:Number):void</code><p>
+  Updates the duration the Timer can count up to (or down from).
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">duration</span>:Number</code></td>
@@ -295,7 +293,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function setTime(time:Number):void</code><p>
-  
+  Updates the time shown by the Timer.
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>

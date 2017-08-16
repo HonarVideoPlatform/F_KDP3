@@ -1,10 +1,8 @@
 package
 {
-	import com.kaltura.kdpfl.model.ConfigProxy;
 	import com.kaltura.kdpfl.model.MediaProxy;
 	import com.kaltura.kdpfl.plugin.IPlugin;
 	import com.kaltura.kdpfl.plugin.KPluginEvent;
-	import com.kaltura.kdpfl.util.URLUtils;
 	
 	import fl.core.UIComponent;
 	
@@ -14,7 +12,6 @@ package
 	import org.osmf.media.DefaultMediaFactory;
 	import org.osmf.media.URLResource;
 	import org.puremvc.as3.interfaces.IFacade;
-
 	/**
 	 * Plugin which wraps the load of an OSMF plugin into the OSMF MediaFactory of the KDP 
 	 * @author Hila
@@ -41,19 +38,6 @@ package
 			if (pluginURL)
 			{
 				_localMediaFactory = (facade.retrieveProxy(MediaProxy.NAME) as MediaProxy).vo.mediaFactory;
-				var configProxy : ConfigProxy = facade.retrieveProxy( ConfigProxy.NAME ) as ConfigProxy;
-				var flashvars : Object = configProxy.vo.flashvars;
-				var pluginDomain : String = flashvars.pluginDomain ? flashvars.pluginDomain : (facade['appFolder'] + 'plugins/');
-				
-				//	if a full path wasnt passed use either the cdn host or pluginDomain
-				if (!URLUtils.isHttpURL(pluginURL)) {
-					if (pluginURL.charAt(0) == "/")
-						pluginURL = flashvars.httpProtocol + flashvars.cdnHost + pluginURL;
-					else
-						pluginURL = pluginDomain + pluginURL;
-				}
-				
-				
 				var pluginResource : URLResource = new URLResource(pluginURL);
 				_localMediaFactory.addEventListener(MediaFactoryEvent.PLUGIN_LOAD, onOSMFPluginLoaded);
 				_localMediaFactory.addEventListener(MediaFactoryEvent.PLUGIN_LOAD_ERROR, onOSMFPluginLoadError);

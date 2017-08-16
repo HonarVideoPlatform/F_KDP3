@@ -7,7 +7,11 @@ package com.kaltura.kdpfl.plugin
 	import flash.events.IOErrorEvent;
 	
 	import mx.rpc.mxml.Concurrency;
-
+	/**
+	 * Singleton class which manages the loading of the KDP plugins according to the plugin's different loading policies. 
+	 * @author Hila
+	 * 
+	 */	
 	public class PluginManager extends EventDispatcher
 	{
 		public static const ALL_PLUGINS_LOADED : String = "allPluginsLoaded";
@@ -43,7 +47,11 @@ package com.kaltura.kdpfl.plugin
 		{
 			
 		}
-		
+		/**
+		 *  
+		 * @return 
+		 * 
+		 */		
 		public static function getInstance() : PluginManager
 		{
 			if(!_instance)
@@ -56,7 +64,16 @@ package com.kaltura.kdpfl.plugin
 		{
 			//TODO: Check if it is loaded
 		}
-		
+		/**
+		 * loads a single KDP plugin 
+		 * @param url the url from which the plugis is loaded
+		 * @param pluginName the name of the plugin
+		 * @param loadingPolicy the loading policy of the plugin (preInitialize, onDemand, wiat, noWait).
+		 * @param asyncInit flag indicating whether the Manager should wait until the plugin itself reports its initialize process as complete (if the plugin makes an async load on its <code>initializePlugin</code> function.
+		 * @param fileSystemMode - flag indicating whether the KDP is running in the user's file system or from a remote server.
+		 * @return Plugin
+		 * 
+		 */		
 		public function loadPlugin( url : String , pluginName : String, loadingPolicy : String, asyncInit : Boolean = false, fileSystemMode : Boolean = false ) : Plugin
 		{
 			if(!_url2PluginMap[url])
@@ -89,7 +106,11 @@ package com.kaltura.kdpfl.plugin
 				
 			return plugin;
 		}
-		
+		/**
+		 * method for unloading the plugin from the KDP. 
+		 * @param url url which serves as a unique id of the plugin to the PluginManager.
+		 * 
+		 */		
 		public function unloadPlugin( url : String ) : void
 		{
 			if(_url2PluginMap[url])
@@ -100,7 +121,11 @@ package com.kaltura.kdpfl.plugin
 			}
 			
 		}
-		
+		/**
+		 * Handler for the COMPLETE event.
+		 * @param event
+		 * 
+		 */		
 		public function onPluginReady( event : Event ) : void
 		{
 			//trace ("inner ready");
@@ -110,7 +135,11 @@ package com.kaltura.kdpfl.plugin
 			//if all plugin loaded
 			dispatchAllPluginsLoaded();
 		}
-		
+		/**
+		 * Handler for the KPLUGIN_INIT_COMPLETE event 
+		 * @param e
+		 * 
+		 */		
 		private function onAsyncInitComplete (e : Event ) : void
 		{
 			--_loadingQ;
@@ -118,7 +147,11 @@ package com.kaltura.kdpfl.plugin
 			//if all plugin loaded
 			dispatchAllPluginsLoaded();
 		}
-		
+		/**
+		 * Handler for the KPLUGIN_INIT_FAILED event
+		 * @param e
+		 * 
+		 */		
 		private function onAsyncInitFailed (e : Event) : void
 		{
 			--_loadingQ;
@@ -126,7 +159,11 @@ package com.kaltura.kdpfl.plugin
 			//if all plugin loaded
 			dispatchAllPluginsLoaded();
 		}
-		
+		/**
+		 * Handler for plugin load fail.
+		 * @param event
+		 * 
+		 */		
 		private function onPluginError( event : IOErrorEvent ) :void
 		{
 			event.target.removeEventListener(  IOErrorEvent.IO_ERROR  , onPluginError );

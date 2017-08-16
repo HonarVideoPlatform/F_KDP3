@@ -14,9 +14,12 @@ package
 	
 	import fl.core.UIComponent;
 	import fl.data.DataProvider;
+	import fl.events.ListEvent;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
+	import mx.events.ListEvent;
 	
 	import org.puremvc.as3.interfaces.IFacade;
 

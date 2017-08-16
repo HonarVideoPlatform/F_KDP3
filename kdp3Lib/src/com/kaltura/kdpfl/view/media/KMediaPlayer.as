@@ -278,7 +278,7 @@ package com.kaltura.kdpfl.view.media
 						_thumbnail.height = this.height;
 					}
 				}
-				if (_player.displayObject)
+				if (_player && _player.displayObject)
 				{
 					
 					if (_keepAspectRatio)
@@ -321,7 +321,7 @@ package com.kaltura.kdpfl.view.media
 						_thumbnail.height = this.height;
 					}
 				}
-				if (_player.displayObject)
+				if (_player && _player.displayObject)
 				{
 					if (_keepAspectRatio)
 					{

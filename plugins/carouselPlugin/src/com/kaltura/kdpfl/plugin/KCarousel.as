@@ -31,6 +31,11 @@ package com.kaltura.kdpfl.plugin
 		override public function set dataProvider(value:DataProvider):void
 		{
 			var prevSelectedIndex : int = this.selectedIndex != -1 ? this.selectedIndex : 0;
+			
+			if (prevSelectedIndex > value.length)
+			{
+				prevSelectedIndex = 0;
+			}
 			super.dataProvider = value;
 			this.selectedIndex = prevSelectedIndex;
 		}

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FuncsProxy,com.kaltura.kdpfl.model.FuncsProxy,NAME,formatDate,jsCall,navigate" name="keywords">
+<meta content="FuncsProxy,com.kaltura.kdpfl.model.FuncsProxy,NAME,encodeUrl,formatDate,jsCall,navigate,not" name="keywords">
 <title>com.kaltura.kdpfl.model.FuncsProxy</title>
 </head>
 <body>
@@ -35,14 +35,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.kaltura.kdpfl.model</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FuncsProxy</td>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public dynamic  class FuncsProxy</td>
 </tr>
 <tr>
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FuncsProxy <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../../../../org/puremvc/as3/patterns/proxy/Proxy.html">Proxy</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../../../../org/puremvc/as3/patterns/observer/Notifier.html">Notifier</a></td>
 </tr>
 </table>
 <p></p>
-   The class FuncsProxy contains general functions used by the KDP.
+   The class FuncsProxy contains general functions used by the KDP. It can be accessed by the alias
+  Functor.globalsFunctionsObject .
   
   <p></p>
 <br>
@@ -97,7 +98,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#FuncsProxy()">FuncsProxy</a>()</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Constructor 
+   
+   </div>
+</td><td class="summaryTableOwnerCol">FuncsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#encodeUrl()">encodeUrl</a>(url:String):String</div>
+<div class="summaryTableDescription">
+    
+   </div>
 </td><td class="summaryTableOwnerCol">FuncsProxy</td>
 </tr>
 <tr class="">
@@ -140,6 +153,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#navigate()">navigate</a>(url:String, window:String = null):void</div>
 <div class="summaryTableDescription">
    a wrapper to navigateToURL to avoid runtime errors.</div>
+</td><td class="summaryTableOwnerCol">FuncsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#not()">not</a>(obj:*, defaultValue:Boolean = false):Boolean</div>
+<div class="summaryTableDescription">
+   This function reverses a boolean value, or a string value with casting to boolean.</div>
 </td><td class="summaryTableOwnerCol">FuncsProxy</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -206,14 +227,39 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function FuncsProxy()</code>
-</div>
+<code>public function FuncsProxy()</code><p>
+   Constructor 
+   
+   </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="encodeUrl()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">encodeUrl</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function encodeUrl(url:String):String</code><p>
+    
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">url</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
 <a name="formatDate()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">formatDate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">formatDate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -281,6 +327,37 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">window</span>:String</code> (default = <code>null</code>)<code></code> &mdash; the window in which to open this url
    </td>
+</tr>
+</table>
+</div>
+<a name="not()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">not</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function not(obj:*, defaultValue:Boolean = false):Boolean</code><p>
+   This function reverses a boolean value, or a string value with casting to boolean. 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; - the object to reverse
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">defaultValue</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; - the default in case a string is received and it is not 'true' and not 'false'
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
 </div>

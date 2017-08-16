@@ -418,8 +418,8 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 			{
 				_titleDrawn = true;
 			}
-			
-			_buttonBar.drawButtons(buttons, listeners);		
+			if (buttons && buttons.length)
+				_buttonBar.drawButtons(buttons, listeners);		
 		}
 		
 		/**

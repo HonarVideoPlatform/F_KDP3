@@ -6,6 +6,8 @@ package com.kaltura.kdpfl.view.containers
 	import com.yahoo.astra.fl.containers.HBoxPane;
 	import com.yahoo.astra.fl.utils.UIComponentUtil;
 	
+	import fl.core.InvalidationType;
+	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
@@ -50,17 +52,18 @@ package com.kaltura.kdpfl.view.containers
 			// do nothing - just override whatever this does
 		}
 		[Bindable]
-		public function set bgColor(str:String):void
+		public function set bgColor(color:Number):void
 		{
-			_bgColor = Number(str);
+			_bgColor = color;
+			drawBackground();
 			
 		}
 		/**
 		 * This parameter will flat color the container skin
 		 */
-		public function get bgColor():String
+		public function get bgColor():Number
 		{
-			return _bgColor.toString();
+			return _bgColor;
 		}
 		public function set bgAlpha(str:String):void
 		{

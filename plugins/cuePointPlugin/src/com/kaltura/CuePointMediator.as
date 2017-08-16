@@ -14,7 +14,7 @@ package com.kaltura
 		
 		override public function listNotificationInterests():Array
 		{
-			var array : Array = ["receivedCuePoints","entryReady","changeMedia"];
+			var array : Array = ["receivedCuePoints","entryReady","changeMediaProcessStarted"];
 			return array;
 		}
 		
@@ -37,6 +37,9 @@ package com.kaltura
 				case "changeMediaProcessStarted" :
 					viewComponent.cleanCuePoints();
 					break;
+				
+				
+				
 			}
 		}
 	}

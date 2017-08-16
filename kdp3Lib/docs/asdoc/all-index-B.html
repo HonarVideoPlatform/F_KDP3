@@ -524,6 +524,33 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
   A constant used for populating the <em>nodeType</em> field.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimation.html">BufferAnimation</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  class for the buffer indicator animation that appears when media playing in the KDP goes into buffering mode.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimation.html#BufferAnimation()">BufferAnimation</a>() &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimation.html">BufferAnimation</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html">BufferAnimationMediator</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/package-detail.html">com.kaltura.kdpfl.view.controls</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Mediator for the buffer indicator animation.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html#BufferAnimationMediator()">BufferAnimationMediator</a>(viewComponent) &mdash; Constructor in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html">BufferAnimationMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Constructor.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html#BUFFER_CHANGE">BUFFER_CHANGE</a> &mdash; Constant static property in class com.kaltura.kdpfl.model.type.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html">NotificationType</a></td>
 </tr>
 <tr>
@@ -532,7 +559,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
    </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/PreLoaderMediator.html#bufferingStyleName">bufferingStyleName</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/PreLoaderMediator.html">PreLoaderMediator</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html#bufferingStyleName">bufferingStyleName</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/BufferAnimationMediator.html">BufferAnimationMediator</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -579,9 +606,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   Main KDP view builder, this function gets a uiconf xml
-   and create KDP instances from it and return the root parent
-   </td>
+   Main KDP view builder, this function gets a uiconf xml, and instantiates the KDP classes according
+   to the mapping found on the ComponentFactory class.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/AdsNotificationTypes.html#BUMPER_CLICKED">BUMPER_CLICKED</a> &mdash; Constant static property in class com.kaltura.kdpfl.model.type.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/AdsNotificationTypes.html">AdsNotificationTypes</a></td>
@@ -603,7 +629,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#_button">_button</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Volume button.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html#buttonBar">buttonBar</a> &mdash; Property in class com.yahoo.astra.fl.controls.containerClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html">DialogBox</a></td>
@@ -639,6 +666,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
     Positions each button after it has been resized.</td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#_buttonHeight">_buttonHeight</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#buttonHeight">buttonHeight</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Height of the volume button.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html#buttonHeight">buttonHeight</a> &mdash; Property in class com.yahoo.astra.fl.controls.containerClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html">DialogBox</a></td>
 </tr>
 <tr>
@@ -653,6 +693,45 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
 <td width="20"></td><td>
    Height of the buttons on the alert
    </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#_buttonLabelColor">_buttonLabelColor</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#buttonLabelColor">buttonLabelColor</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   color for the alert's button label texts.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#_buttonLabelFont">_buttonLabelFont</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#buttonLabelFont">buttonLabelFont</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   font for the alert's button labels.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#_buttonLabelSize">_buttonLabelSize</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html#buttonLabelSize">buttonLabelSize</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/AlertMediator.html">AlertMediator</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   size for the alert's button label texts.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html#buttonRowSpacing">buttonRowSpacing</a> &mdash; Property in class com.yahoo.astra.fl.controls.containerClasses.<a onclick="javascript:loadClassListFrame('com/yahoo/astra/fl/controls/containerClasses/class-list.html');" href="com/yahoo/astra/fl/controls/containerClasses/DialogBox.html">DialogBox</a></td>
@@ -705,6 +784,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BÂ
 </tr>
 <tr>
 <td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#_buttonWidth">_buttonWidth</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html#buttonWidth">buttonWidth</a> &mdash; Property in class com.kaltura.kdpfl.view.controls.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/view/controls/class-list.html');" href="com/kaltura/kdpfl/view/controls/KVolumeBar.html">KVolumeBar</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Width of the volumebutton.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html#BYTES_DOWNLOADED_CHANGE">BYTES_DOWNLOADED_CHANGE</a> &mdash; Constant static property in class com.kaltura.kdpfl.model.type.<a onclick="javascript:loadClassListFrame('com/kaltura/kdpfl/model/type/class-list.html');" href="com/kaltura/kdpfl/model/type/NotificationType.html">NotificationType</a></td>

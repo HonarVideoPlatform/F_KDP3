@@ -402,12 +402,13 @@ package com.kaltura.kdpfl.plugin
 			_slideLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, slideLoadComplete );
 			_slideSwfLoaded = true;
 			_enablePPTControls = true;
+			
 			viewComponent.enablePPTControls = true;
 			// Set the raw movieclip of the presentation
 			(viewComponent as PPTWidgetAPIPlugin).presentationMovieClip = _fLoader.loader1.content as MovieClip;
 			// Set the movie containers
 			_dummyMovieContainer.loaderContent = _fLoader.loader1.content as MovieClip;
-			
+			_carouselPictureArray = new Array();
 			var ratio:Number = _fLoader.loader1.content.width / _fLoader.loader1.content.height;
 			
 			// This is the converted slide movie dimention
@@ -438,7 +439,12 @@ package com.kaltura.kdpfl.plugin
 		private function updateDataProvider (startFrame : int, endFrame : int) : void
 		{
 			//If the end frame is greater than the number of frames in the original MC --> do nothing
-			if (endFrame > _dummyMovieContainer.numberOfSlides)
+			if ( endFrame > _dummyMovieContainer.numberOfSlides)
+			{
+				endFrame = _dummyMovieContainer.numberOfSlides;
+			}
+			
+			if (startFrame > endFrame)
 			{
 				return;
 			}

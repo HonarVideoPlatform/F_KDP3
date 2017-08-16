@@ -8,6 +8,8 @@ package com.kaltura.vo
 
 		public var entryId : String;
 
+		public var partnerId : int = int.MIN_VALUE;
+
 		public var parentId : String;
 
 		public var createdAt : int = int.MIN_VALUE;
@@ -24,6 +26,8 @@ package com.kaltura.vo
 
 		public var userId : String;
 
+		public var partnerData : String;
+
 		public function getUpdateableParamKeys():Array
 		{
 			var arr : Array;
@@ -34,6 +38,7 @@ package com.kaltura.vo
 			arr.push('tags');
 			arr.push('startTime');
 			arr.push('endTime');
+			arr.push('partnerData');
 			return arr;
 		}
 	}

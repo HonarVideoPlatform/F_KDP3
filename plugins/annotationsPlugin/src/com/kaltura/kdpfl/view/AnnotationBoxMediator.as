@@ -442,22 +442,19 @@ package com.kaltura.kdpfl.view
 			
 			function onCreateParentAnnotationFailed (e : KalturaEvent) : void
 			{
-				sendNotification(Notifications.FEEDBACK_SESSION_SUBMITTED, {error:e.error.errorMsg});
-				trace (e.error.errorMsg);
 				trace ("failed");
 			}
 			
 			function onFeedbackSaved (e : KalturaEvent) : void
 			{
 				trace ("Feedback saved successfully");
-				sendNotification(Notifications.FEEDBACK_SESSION_SUBMITTED, {notificationId:e.data[0].parentId});
+				
 				resetAnnotationComponent();
 			}
 			
 			function onFeedbackSaveFailed (e : KalturaEvent) : void
 			{
 				trace ("Feedback not saved");
-				sendNotification(Notifications.FEEDBACK_SESSION_SUBMITTED, {error:e.error.errorMsg});
 			}
 		}
 		

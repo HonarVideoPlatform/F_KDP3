@@ -1,23 +1,39 @@
 package com.kaltura.kdpfl.model
 {
 	import com.kaltura.kdpfl.util.DateTimeUtils;
+	import com.kaltura.kdpfl.util.Functor;
 	
 	import flash.external.ExternalInterface;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
 	import org.puremvc.as3.patterns.proxy.Proxy;
+
 	/**
-	 *  The class FuncsProxy contains general functions used by the KDP.
+	 *  The class FuncsProxy contains general functions used by the KDP. It can be accessed by the alias
+	 * Functor.globalsFunctionsObject .
 	 * 
 	 */	
-	public class FuncsProxy extends Proxy
+	public dynamic class FuncsProxy extends Proxy
 	{
 		public static const NAME:String = "FuncsProxy";
-		
+		/**
+		 * Constructor 
+		 * 
+		 */		
 		public function FuncsProxy()
 		{
 			super(NAME);
+		}
+		/**
+		 *  
+		 * @param url
+		 * @return 
+		 * 
+		 */		
+		public function encodeUrl(url : String) : String
+		{
+			return encodeURI(url);
 		}
 		
 		/**

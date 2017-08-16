@@ -64,7 +64,7 @@ package {
 		 */		
 		[Embed(source="assets/preloader.swf")]
 		private var AssetClass:Class;
-		
+
 		
 		private var _height:Number;
 		private var _width:Number;
@@ -175,12 +175,12 @@ package {
 			if (mainClass) {
 				_app = new mainClass();
 				addChild(_app as DisplayObject);
-				/*if (_width) {
-				_app.width = _width;
-				}
-				if (_height) {
-				_app.height = _height;
-				}*/
+								/*if (_width) {
+									_app.width = _width;
+								}
+								if (_height) {
+									_app.height = _height;
+								}*/
 				if (_flashvars) {
 					_app.flashvars = _flashvars;
 				}

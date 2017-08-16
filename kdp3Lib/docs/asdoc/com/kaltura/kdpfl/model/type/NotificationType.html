@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="NotificationType,com.kaltura.kdpfl.model.type.NotificationType,ALERT,BUFFER_CHANGE,BUFFER_PROGRESS,BYTES_DOWNLOADED_CHANGE,BYTES_TOTAL_CHANGE,CANCEL_ALERTS,CHANGE_MEDIA,CHANGE_VOLUME,CLEAN_MEDIA,CLOSE_FULL_SCREEN,DO_PAUSE,DO_PLAY,DO_PLAY_ENTRY,DO_REPLAY,DO_SEEK,DO_STOP,DO_SWITCH,DURATION_CHANGE,ENABLE_ALERTS,ENABLE_GUI,ENTRY_FAILED,ENTRY_READY,ENTRY_RESTRICTED,FREE_PREVIEW_END,HAS_CLOSED_FULL_SCREEN,HAS_OPENED_FULL_SCREEN,INITIATE_APP,INTELLI_SEEK,KDP_EMPTY,KDP_READY,LAYOUT_READY,LIVE_ENTRY,LOAD_MEDIA,MEDIA_ERROR,MEDIA_LOADING,MEDIA_LOAD_ERROR,MEDIA_READY,MEDIA_UNLOADED,MEDIA_VIEWABLE_CHANGE,OPEN_FULL_SCREEN,PLAYBACK_COMPLETE,PLAYER_CONTAINER_READY,PLAYER_DIMENSION_CHANGE,PLAYER_PAUSED,PLAYER_PLAYED,PLAYER_PLAY_END,PLAYER_READY,PLAYER_SEEK_END,PLAYER_SEEK_START,PLAYER_STATE_CHANGE,PLAYER_UPDATE_PLAYHEAD,PLUGINS_LOADED,POST_1_START,POST_SEQUENCE_COMPLETE,PRE_1_START,PRE_SEQUENCE_COMPLETE,ROOT_RESIZE,SCRUBBER_DRAG_END,SCRUBBER_DRAG_START,SEQUENCE_ITEM_PLAY_END,SEQUENCE_SKIP_NEXT,SHOW_UI_ELEMENT,SKIN_LOADED,SKIN_LOAD_FAILED,SOURCE_READY,STARTUP,SWITCHING_CHANGE,VOLUME_CHANGED" name="keywords">
+<meta content="NotificationType,com.kaltura.kdpfl.model.type.NotificationType,ALERT,BUFFER_CHANGE,BUFFER_PROGRESS,BYTES_DOWNLOADED_CHANGE,BYTES_TOTAL_CHANGE,CANCEL_ALERTS,CHANGE_MEDIA,CHANGE_MEDIA_PROCESS_STARTED,CHANGE_VOLUME,CLEAN_MEDIA,CLOSE_FULL_SCREEN,DO_PAUSE,DO_PLAY,DO_PLAY_ENTRY,DO_REPLAY,DO_SEEK,DO_STOP,DO_SWITCH,DURATION_CHANGE,ENABLE_ALERTS,ENABLE_GUI,ENTRY_FAILED,ENTRY_READY,ENTRY_RESTRICTED,FREE_PREVIEW_END,HAS_CLOSED_FULL_SCREEN,HAS_OPENED_FULL_SCREEN,INITIATE_APP,INTELLI_SEEK,KDP_EMPTY,KDP_READY,LAYOUT_READY,LIVE_ENTRY,LOAD_MEDIA,MEDIA_ERROR,MEDIA_LOADED,MEDIA_LOADING,MEDIA_LOAD_ERROR,MEDIA_READY,MEDIA_UNLOADED,MEDIA_VIEWABLE_CHANGE,METADATA_RECEIVED,OPEN_FULL_SCREEN,PLAYBACK_COMPLETE,PLAYER_CONTAINER_READY,PLAYER_DIMENSION_CHANGE,PLAYER_PAUSED,PLAYER_PLAYED,PLAYER_PLAY_END,PLAYER_READY,PLAYER_SEEK_END,PLAYER_SEEK_START,PLAYER_STATE_CHANGE,PLAYER_UPDATE_PLAYHEAD,PLUGINS_LOADED,POST_1_START,POST_SEQUENCE_COMPLETE,PRE_1_START,PRE_SEQUENCE_COMPLETE,READY_TO_LOAD,READY_TO_PLAY,REMOVE_ALERTS,ROOT_RESIZE,SCRUBBER_DRAG_END,SCRUBBER_DRAG_START,SEQUENCE_ITEM_PLAY_END,SEQUENCE_SKIP_NEXT,SHOW_UI_ELEMENT,SKIN_LOADED,SKIN_LOAD_FAILED,SOURCE_READY,STARTUP,SWITCHING_CHANGE_COMPLETE,SWITCHING_CHANGE_STARTED,VOLUME_CHANGED" name="keywords">
 <title>com.kaltura.kdpfl.model.type.NotificationType</title>
 </head>
 <body>
@@ -92,6 +92,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CHANGE_MEDIA_PROCESS_STARTED">CHANGE_MEDIA_PROCESS_STARTED</a> : String = "changeMediaProcessStarted"<div class="summaryTableDescription">[static]
+    Fired when the first mini-command of the ChangeMedia macro command is inited.</div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CHANGE_VOLUME">CHANGE_VOLUME</a> : String = "changeVolume"<div class="summaryTableDescription">[static]
    change volume.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
@@ -122,6 +127,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#DO_PLAY_ENTRY">DO_PLAY_ENTRY</a> : String = "doPlayEntry"<div class="summaryTableDescription">[static]
+   DEPRECATED IN KDP3
    This is the actually play command on the video player.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
@@ -166,13 +172,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ENTRY_FAILED">ENTRY_FAILED</a> : String = "entryFailed"<div class="summaryTableDescription">[static]
-   Get Entry failed
+   The BaseEntry object has failed to be retrieved
    </div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ENTRY_READY">ENTRY_READY</a> : String = "entryReady"<div class="summaryTableDescription">[static]
-   The Entry is set
+   The BaseEntry object has been retrieved successfully
    </div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
@@ -237,6 +243,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#LOAD_MEDIA">LOAD_MEDIA</a> : String = "loadMedia"<div class="summaryTableDescription">[static]
+   DEPRECATED
    Start the init macro command of the KDP 
    </div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
@@ -248,18 +255,25 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MEDIA_LOADED">MEDIA_LOADED</a> : String = "mediaLoaded"<div class="summaryTableDescription">[static]
+    From version 3.5.0 this notification replaces the MEDIA_READY notification as the catalyst for the
+    MediaReadyCommand.</div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MEDIA_LOAD_ERROR">MEDIA_LOAD_ERROR</a> : String = "mediaLoadError"<div class="summaryTableDescription">[static]
    The loadable media has failed to complete loading.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MEDIA_LOADING">MEDIA_LOADING</a> : String = "mediaLoading"<div class="summaryTableDescription">[static]
+   DEPRECATED
    The loadable media has begun loading..</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MEDIA_READY">MEDIA_READY</a> : String = "mediaReady"<div class="summaryTableDescription">[static]
-   The loadable media has completed loading.</div>
+   The loadable media element has completed construction.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
@@ -271,6 +285,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MEDIA_VIEWABLE_CHANGE">MEDIA_VIEWABLE_CHANGE</a> : String = "mediaViewableChange"<div class="summaryTableDescription">[static]
    Used mainlly to know when OSMF Media Playe is viewable 
    </div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#METADATA_RECEIVED">METADATA_RECEIVED</a> : String = "metadataReceived"<div class="summaryTableDescription">[static]
+    Fired when metadata for the entry has been received.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
@@ -369,6 +388,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#READY_TO_LOAD">READY_TO_LOAD</a> : String = "readyToLoad"<div class="summaryTableDescription">[static]
+    Notification added with version 3.5.0, signifies that there is no playable
+    entry/media in the KDP, and that it is ready to load alternate media/entries.</div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#READY_TO_PLAY">READY_TO_PLAY</a> : String = "readyToPlay"<div class="summaryTableDescription">[static]
+     Notification added with version 3.5.0, signifies that an entry/media is ready to be
+    played in the KDP
+    </div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#REMOVE_ALERTS">REMOVE_ALERTS</a> : String = "removeAlerts"<div class="summaryTableDescription">[static]
+    Fired when all alerts popped by the player need to be removed.</div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ROOT_RESIZE">ROOT_RESIZE</a> : String = "rootResize"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
@@ -425,9 +462,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#SWITCHING_CHANGE">SWITCHING_CHANGE</a> : String = "switchingChange"<div class="summaryTableDescription">[static]
-    
-   </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#SWITCHING_CHANGE_COMPLETE">SWITCHING_CHANGE_COMPLETE</a> : String = "switchingChangeComplete"<div class="summaryTableDescription">[static]
+    Notification dispatched when the player has finished switching to a different dynamic bitrate.</div>
+</td><td class="summaryTableOwnerCol">NotificationType</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#SWITCHING_CHANGE_STARTED">SWITCHING_CHANGE_STARTED</a> : String = "switchingChangeStarted"<div class="summaryTableDescription">[static]
+   Notification dispatched when the player has started switching to a different dynamic bitrate.</div>
 </td><td class="summaryTableOwnerCol">NotificationType</td>
 </tr>
 <tr class="">
@@ -452,7 +493,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const ALERT:String = "alert"</code><p>
-   Pop up an alert. arguments: message:String="",title:String=""
+   Pop up an alert. Arguments: new Object = {message:String="",title:String=""}
    </p></div>
 <a name="BUFFER_CHANGE"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -514,6 +555,16 @@ showHideInherited();
 <code>public static const CHANGE_MEDIA:String = "changeMedia"</code><p>
    Start the init of change media macro commands 
    </p></div>
+<a name="CHANGE_MEDIA_PROCESS_STARTED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CHANGE_MEDIA_PROCESS_STARTED</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CHANGE_MEDIA_PROCESS_STARTED:String = "changeMediaProcessStarted"</code><p>
+    Fired when the first mini-command of the ChangeMedia macro command is inited. 
+    </p></div>
 <a name="CHANGE_VOLUME"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -572,9 +623,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const DO_PLAY_ENTRY:String = "doPlayEntry"</code><p>
+   DEPRECATED IN KDP3
    This is the actually play command on the video player. It is an addition to the DoPlay
    because of the pre session mechanism (pre roll ads, bumper)
-   DEPRECATED IN KDP3
    </p></div>
 <a name="DO_REPLAY"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -654,7 +705,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const ENTRY_FAILED:String = "entryFailed"</code><p>
-   Get Entry failed
+   The BaseEntry object has failed to be retrieved
    </p></div>
 <a name="ENTRY_READY"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -664,7 +715,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const ENTRY_READY:String = "entryReady"</code><p>
-   The Entry is set
+   The BaseEntry object has been retrieved successfully
    </p></div>
 <a name="ENTRY_RESTRICTED"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -774,6 +825,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const LOAD_MEDIA:String = "loadMedia"</code><p>
+   DEPRECATED
    Start the init macro command of the KDP 
    </p></div>
 <a name="MEDIA_ERROR"></a>
@@ -786,6 +838,18 @@ showHideInherited();
 <code>public static const MEDIA_ERROR:String = "mediaError"</code><p>
    The playe notify on media error 
    </p></div>
+<a name="MEDIA_LOADED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">MEDIA_LOADED</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const MEDIA_LOADED:String = "mediaLoaded"</code><p>
+    From version 3.5.0 this notification replaces the MEDIA_READY notification as the catalyst for the
+    MediaReadyCommand. This notification is indicative that the MediaElement constructed under the MediaProxy 
+    function prepareMediaElement is loaded into the OSMF MediaPlayer. 
+    </p></div>
 <a name="MEDIA_LOAD_ERROR"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -804,6 +868,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const MEDIA_LOADING:String = "mediaLoading"</code><p>
+   DEPRECATED
    The loadable media has begun loading..
    </p></div>
 <a name="MEDIA_READY"></a>
@@ -814,7 +879,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const MEDIA_READY:String = "mediaReady"</code><p>
-   The loadable media has completed loading.
+   The loadable media element has completed construction.
    </p></div>
 <a name="MEDIA_UNLOADED"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -836,6 +901,16 @@ showHideInherited();
 <code>public static const MEDIA_VIEWABLE_CHANGE:String = "mediaViewableChange"</code><p>
    Used mainlly to know when OSMF Media Playe is viewable 
    </p></div>
+<a name="METADATA_RECEIVED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">METADATA_RECEIVED</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const METADATA_RECEIVED:String = "metadataReceived"</code><p>
+    Fired when metadata for the entry has been received. 
+    </p></div>
 <a name="OPEN_FULL_SCREEN"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1005,6 +1080,38 @@ showHideInherited();
 <code>public static const PRE_SEQUENCE_COMPLETE:String = "preSequenceComplete"</code><p>
     Signifies the end of the pre-sequence
     </p></div>
+<a name="READY_TO_LOAD"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">READY_TO_LOAD</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const READY_TO_LOAD:String = "readyToLoad"</code><p>
+    Notification added with version 3.5.0, signifies that there is no playable
+    entry/media in the KDP, and that it is ready to load alternate media/entries.
+    </p></div>
+<a name="READY_TO_PLAY"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">READY_TO_PLAY</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const READY_TO_PLAY:String = "readyToPlay"</code><p>
+     Notification added with version 3.5.0, signifies that an entry/media is ready to be
+    played in the KDP
+    </p></div>
+<a name="REMOVE_ALERTS"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">REMOVE_ALERTS</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const REMOVE_ALERTS:String = "removeAlerts"</code><p>
+    Fired when all alerts popped by the player need to be removed. 
+    </p></div>
 <a name="ROOT_RESIZE"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1104,15 +1211,27 @@ showHideInherited();
 <code>public static const STARTUP:String = "startUp"</code><p>
    the first command that register the main proxys and main view mediator
    </p></div>
-<a name="SWITCHING_CHANGE"></a>
+<a name="SWITCHING_CHANGE_COMPLETE"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">SWITCHING_CHANGE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">SWITCHING_CHANGE_COMPLETE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static const SWITCHING_CHANGE:String = "switchingChange"</code><p>
-    
+<code>public static const SWITCHING_CHANGE_COMPLETE:String = "switchingChangeComplete"</code><p>
+    Notification dispatched when the player has finished switching to a different dynamic bitrate.
+    Body of the notification - {currentIndex:[the index of the bitrate that the player finished switching to],currentBitrate: [the bitrate the player finished switching to]}
+   </p></div>
+<a name="SWITCHING_CHANGE_STARTED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SWITCHING_CHANGE_STARTED</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const SWITCHING_CHANGE_STARTED:String = "switchingChangeStarted"</code><p>
+   Notification dispatched when the player has started switching to a different dynamic bitrate.
+   Body of the notification - {newIndex: [the index of the bitrate the player started switching to. If auto, send -1],newBitrate: [the bitrate the player started switching to. If auto, sned null]}
    </p></div>
 <a name="VOLUME_CHANGED"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

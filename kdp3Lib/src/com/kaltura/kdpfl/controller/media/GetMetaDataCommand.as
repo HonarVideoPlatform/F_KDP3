@@ -13,7 +13,11 @@ package com.kaltura.kdpfl.controller.media
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.AsyncCommand;
-	
+	/**
+	 * DEPRECATED 
+	 * @author Hila
+	 * 
+	 */	
 	public class GetMetaDataCommand extends AsyncCommand
 	{
 		private var _entryId : String;

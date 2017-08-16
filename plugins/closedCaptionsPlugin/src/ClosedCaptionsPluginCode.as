@@ -117,7 +117,7 @@ package {
 
 		public function set ccUrl(value:String):void
 		{
-			if (value != _ccUrl)
+			if (value && value != "" && value != _ccUrl)
 			{
 				_ccUrl = value ? value : "";
 				if (type && type != "")

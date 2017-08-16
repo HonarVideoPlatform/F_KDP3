@@ -383,7 +383,11 @@ package com.kaltura.kdpfl.model
 				}
 			}
 		}
-		
+		/**
+		 * function which activates the sequence plugin's midroll sequence.
+		 * @param midrollPlugin the sequence plugin sheduled to play a midroll.
+		 * 
+		 */		
 		public function activateMidrollSequence (midrollPlugin : IMidrollSequencePlugin) : void
 		{
 			vo.activeMidrollPlugin = midrollPlugin;

@@ -301,7 +301,11 @@ package com.kaltura.kdpfl.view
 			ApplicationFacade.getInstance().app["contextMenu"] = customContextMenu;
 		}
 		
-		
+		/**
+		 * Handler for mouse click on the contect menu. 
+		 * @param e
+		 * 
+		 */		
 		private function onCreditClick ( e : ContextMenuEvent) : void
 		{
 			var contextLink : String = _flashvars.aboutPlayerLink;

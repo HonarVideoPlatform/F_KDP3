@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="MediaVO,com.kaltura.kdpfl.model.vo.MediaVO,deliveryType,entry,entryExtraData,entryLoadedBeforeChangeMedia,expandedBufferTime,expandedLiveBufferTime,imageDefaultDuration,initialBufferTime,initialLiveBufferTime,isLive,isMediaDisabled,isOffline,kalturaMediaFlavorArray,keyframeValuesArray,media,mediaFactory,mediaProtocol,osmfPluginManager,playOnLoad,preferedFlavorBR,resource,selectedFlavorId,singleAutoPlay,supportImageDuration,switchDue" name="keywords">
+<meta content="MediaVO,com.kaltura.kdpfl.model.vo.MediaVO,deliveryType,entry,entryExtraData,entryLoadedBeforeChangeMedia,entryMetadata,expandedBufferTime,expandedLiveBufferTime,imageDefaultDuration,initialBufferTime,initialLiveBufferTime,isLive,isMediaDisabled,isOffline,kalturaMediaFlavorArray,keyframeValuesArray,media,mediaFactory,mediaPlayFrom,mediaPlayTo,mediaProtocol,osmfPluginManager,playOnLoad,preferedFlavorBR,resource,selectedFlavorId,singleAutoPlay,supportImageDuration,switchDue" name="keywords">
 <title>com.kaltura.kdpfl.model.vo.MediaVO</title>
 </head>
 <body>
@@ -77,6 +77,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">MediaVO</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#entryMetadata">entryMetadata</a> : Object<div class="summaryTableDescription">
+   laceholder for the KDP meta-data.</div>
+</td><td class="summaryTableOwnerCol">MediaVO</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#expandedBufferTime">expandedBufferTime</a> : Number = 10<div class="summaryTableDescription">
    set the maximum buffer time to be set once the video started playing in order to minimize further buffering events
    </div>
@@ -140,9 +145,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">MediaVO</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#mediaFactory">mediaFactory</a> : MediaFactory<div class="summaryTableDescription">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#mediaFactory">mediaFactory</a> : DefaultMediaFactory<div class="summaryTableDescription">
    mediaFactory for creating all kind of MediaElemnets
    </div>
+</td><td class="summaryTableOwnerCol">MediaVO</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#mediaPlayFrom">mediaPlayFrom</a> : Number = 0<div class="summaryTableDescription">
+   Indicates the time from which to play the media.</div>
+</td><td class="summaryTableOwnerCol">MediaVO</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#mediaPlayTo">mediaPlayTo</a> : Number = 0<div class="summaryTableDescription">
+   Indicates the time to which to play the media.</div>
 </td><td class="summaryTableOwnerCol">MediaVO</td>
 </tr>
 <tr class="">
@@ -153,8 +168,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#osmfPluginManager">osmfPluginManager</a> : PluginManager<div class="summaryTableDescription">
-   plugin manager for loading osmf plugins 
-   </div>
+   plugin manager for loading osmf plugins - TODO:  pretty sure this is deprecated.</div>
 </td><td class="summaryTableOwnerCol">MediaVO</td>
 </tr>
 <tr class="">
@@ -250,6 +264,17 @@ showHideInherited();
 <div class="detailBody">
 <code>public var entryLoadedBeforeChangeMedia:Boolean = false</code><p>
    entry already loaded entryLoadedBeforeChangeMedia by kdp first multirequest 
+   </p><p>This property can be used as the source for data binding.</p>
+</div>
+<a name="entryMetadata"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">entryMetadata</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var entryMetadata:Object</code><p>
+   laceholder for the KDP meta-data. 
    </p><p>This property can be used as the source for data binding.</p>
 </div>
 <a name="expandedBufferTime"></a>
@@ -383,8 +408,34 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var mediaFactory:MediaFactory</code><p>
+<code>public var mediaFactory:DefaultMediaFactory</code><p>
    mediaFactory for creating all kind of MediaElemnets
+   </p><p>This property can be used as the source for data binding.</p>
+</div>
+<a name="mediaPlayFrom"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">mediaPlayFrom</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var mediaPlayFrom:Number = 0</code><p>
+   Indicates the time from which to play the media. If passed and unequal to 0, the player seeks to this time before
+   beginning to play.
+   
+   </p><p>This property can be used as the source for data binding.</p>
+</div>
+<a name="mediaPlayTo"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">mediaPlayTo</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var mediaPlayTo:Number = 0</code><p>
+   Indicates the time to which to play the media. If passed and unequal to 0, the player
+   pauses upon arrival at this time.
+   
    </p><p>This property can be used as the source for data binding.</p>
 </div>
 <a name="mediaProtocol"></a>
@@ -406,7 +457,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var osmfPluginManager:PluginManager</code><p>
-   plugin manager for loading osmf plugins 
+   plugin manager for loading osmf plugins - TODO:  pretty sure this is deprecated. See if removable. - Hila.
    </p><p>This property can be used as the source for data binding.</p>
 </div>
 <a name="playOnLoad"></a>

@@ -11,7 +11,6 @@ package com.kaltura.kdpfl.view.controls
 	import flash.text.TextFormat;
 	import flash.utils.getDefinitionByName;
 
-
 	public class KComboBox extends ComboBox implements IComponent
 	{
 		private var _postfix:String;
@@ -19,6 +18,7 @@ package com.kaltura.kdpfl.view.controls
 		public var color1:Number = -1;
 		public var color2:Number = -1;
 		public var limitRowCount:String = "7";
+	
 		
 		public function KComboBox()
 		{
@@ -124,5 +124,18 @@ package com.kaltura.kdpfl.view.controls
 				dropdown.setRendererStyle( styleProperty ,displayItem );
 			}catch(e:Error){};
 		}
+		
+		override public function set visible(value:Boolean):void
+		{
+			super.visible = value;
+			this.dropdown.visible = value;
+		}
+		
+		override public function set alpha(value:Number):void
+		{
+			super.alpha = value;
+			this.dropdown.alpha = value;
+		}
+
 	}
 }

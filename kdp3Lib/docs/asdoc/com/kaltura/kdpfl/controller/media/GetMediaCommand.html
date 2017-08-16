@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="GetMediaCommand,com.kaltura.kdpfl.controller.media.GetMediaCommand,execute,fault,result" name="keywords">
+<meta content="GetMediaCommand,com.kaltura.kdpfl.controller.media.GetMediaCommand,commandComplete,execute,fault,result" name="keywords">
 <title>com.kaltura.kdpfl.controller.media.GetMediaCommand</title>
 </head>
 <body>
@@ -42,7 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+  This is the class for the command used to retrieve the entry object and its related data from the Kaltura CMS. 
+  <p></p>
 <br>
 <hr>
 </div>
@@ -88,8 +89,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#execute()">execute</a>(notification:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a>):void</div>
 <div class="summaryTableDescription">
-   Using Kaltura Client to call to Get Entry and fill the Kaltura Media Entry with it's data
-   so the user can see title, thumbnail and more info...</div>
+   The command's execution involves using the Kaltura Client to construct a multi-tiered call to the
+   Kaltura CMS (a MultiRequest) and populating it with single-tier calls to get the Entry object, the Flavors array,
+   the Entry Context Data and the Custom Metadata.</div>
 </td><td class="summaryTableOwnerCol">GetMediaCommand</td>
 </tr>
 <tr class="">
@@ -97,7 +99,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#fault()">fault</a>(data:Object):void</div>
 <div class="summaryTableDescription">
-   The client request is failed 
+   The client request has failed
    </div>
 </td><td class="summaryTableOwnerCol">GetMediaCommand</td>
 </tr>
@@ -106,8 +108,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#result()">result</a>(data:Object):void</div>
 <div class="summaryTableDescription">
-   The Client retured from the server with result 
-   </div>
+   The response to the server result.</div>
 </td><td class="summaryTableOwnerCol">GetMediaCommand</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -131,25 +132,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="protectedMethodSummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Protected Methods</div>
-<div class="showHideLinks">
-<div class="hideInheritedProtectedMethod" id="hideInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(false,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Methods</a>
-</div>
-<div class="showInheritedProtectedMethod" id="showInheritedProtectedMethod">
-<a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
-</div>
-</div>
-<table id="summaryTableProtectedMethod" class="summaryTable hideInheritedProtectedMethod" cellpadding="3" cellspacing="0">
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
-<tr class="hideInheritedProtectedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../../../../org/puremvc/as3/patterns/command/AsyncCommand.html#commandComplete()">commandComplete</a>():void</div>
-<div class="summaryTableDescription">
-   Notify the parent <code>AsyncMacroCommand</code> that this command is complete.</div>
-</td><td class="summaryTableOwnerCol"><a href="../../../../../org/puremvc/as3/patterns/command/AsyncCommand.html">AsyncCommand</a></td>
+<a class="signatureLink" href="#commandComplete()">commandComplete</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">GetMediaCommand</td>
 </tr>
 </table>
 </div>
@@ -160,21 +152,32 @@ showHideInherited();
 <div class="MainContent">
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="commandComplete()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">commandComplete</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function commandComplete():void</code>
+</div>
 <a name="execute()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">execute</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">execute</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>public override function execute(notification:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a>):void</code><p>
-   Using Kaltura Client to call to Get Entry and fill the Kaltura Media Entry with it's data
-   so the user can see title, thumbnail and more info... this command is used to change media
-   as well 
+   The command's execution involves using the Kaltura Client to construct a multi-tiered call to the
+   Kaltura CMS (a MultiRequest) and populating it with single-tier calls to get the Entry object, the Flavors array,
+   the Entry Context Data and the Custom Metadata.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">notification</span>:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a></code></td>
+<td width="20px"></td><td><code><span class="label">notification</span>:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a></code> &mdash; - the notifcation which triggered the command.
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -186,7 +189,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function fault(data:Object):void</code><p>
-   The client request is failed 
+   The client request has failed
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -202,11 +205,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function result(data:Object):void</code><p>
-   The Client retured from the server with result 
+   The response to the server result. This function reassigns the values returned from the server into the
+   mediaProxy.vo (value object) so that it is subsequently visible to any Observer-type class (proxy, mediator, command).
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">data</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; - the server response
+   
+   </td>
 </tr>
 </table>
 </div>

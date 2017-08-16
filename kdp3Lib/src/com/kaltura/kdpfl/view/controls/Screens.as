@@ -11,7 +11,12 @@ package com.kaltura.kdpfl.view.controls
 	import flash.utils.Timer;
 	
 	import mx.events.ResizeEvent;
-
+	/**
+	 * Class represents the Screens layer - the layer over the video containing on-screen buttons that show over the video layer.
+	 * The buttons fade from view a set amount of time after the user rolls out of the component. 
+	 * @author Hila
+	 * 
+	 */
 	public dynamic class Screens extends KCanvas implements IComponent
 	{
 		//strings of screens names (id)

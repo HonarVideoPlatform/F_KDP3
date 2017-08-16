@@ -4,12 +4,19 @@ package com.kaltura.kdpfl.view.controls
 	import com.kaltura.kdpfl.model.ConfigProxy;
 	import com.kaltura.kdpfl.model.type.NotificationType;
 	
+	import fl.events.ComponentEvent;
+	
+	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import org.osmf.media.MediaPlayerState;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-
+	/**
+	 * Mediator for the buffer indicator animation. Controls the appearance and removal of the animation from the display list. 
+	 * @author Hila
+	 * 
+	 */
 	public class BufferAnimationMediator extends Mediator
 	{
 		public static const NAME:String = "spinnerMediator";
@@ -19,13 +26,17 @@ package com.kaltura.kdpfl.view.controls
 		private var zeroPoint : Point = new Point( 0 , 0);
 		
 		/**
-		 * true if the playing entry has reached its end. 
+		 * flag indicating whether the active media has reached its end.
 		 */		
 		private var _reachedEnd:Boolean=false;
 		private var _flashvars : Object;
 		private var _notBuffering : Boolean = true;
 
-		
+		/**
+		 * Constructor. 
+		 * @param viewComponent - the component controlled by the mediator.
+		 * 
+		 */		
 		public function BufferAnimationMediator(viewComponent:Object=null)
 		{
 			super(NAME, viewComponent);
@@ -44,7 +55,7 @@ package com.kaltura.kdpfl.view.controls
 					spinner.visible = false;
 				break;
 				case NotificationType.LAYOUT_READY:
-					spinner.setBufferingAnimation( applicationLoadStyleName == '' ? SPINNER_CLASS : applicationLoadStyleName );
+					spinner.setBufferingAnimation( applicationLoadStyleName == '' ? SPINNER_CLASS : applicationLoadStyleName );					
 					break;
 				case NotificationType.KDP_READY:
 				case NotificationType.READY_TO_PLAY:
@@ -108,6 +119,7 @@ package com.kaltura.kdpfl.view.controls
 				break;
 				case NotificationType.CHANGE_MEDIA:
 					//spinner.visible = true;
+					
 				break;
 				
 				//in case we are trying to connect to a live stream but it is not on air yet
@@ -119,11 +131,7 @@ package com.kaltura.kdpfl.view.controls
 				case LiveStreamCommand.LIVE_STREAM_READY:
 					spinner.visible = false;
 				break;
-				case NotificationType.MEDIA_LOADED:
-				case NotificationType.MEDIA_LOAD_ERROR:
-					spinner.setBufferingAnimation( applicationLoadStyleName == '' ? SPINNER_CLASS : applicationLoadStyleName );
-					break;
- 
+
 			}
 		}
 
@@ -142,17 +150,21 @@ package com.kaltura.kdpfl.view.controls
 					NotificationType.LAYOUT_READY,
 					NotificationType.LIVE_ENTRY,
 					LiveStreamCommand.LIVE_STREAM_READY,
-					NotificationType.MEDIA_LOADED,
-					NotificationType.MEDIA_LOAD_ERROR,
+					NotificationType.MEDIA_READY,
+					NotificationType.READY_TO_PLAY,
 					NotificationType.READY_TO_LOAD,
-					NotificationType.READY_TO_PLAY
+					NotificationType.ROOT_RESIZE
 				   ];
 		}
-		
+		/**
+		 * the buffer indicator animation controlled by the mediator. 
+		 * @return 
+		 * 
+		 */		
 		public function get spinner():BufferAnimation
 		{
 			return viewComponent as BufferAnimation;
 		}
-		
+
 	}
 }

@@ -17,7 +17,11 @@
 	import org.osmf.media.MediaPlayerState;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
-	
+	/**
+	 * Mediator for the on-video buttons layer. 
+	 * @author Hila
+	 * 
+	 */	
 	public class ScreensMediator extends Mediator
 	{
 		public static const NAME:String = "ScreensMediator";
@@ -134,7 +138,9 @@
 					NotificationType.SCRUBBER_DRAG_START,
 					LiveStreamCommand.LIVE_STREAM_READY,
 					NotificationType.LIVE_ENTRY, 
-					NotificationType.PLAYER_STATE_CHANGE
+					NotificationType.PLAYER_STATE_CHANGE,
+					NotificationType.ENTRY_READY,
+					NotificationType.KDP_EMPTY
 				   ];
 		}
 	}

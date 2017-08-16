@@ -48,20 +48,22 @@ package com.kaltura.kdpfl.model
 		 * @param parameters - array of parameters to pass the javascript function
 		 * 
 		 */		
-		public function call( functionName : String, ...parameters ) : void
+		public function call( functionName : String, ...parameters ) : *
 		{
 			if(vo.enabled)
 			{
 				try {
 					if (parameters.length)
-						ExternalInterface.call(functionName , parameters, ExternalInterface.objectID );
+						return ExternalInterface.call(functionName , parameters, ExternalInterface.objectID );
 					else
-						ExternalInterface.call(functionName , ExternalInterface.objectID );
+						return ExternalInterface.call(functionName , ExternalInterface.objectID );
 				}
 				catch(e:Error)
 				{
 				} 
 			}
+			
+			return null;
 		}
 		
 		/**
@@ -77,7 +79,10 @@ package com.kaltura.kdpfl.model
 		}
 		
 		/**
-		 * Register the html wrapper with the basic callbacks so the wrapper can communicate with the KDP.
+		 * This function does 1 of 2 possible things:
+		 * 1. If the flashvar <code>jsInterfaceReadyFunc</code> is set to <code>true</code>, this function waits until the <body> tag of the html page surrounding the player
+		 * is ready before registering the KDP callbacks. It does so by starting the <code>callbackTimer</code>, and re-calling this funcion when the timer fires the COMPLETE event.
+		 * 2. If the flashvar <code>jsInterfaceReadyFunc</code> is set to <code>false</code>, this function simply registers the KDP callbacks, without waiting for the page to report that it's ready.
 		 * 
 		 */		
 		public function registerKDPCallbacks() : void
@@ -100,19 +105,31 @@ package com.kaltura.kdpfl.model
 					
 			}
 		}
-		
+		/**
+		 * Function checks whether the html <body> tag is ready, to be sure that the javascript jsListeners are ready for the KDP events.
+		 * @return - <code>true</code> if the <body> tag is ready, <code>false</code> otherwise.
+		 * 
+		 */		
 		private function isContainerReady () : Boolean
 		{
 			var result : Boolean = ExternalInterface.call(_flashvars.jsInterfaceReadyFunc);
 			return result;
 		}
-		
+		/**
+		 * Handler for the TimerEvent.COMPLETE of the <code>callbackTimer</code>. This handler re-calls the <code>registerKDPCallbacks</code>
+		 * function. 
+		 * @param e TimerEvent.
+		 * 
+		 */		
 		private function onCallbackTimer ( e : TimerEvent) : void
 		{
 			(e.target as Timer).removeEventListener(TimerEvent.TIMER_COMPLETE, onCallbackTimer);
 			registerKDPCallbacks();
 		}
-		
+		/**
+		 * Function which registers the KDP callbacks.
+		 * 
+		 */		
 		private function callBackRegistration() : void
 		{
 			addCallback( SEND_NOTIFICATION , extSendNotification );

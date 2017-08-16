@@ -105,8 +105,6 @@ package {
 		 */
 		public function init(kml:XML = null):void {
 			_initialized = true;
-
-
 			//start the lifecycle of the 
 			_facade.start(this.root);
 			this.root.addEventListener("skinLoaded", onSkinLoaded);
@@ -255,7 +253,6 @@ package {
 		 */
 		override public function addChild(child:DisplayObject):DisplayObject {
 			super.addChild(child);
-
 			//search if there is a preloader and move it on top
 			if (!(child is BufferAnimation)) {
 				for (var i:int = 0; i < this.numChildren; i++) {
@@ -276,7 +273,7 @@ package {
 		 */
 		private function onAddedToStage(event:Event = null):void {
 			this.stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullScreenEvt);
-
+			
 			//if this is standalone application the root parent is the stage so start loading sequence
 			try {
 				if (root.stage && root.parent && root.stage == root.parent) {

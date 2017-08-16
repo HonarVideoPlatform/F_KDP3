@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="KVolumeBar,com.kaltura.kdpfl.view.controls.KVolumeBar,EVENT_CHANGE,ICON_BUTTON,_button,_setSkinSize,_slider,_sliderBackground,_sliderContainer,_unmutedVolume,_volume,_volumeSlider,_volumeSliderTimer,buttonType,color1,color2,color3,color4,color5,defaultStyles,verticalDistance,height,sliderContainer,width,alpha,enabled,visible,x,y,changeVolume,configUI,delay,draw,drawLayout,getStyleDefinition,getVolume,hideVolumeSlider,init,initialize,onButtonClick,onRollOut,onRollOver,onSliderChange,setSkin,setStyle,setVolume" name="keywords">
+<meta content="KVolumeBar,com.kaltura.kdpfl.view.controls.KVolumeBar,EVENT_CHANGE,ICON_BUTTON,LAYOUT_MODE_HORIZONTAL,LAYOUT_MODE_VERTICAL,_button,_buttonHeight,_buttonWidth,_hasExpanded,_layoutMode,_parentContainer,_setSkinSize,_shouldHideSlider,_slider,_sliderBackground,_sliderContainer,_unmutedVolume,_volume,_volumeBarContainer,_volumeSlider,_volumeSliderTimer,buttonType,color1,color2,color3,color4,color5,color6,defaultStyles,verticalDistance,buttonHeight,buttonWidth,layoutMode,parentContainer,shouldHideSlider,sliderContainer,volumeSlider,alpha,enabled,visible,x,y,changeVolume,delay,draw,drawLayout,getStyleDefinition,getVolume,hideVolumeSlider,init,initialize,onButtonClick,onRollOut,onRollOver,onSliderChange,setSkin,setStyle,setVolume" name="keywords">
 <title>com.kaltura.kdpfl.view.controls.KVolumeBar</title>
 </head>
 <body>
@@ -45,7 +45,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+ Class representing the Volume Bar in the KDP. 
+ <p></p>
 <br>
 <hr>
 </div>
@@ -64,12 +65,26 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#allowDisable">allowDisable</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#alpha">alpha</a> : Number<div class="summaryTableDescription">[write-only]</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#buttonHeight">buttonHeight</a> : Number<div class="summaryTableDescription">
+  Height of the volume button.</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#buttonType">buttonType</a> : String = "normal"<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#buttonWidth">buttonWidth</a> : Number<div class="summaryTableDescription">
+  Width of the volumebutton.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -93,7 +108,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#enabled">enabled</a> : Boolean<div class="summaryTableDescription">[write-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#color6">color6</a> : Number = -1<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#enabled">enabled</a> : Boolean<div class="summaryTableDescription">[write-only]
+  Override the enabled setter/getter - in case the allowDisable property is set to <code>false</code>.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -108,19 +128,29 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
          peers.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#height">height</a> : Number<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#height">height</a> : Number<div class="summaryTableDescription">
+         Gets or sets the height of the component, in pixels.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#includeInLayout">includeInLayout</a> : Boolean<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#layoutMode">layoutMode</a> : String<div class="summaryTableDescription">
+  The layout of the volume slider.</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#mouseFocusEnabled">mouseFocusEnabled</a> : Boolean<div class="summaryTableDescription">
          Gets or sets a value that indicates whether the component can receive focus after 
          the user clicks it.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#parentContainer">parentContainer</a> : DisplayObject<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#scaleX">scaleX</a> : Number<div class="summaryTableDescription">
@@ -133,7 +163,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#sliderContainer">sliderContainer</a> : Sprite<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#shouldHideSlider">shouldHideSlider</a> : String<div class="summaryTableDescription">
+  This attribute indicates whether the volume slider should always be visible,
+  or disappear after the allocated amount of time from the mouse ROLLOUT event.</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#sliderContainer">sliderContainer</a> : <a href="../../../../../fl/core/UIComponent.html">UIComponent</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedProperty">
@@ -156,9 +193,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#width">width</a> : Number<div class="summaryTableDescription">
-     </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#volumeSlider">volumeSlider</a> : Sprite<div class="summaryTableDescription">
+  The volume slider component of the KVoumeBar component.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#width">width</a> : Number<div class="summaryTableDescription">
+         Gets or sets the width of the component, in pixels.</div>
+</td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#x">x</a> : Number<div class="summaryTableDescription">[write-only]</div>
@@ -173,13 +215,34 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="protectedPropertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
 <table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../../../../../fl/core/UIComponent.html#_allowDisable">_allowDisable</a> : Boolean = true<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../../../../../fl/core/UIComponent.html">UIComponent</a></td>
+</tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_button">_button</a> : <a href="../controls/KButton.html">KButton</a>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Volume button.</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_buttonHeight">_buttonHeight</a> : Number<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_buttonWidth">_buttonWidth</a> : Number<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -187,7 +250,23 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_hasExpanded">_hasExpanded</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_layoutMode">_layoutMode</a> : String = "vertical"<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_parentContainer">_parentContainer</a> : DisplayObject<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_setSkinSize">_setSkinSize</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_shouldHideSlider">_shouldHideSlider</a> : Boolean = true<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -200,7 +279,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_sliderContainer">_sliderContainer</a> : Sprite<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_sliderContainer">_sliderContainer</a> : <a href="../../../../../fl/core/UIComponent.html">UIComponent</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -212,7 +292,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_volumeSlider">_volumeSlider</a> : Sprite<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_volumeBarContainer">_volumeBarContainer</a> : <a href="../../../../yahoo/astra/fl/containers/layoutClasses/AdvancedLayoutPane.html">AdvancedLayoutPane</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_volumeSlider">_volumeSlider</a> : Sprite<div class="summaryTableDescription">
+  Slider of the volume bar.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -240,14 +326,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#KVolumeBar()">KVolumeBar</a>()</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Constructor.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#changeVolume()">changeVolume</a>(volume:Number):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  This function fires an event to the mediator reporting the volume change.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -263,8 +351,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#delay()">delay</a>(value:String):void</div>
 <div class="summaryTableDescription">
-  Override the timer 
-  </div>
+  controls the amount of time that passes from rollout until the slider fades out from view.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -311,21 +398,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getVolume()">getVolume</a>():Number</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Function returns the  current volume.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#init()">init</a>():void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  function called when component needs to be activated externally (by the volume bar mediator).</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#initialize()">initialize</a>():void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  function which sets the component's behavior.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -412,13 +502,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#configUI()">configUI</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">KVolumeBar</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
 <a class="signatureLink" href="#draw()">draw</a>():void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
@@ -442,35 +525,41 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#hideVolumeSlider()">hideVolumeSlider</a>(evt:TimerEvent = null):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Handler for the TimerEvent indicating that the <code>_volumeSliderTimer</code> has finished counting down, and that the volume slider 
+  needs to be removed from view.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onButtonClick()">onButtonClick</a>(evt:MouseEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Event handler for Mouse Click on the volume button (not slider!).</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onRollOut()">onRollOut</a>(evt:MouseEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Handler for the MouseEvent ROLL_OUT.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onRollOver()">onRollOver</a>(evt:MouseEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Handler for the MouseEvent ROLL_OVER.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onSliderChange()">onSliderChange</a>(evt:SliderEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Handler function for the SliderEvent CHANGE.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 <tr class="">
@@ -478,8 +567,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#setVolume()">setVolume</a>(value:Number):void</div>
 <div class="summaryTableDescription">
-  
-  </div>
+  Function sets the volume.</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
 </table>
@@ -599,6 +687,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ICON_BUTTON">ICON_BUTTON</a> : String = "iconButton"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">KVolumeBar</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#LAYOUT_MODE_HORIZONTAL">LAYOUT_MODE_HORIZONTAL</a> : String = "horizontal"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#LAYOUT_MODE_VERTICAL">LAYOUT_MODE_VERTICAL</a> : String = "vertical"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">KVolumeBar</td>
+</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -627,7 +723,34 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected var _button:<a href="../controls/KButton.html">KButton</a></code>
+<code>protected var _button:<a href="../controls/KButton.html">KButton</a></code><p>
+  Volume button. Clicking this button mutes/unmutes the player. 
+  </p></div>
+<a name="_buttonHeight"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_buttonHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _buttonHeight:Number</code>
+</div>
+<a name="buttonHeight"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">buttonHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>buttonHeight:Number</code>&nbsp;&nbsp;[read-write]<p>
+  Height of the volume button. Default value - height of the whole KVolumeBar. 
+  </p><p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get buttonHeight():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set buttonHeight(value:Number):void</code>
+<br>
 </div>
 <a name="buttonType"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -637,6 +760,32 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var buttonType:String = "normal"</code>
+</div>
+<a name="_buttonWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_buttonWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _buttonWidth:Number</code>
+</div>
+<a name="buttonWidth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">buttonWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>buttonWidth:Number</code>&nbsp;&nbsp;[read-write]<p>
+  Width of the volumebutton. Default value - width of the whole KVolumeBar. 
+  </p><p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get buttonWidth():Number</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set buttonWidth(value:Number):void</code>
+<br>
 </div>
 <a name="color1"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -683,6 +832,15 @@ showHideInherited();
 <div class="detailBody">
 <code>public var color5:Number = -1</code>
 </div>
+<a name="color6"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">color6</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var color6:Number = -1</code>
+</div>
 <a name="defaultStyles"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -699,23 +857,70 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>enabled:Boolean</code>&nbsp;&nbsp;[write-only]<span class="label">Implementation</span>
+<code>enabled:Boolean</code>&nbsp;&nbsp;[write-only]<p>
+  Override the enabled setter/getter - in case the allowDisable property is set to <code>false</code>. 
+  </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function set enabled(value:Boolean):void</code>
 <br>
 </div>
-<a name="height"></a>
+<a name="_hasExpanded"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">height</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">_hasExpanded</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>height:Number</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>protected var _hasExpanded:Boolean</code>
+</div>
+<a name="_layoutMode"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_layoutMode</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _layoutMode:String = "vertical"</code>
+</div>
+<a name="layoutMode"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">layoutMode</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>layoutMode:String</code>&nbsp;&nbsp;[read-write]<p>
+  The layout of the volume slider. Expect one of 2 values -"horizontal" or "vertical".
+  Default is "vertical". 
+  </p><p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get height():Number</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get layoutMode():String</code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set height(value:Number):void</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set layoutMode(value:String):void</code>
+<br>
+</div>
+<a name="_parentContainer"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_parentContainer</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _parentContainer:DisplayObject</code>
+</div>
+<a name="parentContainer"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parentContainer</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>parentContainer:DisplayObject</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get parentContainer():DisplayObject</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set parentContainer(value:DisplayObject):void</code>
 <br>
 </div>
 <a name="_setSkinSize"></a>
@@ -726,6 +931,34 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected var _setSkinSize:Boolean</code>
+</div>
+<a name="_shouldHideSlider"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_shouldHideSlider</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _shouldHideSlider:Boolean = true</code>
+</div>
+<a name="shouldHideSlider"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">shouldHideSlider</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>shouldHideSlider:String</code>&nbsp;&nbsp;[read-write]<p>
+  This attribute indicates whether the volume slider should always be visible,
+  or disappear after the allocated amount of time from the mouse ROLLOUT event. 
+  The default is <code>true</code>.
+  </p><p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get shouldHideSlider():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set shouldHideSlider(value:String):void</code>
+<br>
 </div>
 <a name="_slider"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -752,7 +985,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected var _sliderContainer:Sprite</code>
+<code>protected var _sliderContainer:<a href="../../../../../fl/core/UIComponent.html">UIComponent</a></code>
 </div>
 <a name="sliderContainer"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -761,11 +994,11 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>sliderContainer:Sprite</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>sliderContainer:<a href="../../../../../fl/core/UIComponent.html">UIComponent</a></code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get sliderContainer():Sprite</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get sliderContainer():<a href="../../../../../fl/core/UIComponent.html">UIComponent</a></code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set sliderContainer(value:Sprite):void</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set sliderContainer(value:<a href="../../../../../fl/core/UIComponent.html">UIComponent</a>):void</code>
 <br>
 </div>
 <a name="_unmutedVolume"></a>
@@ -807,6 +1040,15 @@ showHideInherited();
 <div class="detailBody">
 <code>protected var _volume:Number = 0</code>
 </div>
+<a name="_volumeBarContainer"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_volumeBarContainer</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _volumeBarContainer:<a href="../../../../yahoo/astra/fl/containers/layoutClasses/AdvancedLayoutPane.html">AdvancedLayoutPane</a></code>
+</div>
 <a name="_volumeSlider"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -814,7 +1056,24 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected var _volumeSlider:Sprite</code>
+<code>protected var _volumeSlider:Sprite</code><p>
+  Slider of the volume bar.  
+  </p></div>
+<a name="volumeSlider"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">volumeSlider</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>volumeSlider:Sprite</code>&nbsp;&nbsp;[read-write]<p>
+  The volume slider component of the KVoumeBar component.
+  </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get volumeSlider():Sprite</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set volumeSlider(value:Sprite):void</code>
+<br>
 </div>
 <a name="_volumeSliderTimer"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -824,21 +1083,6 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected var _volumeSliderTimer:Timer</code>
-</div>
-<a name="width"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">width</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>width:Number</code>&nbsp;&nbsp;[read-write]<p>
-     </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get width():Number</code>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set width(value:Number):void</code>
-<br>
 </div>
 <a name="x"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -873,8 +1117,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function KVolumeBar()</code>
-</div>
+<code>public function KVolumeBar()</code><p>
+  Constructor.
+  
+  </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="changeVolume()"></a>
@@ -884,21 +1130,14 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function changeVolume(volume:Number):void</code><span class="label">Parameters</span>
+<code>public function changeVolume(volume:Number):void</code><p>
+  This function fires an event to the mediator reporting the volume change. 
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">volume</span>:Number</code></td>
 </tr>
 </table>
-</div>
-<a name="configUI()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">configUI</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>protected override function configUI():void</code>
 </div>
 <a name="delay()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -908,7 +1147,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function delay(value:String):void</code><p>
-  Override the timer 
+  controls the amount of time that passes from rollout until the slider fades out from view. 
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -957,8 +1196,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getVolume():Number</code>
-<p></p>
+<code>public function getVolume():Number</code><p>
+  Function returns the  current volume.
+  </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -973,10 +1213,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function hideVolumeSlider(evt:TimerEvent = null):void</code><span class="label">Parameters</span>
+<code>protected function hideVolumeSlider(evt:TimerEvent = null):void</code><p>
+   Handler for the TimerEvent indicating that the <code>_volumeSliderTimer</code> has finished counting down, and that the volume slider 
+  needs to be removed from view.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">evt</span>:TimerEvent</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">evt</span>:TimerEvent</code> (default = <code>null</code>)<code></code> &mdash; - TimerEvent
+  
+  </td>
 </tr>
 </table>
 </div>
@@ -987,8 +1232,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function init():void</code>
-</div>
+<code>public function init():void</code><p>
+  function called when component needs to be activated externally (by the volume bar mediator). 
+  
+  </p></div>
 <a name="initialize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -996,8 +1243,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function initialize():void</code>
-</div>
+<code>public function initialize():void</code><p>
+  function which sets the component's behavior. This function sets the visual aspects of the VolumeBar (the layout mode, colors) and adds the necessary event listeners. 
+  
+  </p></div>
 <a name="onButtonClick()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1005,7 +1254,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onButtonClick(evt:MouseEvent):void</code><span class="label">Parameters</span>
+<code>protected function onButtonClick(evt:MouseEvent):void</code><p>
+  Event handler for Mouse Click on the volume button (not slider!). This function also updates the local flash SharedObject which contains the latest volume the user set. 
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">evt</span>:MouseEvent</code></td>
@@ -1019,10 +1270,14 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onRollOut(evt:MouseEvent):void</code><span class="label">Parameters</span>
+<code>protected function onRollOut(evt:MouseEvent):void</code><p>
+  Handler for the MouseEvent ROLL_OUT. This handler starts the timer for vanishing the volume slider.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">evt</span>:MouseEvent</code></td>
+<td width="20px"></td><td><code><span class="label">evt</span>:MouseEvent</code> &mdash; - MouseEvent of type ROLL_OUT
+  
+  </td>
 </tr>
 </table>
 </div>
@@ -1033,10 +1288,14 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onRollOver(evt:MouseEvent):void</code><span class="label">Parameters</span>
+<code>protected function onRollOver(evt:MouseEvent):void</code><p>
+  Handler for the MouseEvent ROLL_OVER. This handler sets the volume slider <code>visible</code> property to <code>true</code>.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">evt</span>:MouseEvent</code></td>
+<td width="20px"></td><td><code><span class="label">evt</span>:MouseEvent</code> &mdash; MouseEvent.ROLL_OVER
+  
+  </td>
 </tr>
 </table>
 </div>
@@ -1047,7 +1306,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onSliderChange(evt:SliderEvent):void</code><span class="label">Parameters</span>
+<code>protected function onSliderChange(evt:SliderEvent):void</code><p>
+  Handler function for the SliderEvent CHANGE. Called when the thumb position on the volume slider has changed. 
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">evt</span>:SliderEvent</code></td>
@@ -1102,7 +1363,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected function setVolume(value:Number):void</code><p>
-  
+  Function sets the volume.
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -1132,6 +1393,24 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const ICON_BUTTON:String = "iconButton"</code>
+</div>
+<a name="LAYOUT_MODE_HORIZONTAL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">LAYOUT_MODE_HORIZONTAL</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const LAYOUT_MODE_HORIZONTAL:String = "horizontal"</code>
+</div>
+<a name="LAYOUT_MODE_VERTICAL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">LAYOUT_MODE_VERTICAL</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const LAYOUT_MODE_VERTICAL:String = "vertical"</code>
 </div>
 <br>
 <br>

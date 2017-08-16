@@ -3,17 +3,28 @@ package com.kaltura.kdpfl.component
 	import fl.core.UIComponent;
 	
 	import flash.utils.getQualifiedClassName;
-	
+	/**
+	 * Class desribing a UI component 
+	 * @author Hila
+	 * 
+	 */	
 	public class ComponentData
 	{
-		//referance to ths ui control
+		/**
+		 * The component's KDP class (i.e KButton, KLabel, etc).
+		 */		
 		private var _ui:Object;
-		
-		//Control's attributes, taken from inside the <layout> xml
+		/**
+		 * The component's attributes as specified on its xml tag in the config.xml file. 
+		 */		
 		public var attr:Object;
-		
+		/**
+		 * The component's skin class name. 
+		 */		
 		public var styleName:String
-		
+		/**
+		 * The component's class name 
+		 */		
 		public var className:String;
 		
 		/**

@@ -1,10 +1,3 @@
-/**
- * KTimer
- *
- * @langversion 3.0
- * @playerversion Flash 9.0.28.0
- * @author Dan Bacon / www.baconoppenheim.com
- */
 package com.kaltura.kdpfl.view.controls
 {
 
@@ -12,7 +5,11 @@ import com.kaltura.kdpfl.util.DateTimeUtils;
 
 import flash.events.MouseEvent;
 	
-
+/**
+ * Class representing the timers used by the KDP
+ * @author Hila
+ * 
+ */
 public dynamic class KTimer extends KLabel
 {
 	
@@ -23,7 +20,10 @@ public dynamic class KTimer extends KLabel
 	
 	private var _time:Number;
 	private var _duration:Number = 0;
-	
+	/**
+	 * C-tor 
+	 * 
+	 */	
 	public function KTimer()
 	{
 		super();
@@ -37,7 +37,12 @@ public dynamic class KTimer extends KLabel
 
 		setTime( 0 );
 	}
-	
+	/**
+	 *  Handler for mouse click on the timer. If timer is of type "both" (can show both ascending and descending time),
+	 * the timer will switch to the opposite mode on mouse click.
+	 * @param e - MouseEvent of type CLICK
+	 * 
+	 */	
 	private function onClick(e:MouseEvent):void
 	{
 		if (_timerType == "both")
@@ -53,7 +58,7 @@ public dynamic class KTimer extends KLabel
 	override public function set text( value:String ):void {}
 	
 	/**
-	 * 
+	 * Updates the time shown by the Timer.
 	 * @param time in seconds (decimal point)
 	 * 
 	 */		
@@ -62,7 +67,11 @@ public dynamic class KTimer extends KLabel
 		_time = time;
 		updateText();
 	}
-		
+	/**
+	 * Updates the duration the Timer can count up to (or down from).
+	 * @param duration
+	 * 
+	 */		
 	public function setDuration( duration:Number ):void
 	{
 		if(duration > 1){//if the changeDuration osmf event is bigger than 0 (due to Intelliseek side effects) , then update the duration
@@ -70,7 +79,12 @@ public dynamic class KTimer extends KLabel
 			updateText();
 		}
 	}
-	
+	/**
+	 * controls the type of the timer. There are 2 possible types: "both" for a timer that can show both ascending and descending time, and 
+	 * "backwards", which can only show descending time. 
+	 * @return 
+	 * 
+	 */	
 	public function get timerType():String { return _timerType; }
 	
 	public function set timerType( timerType:String ):void
@@ -78,7 +92,10 @@ public dynamic class KTimer extends KLabel
 		currentTimerType = _timerType = timerType;
 		updateText();
 	}
-	
+	/**
+	 * This function updates the time text shown by the timer. 
+	 * 
+	 */	
 	private function updateText():void
 	{
 		var formattedTime:String = "";

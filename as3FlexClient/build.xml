@@ -13,10 +13,10 @@
 		<mkdir dir="${project.bin}" description="Make sure there is a bin directory"/>
 	</target>
 	
-	<target name="compile">
+	<target name="compile" depends="flex-extract-classes">
 		<echo>Compiling ${project.outputfile}</echo>		
-        <compc output="${project.outputfile}" >		
-			<include-sources dir="${project.src}" includes="*" />
+        <compc output="${project.outputfile}" include-classes="${include.classes}">		
+			<!--include-sources dir="${project.src}" includes="*" /-->
 			<load-config filename="${project.configfile}"/>
 			<source-path path-element="${project.src}"/>
         </compc>

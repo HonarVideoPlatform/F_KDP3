@@ -15,8 +15,18 @@ import flash.utils.getDefinitionByName;
 public class KSlider extends Slider implements IComponent
 {
 	public var progress:Sprite;
-	public var color1:Number = -1;
-	public var color2:Number = -1;
+	/**
+	 * Color for the progress sprite of the slider.
+	 */	
+	public var color1 : Number = -1;
+	/**
+	 * Color for the slider track. 
+	 */	
+	public var color2 : Number = -1;
+	/**
+	 * Color for the slider handle 
+	 */	
+	public var color3 : Number = -1;
 
 	protected static var defaultStyles:Object =
 	{
@@ -107,16 +117,25 @@ public class KSlider extends Slider implements IComponent
 		if(oldProgress && color1!=-1)
 			 KColorUtil.colorDisplayObject(oldProgress , color1);
 		if(progress  && color1!=-1)
+		{
 			 KColorUtil.colorDisplayObject(progress , color1);
+		}
 		
 		if( oldProgress!=null && oldProgress!=progress )
 		{
 		 	removeChild(oldProgress);
 		}
-		//color the track
-		//consult Shlomit if we want 2 colors or only one
-/* 		if(track && color2!=-1)
-			 KColorUtil.colorDisplayObject(track , color2); */
+		if(track && color2!=-1)
+		{
+			 KColorUtil.colorDisplayObject(track , color2); 
+		}
+		
+		if(thumb && color3!=-1)
+		{
+			KColorUtil.colorDisplayObject(thumb , color3); 
+		}
+		progress.width = track.width;
+		progress.alpha = 1;
 	}
 	
 	override protected function configUI():void

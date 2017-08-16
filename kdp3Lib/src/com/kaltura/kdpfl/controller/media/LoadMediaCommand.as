@@ -64,7 +64,7 @@ package com.kaltura.kdpfl.controller.media
 					var preferedFlavorBR:int = _mediaProxy.vo.preferedFlavorBR;
 					var selectedFlavorId:String = _mediaProxy.vo.selectedFlavorId;
 					var foundFlavorBR:int = 0;
-					var foundFlavorId : String = null;
+					var foundFlavorId : String = (selectedFlavorId && selectedFlavorId != "" && selectedFlavorId!= "-1") ? selectedFlavorId : null;
 					
 					if(_mediaProxy.vo && _mediaProxy.vo.kalturaMediaFlavorArray)
 					{
@@ -72,12 +72,12 @@ package com.kaltura.kdpfl.controller.media
 						for(var i:int=0;i<_mediaProxy.vo.kalturaMediaFlavorArray.length;i++)//this checks the flavorId at the kalturaMediaFlavorArray
 						{
 							// if a selected flavor was set (e.g. kmc preview via flashvars) search for it
-							if (selectedFlavorId)
+							if (selectedFlavorId && selectedFlavorId == _mediaProxy.vo.kalturaMediaFlavorArray[i].id)
 							{
-								foundFlavorId = selectedFlavorId;
+								foundFlavorBR = _mediaProxy.vo.kalturaMediaFlavorArray[i].bitrate;
 								break;
 							}
-								// if a prefered bitrate is specified search for the most closest height (lower or equal)
+								// if a prefered bitrate is specified search for the most closest bitrate (lower or equal)
 							else if (preferedFlavorBR != 0) 
 							{
 								var b:Number = _mediaProxy.vo.kalturaMediaFlavorArray[i].bitrate;
@@ -86,14 +86,13 @@ package com.kaltura.kdpfl.controller.media
 								if (Math.abs(b - preferedFlavorBR) <= dif )
 								{
 									dif = Math.abs(b - preferedFlavorBR);
-									if (b <= preferedFlavorBR || 
-										((b > preferedFlavorBR) && (dif <= 0.2*preferedFlavorBR)))
+									if (b <= 1.2*preferedFlavorBR )
 									{
 										
 										foundFlavorBR = b;
 										foundFlavorId = _mediaProxy.vo.kalturaMediaFlavorArray[i].id;
 										flavorIndex = i;
-//										_mediaProxy.vo.switchDue = true;
+										//										_mediaProxy.vo.switchDue = true;
 									}
 									
 								}
@@ -157,7 +156,11 @@ package com.kaltura.kdpfl.controller.media
 			dispatchMediaReady();
 			commandComplete(); 
 		}
-		
+		/**
+		 * This function resolves the subsequent mode of the player. If the entry object was empty or restricted, the player
+		 * is considered in status EMPTY and the controls are disabled. If the entry is playable and was successfully loaded, the KDP is in status 
+		 * READY.
+		 */		
 		private function dispatchMediaReady () : void
 		{
 			if (!_mediaProxy.vo.isMediaDisabled)
@@ -178,7 +181,11 @@ package com.kaltura.kdpfl.controller.media
 				sendNotification(NotificationType.READY_TO_LOAD);
 			}
 		}
-		
+		/**
+		 * Function to determine whether the player is in autoPlay mode and should load and play the entry's video element
+		 * or hold off.
+		 * 
+		 */		
 		private function configurePlayback () : void
 		{
 			var sequenceProxy : SequenceProxy = facade.retrieveProxy(SequenceProxy.NAME) as SequenceProxy;
@@ -188,7 +195,7 @@ package com.kaltura.kdpfl.controller.media
 					_mediaProxy.vo.singleAutoPlay = false;
 				sendNotification(NotificationType.DO_PLAY);
 			}
-
+			
 		}
 		
 		

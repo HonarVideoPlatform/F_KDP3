@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="SequenceProxy,com.kaltura.kdpfl.model.SequenceProxy,NAME,sequenceContext,vo,activePlugin,hasMediaElement,hasMediaLoaded,hasSequenceToPlay,hasSubSequence,initPostIndex,initPreIndex,playNextInSequence,populatePrePostArr,prePostInited,resolveProgress,restoreMainMedia,saveMainMedia" name="keywords">
+<meta content="SequenceProxy,com.kaltura.kdpfl.model.SequenceProxy,NAME,sequenceContext,vo,activateMidrollSequence,activePlugin,hasMediaElement,hasMediaLoaded,hasSequenceToPlay,hasSubSequence,initPostIndex,initPreIndex,playNextInSequence,populatePrePostArr,prePostInited,resolveProgress,restoreMainMedia,saveMainMedia" name="keywords">
 <title>com.kaltura.kdpfl.model.SequenceProxy</title>
 </head>
 <body>
@@ -122,6 +122,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#activateMidrollSequence()">activateMidrollSequence</a>(midrollPlugin:<a href="../plugin/IMidrollSequencePlugin.html">IMidrollSequencePlugin</a>):void</div>
+<div class="summaryTableDescription">
+   function which activates the sequence plugin's midroll sequence.</div>
+</td><td class="summaryTableOwnerCol">SequenceProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#activePlugin()">activePlugin</a>():<a href="../plugin/ISequencePlugin.html">ISequencePlugin</a>
 </div>
 <div class="summaryTableDescription">
@@ -152,7 +160,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#hasMediaElement()">hasMediaElement</a>():Boolean</div>
 <div class="summaryTableDescription">
-         Function which checks whether the sequence plugin lined up to play plays withing the KDP or as an independent swf.</div>
+   Function which checks whether the sequence plugin lined up to play plays withing the KDP or as an independent swf.</div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -160,9 +168,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#hasMediaLoaded()">hasMediaLoaded</a>():Boolean</div>
 <div class="summaryTableDescription">
-         Function checks whether the sequence plugin lined up to play
-         has been loaded into the MediaPlayer (this check is performed only if the
-         sequence plugin plays in the MediaPlayer of the KDP and not as a custom swf.</div>
+   Function checks whether the sequence plugin lined up to play
+   has been loaded into the MediaPlayer (this check is performed only if the
+   sequence plugin plays in the MediaPlayer of the KDP and not as a custom swf.</div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -170,7 +178,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#hasSequenceToPlay()">hasSequenceToPlay</a>():Boolean</div>
 <div class="summaryTableDescription">
-         Function evaluates whether there is are sequence items to play.</div>
+   Function evaluates whether there is are sequence items to play.</div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -223,8 +231,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#playNextInSequence()">playNextInSequence</a>():void</div>
 <div class="summaryTableDescription">
-         Function which plays the next sequence plugin lined up to play in either
-         the pre-sequenceor the post-sequence.</div>
+   Function which plays the next sequence plugin lined up to play in either
+   the pre-sequenceor the post-sequence.</div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -232,9 +240,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#populatePrePostArr()">populatePrePostArr</a>():void</div>
 <div class="summaryTableDescription">
-         unction to populate the pre and post sequence arrs on the  
-         SequenceVO with the appropriate configurations
-         </div>
+   unction to populate the pre and post sequence arrs on the  
+   SequenceVO with the appropriate configurations
+   </div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -242,8 +250,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#prePostInited()">prePostInited</a>():Boolean</div>
 <div class="summaryTableDescription">
-         Function to check whether the pre and post sequences have been configured 
-         </div>
+   Function to check whether the pre and post sequences have been configured 
+   </div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -263,9 +271,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#restoreMainMedia()">restoreMainMedia</a>():void</div>
 <div class="summaryTableDescription">
-         unction which restores the original mediaVO to the MediaProxy 
-         
-         </div>
+   unction which restores the original mediaVO to the MediaProxy 
+   
+   </div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="">
@@ -273,7 +281,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#saveMainMedia()">saveMainMedia</a>():void</div>
 <div class="summaryTableDescription">
-         unction which saves the main mediaVO as a property of the SequenceVO.</div>
+   unction which saves the main mediaVO as a property of the SequenceVO.</div>
 </td><td class="summaryTableOwnerCol">SequenceProxy</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -365,10 +373,28 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="activateMidrollSequence()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">activateMidrollSequence</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function activateMidrollSequence(midrollPlugin:<a href="../plugin/IMidrollSequencePlugin.html">IMidrollSequencePlugin</a>):void</code><p>
+   function which activates the sequence plugin's midroll sequence.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">midrollPlugin</span>:<a href="../plugin/IMidrollSequencePlugin.html">IMidrollSequencePlugin</a></code> &mdash; the sequence plugin sheduled to play a midroll.
+   
+   </td>
+</tr>
+</table>
+</div>
 <a name="activePlugin()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">activePlugin</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">activePlugin</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -390,14 +416,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function hasMediaElement():Boolean</code><p>
-         Function which checks whether the sequence plugin lined up to play plays withing the KDP or as an independent swf. 
-         </p><p></p>
+   Function which checks whether the sequence plugin lined up to play plays withing the KDP or as an independent swf. 
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the plugin plays in the KDP; <code>false</code> otherwise.
-         
-         </td>
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -409,11 +435,11 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function hasMediaLoaded():Boolean</code><p>
-         Function checks whether the sequence plugin lined up to play
-         has been loaded into the MediaPlayer (this check is performed only if the
-         sequence plugin plays in the MediaPlayer of the KDP and not as a custom swf.
-         
-         </p><p></p>
+   Function checks whether the sequence plugin lined up to play
+   has been loaded into the MediaPlayer (this check is performed only if the
+   sequence plugin plays in the MediaPlayer of the KDP and not as a custom swf.
+   
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -429,15 +455,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function hasSequenceToPlay():Boolean</code><p>
-         Function evaluates whether there is are sequence items to play. 
-         </p><p></p>
+   Function evaluates whether there is are sequence items to play. 
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code> &mdash; returns <code>true</code> if there is anything left to play in 
-         the pre or post sequence arrays. Returns <code>false</code> otherwise.
-         
-         </td>
+   the pre or post sequence arrays. Returns <code>false</code> otherwise.
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -494,10 +520,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function playNextInSequence():void</code><p>
-         Function which plays the next sequence plugin lined up to play in either
-         the pre-sequenceor the post-sequence. 
-         
-         </p></div>
+   Function which plays the next sequence plugin lined up to play in either
+   the pre-sequenceor the post-sequence. 
+   
+   </p></div>
 <a name="populatePrePostArr()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -506,9 +532,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function populatePrePostArr():void</code><p>
-         unction to populate the pre and post sequence arrs on the  
-         SequenceVO with the appropriate configurations
-         </p></div>
+   unction to populate the pre and post sequence arrs on the  
+   SequenceVO with the appropriate configurations
+   </p></div>
 <a name="prePostInited()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -517,14 +543,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function prePostInited():Boolean</code><p>
-         Function to check whether the pre and post sequences have been configured 
-         </p><p></p>
+   Function to check whether the pre and post sequences have been configured 
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>Boolean</code> &mdash; True- if the pre and post arrs have been populated. false otherwise.
-         
-         </td>
+   
+   </td>
 </tr>
 </table>
 </div>
@@ -549,9 +575,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function restoreMainMedia():void</code><p>
-         unction which restores the original mediaVO to the MediaProxy 
-         
-         </p></div>
+   unction which restores the original mediaVO to the MediaProxy 
+   
+   </p></div>
 <a name="saveMainMedia()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -560,9 +586,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function saveMainMedia():void</code><p>
-         unction which saves the main mediaVO as a property of the SequenceVO. 
-         
-         </p></div>
+   unction which saves the main mediaVO as a property of the SequenceVO. 
+   
+   </p></div>
 <a name="constantDetail"></a>
 <div class="detailSectionHeader">Constant detail</div>
 <a name="NAME"></a>

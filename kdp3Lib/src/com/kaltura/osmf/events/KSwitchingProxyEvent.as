@@ -1,7 +1,11 @@
 package com.kaltura.osmf.events
 {
 	import flash.events.Event;
-	
+	/** 
+	 * Event fired by the <code>KSwitchingProxyEvent</code> class.
+	 * @author Hila
+	 * 
+	 */	
 	public class KSwitchingProxyEvent extends Event
 	{
 		protected var _switchingProxySwitchContext : String;
@@ -13,7 +17,11 @@ package com.kaltura.osmf.events
 			super(type, bubbles, cancelable);
 			switchingProxySwitchContext = switchedTo;
 		}
-
+		/**
+		 *  parameter indicating what element the Proxy has switched to: main or secondary.
+		 * @return 
+		 * 
+		 */	
 		public function get switchingProxySwitchContext():String
 		{
 			return _switchingProxySwitchContext;

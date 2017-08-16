@@ -7,7 +7,11 @@ package com.kaltura.kdpfl.view.controls
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import flash.utils.getDefinitionByName;
-
+	/**
+	 * class for the buffer indicator animation that appears when media playing in the KDP goes into buffering mode. 
+	 * @author Hila
+	 * 
+	 */
 	public class BufferAnimation extends BoxPane
 	{
 		private var _tf:TextField;
@@ -26,7 +30,6 @@ package com.kaltura.kdpfl.view.controls
 		 */
 		public function setBufferingAnimation(className : String) : void
 		{
-			trace("SET BUFFER ANIMATION!!!");
 			try {
 				var anim:Class = getDefinitionByName(className) as Class;
 			} catch ( e : Error ){
@@ -37,7 +40,6 @@ package com.kaltura.kdpfl.view.controls
 			// add an animation instead
 			_animInst = new anim();
 			this.configuration = [{target:_animInst,verticalAlign:"middle",horizontalAlign:"center"}];
-			trace ("ANIMATION PARAMS: WIDTH: "+_animInst.width + " HEIGHT: " + _animInst.height + " X: " + _animInst.x + " Y: " + _animInst.y);
 		}
 		
 		//PRIVATE FUNCTIONS
@@ -49,10 +51,9 @@ package com.kaltura.kdpfl.view.controls
 			positionElements();
 		}
 
-		public function positionElements():void {
+		private function positionElements():void {
 			this.verticalAlign = "middle"
 			this.horizontalAlign = "center";
-			
 		}
 //		private function createBox():void
 //		{
@@ -81,11 +82,6 @@ package com.kaltura.kdpfl.view.controls
 		{
 			super.visible = value;
 			this.mouseEnabled = false;
-		}
-		override public function set width(value:Number):void
-		{
-			super.width = value;
-			trace("NEW BUFFER ANIMATION WIDTH: " + value);
 		}
 		
 	}

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="ComboFlavorMediator,com.kaltura.kdpfl.view.controls.ComboFlavorMediator,comboBox" name="keywords">
+<meta content="ComboFlavorMediator,com.kaltura.kdpfl.view.controls.ComboFlavorMediator,comboBox,handleNotification,listNotificationInterests" name="keywords">
 <title>com.kaltura.kdpfl.view.controls.ComboFlavorMediator</title>
 </head>
 <body>
@@ -42,7 +42,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-<p></p>
+  Mediator for the KDP flavor selction combo box of type KFlavorComboBox.
+  <p></p>
 <br>
 <hr>
 </div>
@@ -124,8 +125,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#ComboFlavorMediator()">ComboFlavorMediator</a>(viewComponent:Object = null)</div>
 <div class="summaryTableDescription">
-   
-   </div>
+   Constructor.</div>
 </td><td class="summaryTableOwnerCol">ComboFlavorMediator</td>
 </tr>
 <tr class="hideInheritedMethod">
@@ -144,22 +144,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    Get the <code>Mediator</code>'s view component.</div>
 </td><td class="summaryTableOwnerCol"><a href="../../../../../org/puremvc/as3/patterns/mediator/Mediator.html">Mediator</a></td>
 </tr>
-<tr class="hideInheritedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../../../../org/puremvc/as3/patterns/mediator/Mediator.html#handleNotification()">handleNotification</a>(notification:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a>):void</div>
-<div class="summaryTableDescription">
-   Handle <code>INotification</code>s.</div>
-</td><td class="summaryTableOwnerCol"><a href="../../../../../org/puremvc/as3/patterns/mediator/Mediator.html">Mediator</a></td>
+<a class="signatureLink" href="#handleNotification()">handleNotification</a>(notification:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ComboFlavorMediator</td>
 </tr>
-<tr class="hideInheritedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="../../../../../org/puremvc/as3/patterns/mediator/Mediator.html#listNotificationInterests()">listNotificationInterests</a>():Array</div>
-<div class="summaryTableDescription">
-   List the <code>INotification</code> names this
-   <code>Mediator</code> is interested in being notified of.</div>
-</td><td class="summaryTableOwnerCol"><a href="../../../../../org/puremvc/as3/patterns/mediator/Mediator.html">Mediator</a></td>
+<a class="signatureLink" href="#listNotificationInterests()">listNotificationInterests</a>():Array</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ComboFlavorMediator</td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -228,11 +225,43 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function ComboFlavorMediator(viewComponent:Object = null)</code><p>
-   
+   Constructor.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">viewComponent</span>:Object</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="handleNotification()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">handleNotification</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function handleNotification(notification:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">notification</span>:<a href="../../../../../org/puremvc/as3/interfaces/INotification.html">INotification</a></code></td>
+</tr>
+</table>
+</div>
+<a name="listNotificationInterests()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">listNotificationInterests</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function listNotificationInterests():Array</code>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
 </tr>
 </table>
 </div>

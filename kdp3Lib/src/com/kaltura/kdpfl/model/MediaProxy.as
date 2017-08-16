@@ -56,7 +56,11 @@ package com.kaltura.kdpfl.model
 		private var _flashvars : Object;
 		private var _isElementLoaded : Boolean;
 		
-		
+		/**
+		 *Constructor 
+		 * @param data - value object of the Proxy.
+		 * 
+		 */		
 		public function MediaProxy( data:Object=null )
 		{
 			super( NAME, new MediaVO()  );

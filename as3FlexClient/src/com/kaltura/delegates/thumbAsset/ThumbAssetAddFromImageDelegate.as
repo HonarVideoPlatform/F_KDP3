@@ -1,23 +1,22 @@
 package com.kaltura.delegates.thumbAsset
 {
-	import com.kaltura.commands.thumbAsset.ThumbAssetAddFromImage;
 	import com.kaltura.config.KalturaConfig;
-	import com.kaltura.core.KClassFactory;
-	import com.kaltura.delegates.WebDelegateBase;
-	import com.kaltura.errors.KalturaError;
 	import com.kaltura.net.KalturaCall;
-	
+	import com.kaltura.delegates.WebDelegateBase;
+	import com.kaltura.core.KClassFactory;
+	import com.kaltura.errors.KalturaError;
+	import com.kaltura.commands.thumbAsset.ThumbAssetAddFromImage;
+
+	import ru.inspirit.net.MultipartURLLoader;
+	import mx.utils.UIDUtil;
+
 	import flash.events.DataEvent;
 	import flash.events.Event;
+	import flash.net.URLRequest;
 	import flash.net.FileReference;
 	import flash.net.URLLoaderDataFormat;
-	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 	import flash.utils.getDefinitionByName;
-	
-	import mx.utils.UIDUtil;
-	
-	import ru.inspirit.net.MultipartURLLoader;
 
 	public class ThumbAssetAddFromImageDelegate extends WebDelegateBase
 	{
@@ -26,6 +25,17 @@ package com.kaltura.delegates.thumbAsset
 		public function ThumbAssetAddFromImageDelegate(call:KalturaCall, config:KalturaConfig)
 		{
 			super(call, config);
+		}
+
+		override public function parse(result:XML):* {
+			if ((call as ThumbAssetAddFromImage).fileData is FileReference) {
+				return super.parse(result);
+			}
+			else {
+				var cls : Class = getDefinitionByName('com.kaltura.vo.'+ result.result.objectType) as Class;
+				var obj : * = (new KClassFactory( cls )).newInstanceFromXML( result.result );
+				return obj;
+			}
 		}
 
 		override protected function sendRequest():void {
@@ -46,28 +56,15 @@ package com.kaltura.delegates.thumbAsset
 				mrloader.load(req);
 			}
 		}
-		
-		override public function parse(result:XML):* {
-			if ((call as ThumbAssetAddFromImage).fileData is FileReference) {
-				return super.parse(result);
-			}
-			else {
-				var cls : Class = getDefinitionByName('com.kaltura.vo.'+ result.result.objectType) as Class;
-				var obj : * = (new KClassFactory( cls )).newInstanceFromXML( result.result );
-				return obj;
-			}
-		}
 
 		// Event Handlers
 		override protected function onDataComplete(event:Event):void {
 			try{
-				if ((call as ThumbAssetAddFromImage).fileData is FileReference) 
-				{
+				if ((call as ThumbAssetAddFromImage).fileData is FileReference) {
 					handleResult( XML(event["data"]) );
 				}
-				else
-				{
-					handleResult( XML(event.target.loader.data));
+				else {
+					handleResult( XML(event.target.loader.data) );
 				}
 			}
 			catch( e:Error ){

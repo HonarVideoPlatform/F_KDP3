@@ -25,11 +25,10 @@ package com.kaltura.kdpfl
 	public class ApplicationFacade extends Facade implements IFacade
 	{
 		/**
-		 * The application that use the kdp3Lib should overrid this and
-		 * the attribute is used to populate the clientTag 
+		 * The current version of the KDP.
 		 */		
 
-		public var kdpVersion : String = "v3.5.6";
+		public var kdpVersion : String = "v3.5.7.1";
 
 
 		/**

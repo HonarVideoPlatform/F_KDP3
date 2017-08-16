@@ -39,7 +39,7 @@ package com.kaltura.kdpfl.view.controls
 		 * The post-fix displayed in the Combo Box. For instance, if the post fix is "k" then the displayed string will be bitrate+k.
 		 */		
 		public var bitratePostFix : String = "k";
-	
+		
 		private var _flavorArray : Array;
 		/**
 		 * The bitrate for the user's prefered flavor. 
@@ -78,7 +78,7 @@ package com.kaltura.kdpfl.view.controls
 		}
 		
 		
-			
+		
 		private function flavorLabelFunction (data : Object) : String
 		{
 			var labelLength : int = data.label.length-this.bitratePostFix.length;
@@ -113,7 +113,7 @@ package com.kaltura.kdpfl.view.controls
 			{
 				this.selectedMessage = autoMessage;
 			}
-			
+				
 			else if (_flavorArray && _flavorArray.length)
 			{
 				this.selectedMessage = "Bitrate: " + preferedFlavorBR
@@ -149,7 +149,7 @@ package com.kaltura.kdpfl.view.controls
 			if (_isHttpStreaming) {
 				newDp.addItem( { label : autoString } );
 			}
-			else if(_flavorArray && _flavorArray.length)
+			if(_flavorArray && _flavorArray.length)
 			{	
 				for(var i:int=0;i<_flavorArray.length;i++)
 				{
@@ -183,7 +183,7 @@ package com.kaltura.kdpfl.view.controls
 		public function set preferedFlavorBR( preferedFlavor : int ) : void
 		{
 			if(preferedFlavor == _preferedFlavorBR) return;
-			_preferedFlavorBR = preferedFlavor;
+			_preferedFlavorBR = (Math.round(Number(preferedFlavor)/100))*100;
 			//TODO: check if it's always accurate
 			var foundFlavor : Boolean = false;
 			for(var i:int=0; i<dataProvider.length; i++)
@@ -289,7 +289,7 @@ package com.kaltura.kdpfl.view.controls
 		{
 			return !visible;
 		}
-
+		
 		/**
 		 *The string for the message shown when the switch between bitrates is in process. 
 		 */
@@ -297,7 +297,7 @@ package com.kaltura.kdpfl.view.controls
 		{
 			return _switchingMessage;
 		}
-
+		
 		/**
 		 * @private
 		 */
@@ -325,6 +325,6 @@ package com.kaltura.kdpfl.view.controls
 				}
 			}
 		}
-
+		
 	}
 }

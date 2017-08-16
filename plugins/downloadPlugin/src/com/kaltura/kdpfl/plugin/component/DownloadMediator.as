@@ -43,7 +43,12 @@ package com.kaltura.kdpfl.plugin.component
 					else
 					{
 					  url=_flashvars.httpProtocol+cdnHost+"/p/"+partner+"/sp/"+subPartner+"/download/entry_id/"+entry
-					}	
+					}
+					
+					if ( _flashvars.ks )
+					{
+						url += "/ks/" + _flashvars.ks;
+					}
 					var request:URLRequest= new URLRequest(url);
 					navigateToURL(request, "_blank");
 				break;

@@ -28,7 +28,12 @@ import flash.net.SharedObject;
 import flash.utils.Timer;
 import flash.utils.getDefinitionByName;
 
-
+import mx.binding.utils.BindingUtils;
+/**
+ * Class representing the Volume Bar in the KDP. 
+ * @author Hila
+ * 
+ */
 public dynamic class KVolumeBar extends UIComponent implements IComponent
 {
 
@@ -53,26 +58,28 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 	public static const LAYOUT_MODE_VERTICAL:String = "vertical";
 	public static const ICON_BUTTON:String = "iconButton";
 	
-	[Bindable]
 	public var color1:Number = -1;
-	[Bindable]
 	public var color2:Number = -1;
-	[Bindable]
 	public var color3:Number = -1;
-	[Bindable]
 	public var color4:Number = -1;
-	[Bindable]
 	public var color5:Number = -1;
-	
+	//Color passed to the slider for the slider handle
+	public var color6:Number = -1;
 	public var buttonType:String = "normal";
 	public var verticalDistance:Number = 0;
 	
 	static private var SLIDER_TIMER_DELAY:Number = 600; // ms
 	protected var _slider:KSlider;
 	protected var _sliderBackground:DisplayObject;
+	/**
+	 * Slider of the volume bar.  
+	 */	
 	protected var _volumeSlider:Sprite;
+	/**
+	 * Volume button. Clicking this button mutes/unmutes the player. 
+	 */	
 	protected var _button:KButton;
-	protected var _sliderContainer:Sprite;
+	protected var _sliderContainer:UIComponent;
 	
 	protected var _setSkinSize:Boolean;
 	
@@ -89,6 +96,8 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 	private var _enable:Boolean = true;
 	protected var _volume:Number = 0;
 	protected var _unmutedVolume:Number = 0;
+	
+	protected var _parentContainer : DisplayObject;
 
 	protected static var defaultStyles:Object =
 	{
@@ -160,10 +169,10 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		focusRectPadding:null
 	}			
 	
-//--------------------------------------
-//  Constructor
-//--------------------------------------	
-	
+	/**
+	 * Constructor.
+	 * 
+	 */	
 	public function KVolumeBar()
 	{
 		super();
@@ -173,12 +182,13 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 //  Public Methods
 //--------------------------------------
 	
+	
 	public static function getStyleDefinition():Object
 	{ 
 		return( defaultStyles );
 	}	
 	/**
-	 * Override the timer 
+	 * controls the amount of time that passes from rollout until the slider fades out from view. 
 	 */
 	public function delay(value:String):void
 	{
@@ -236,13 +246,19 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 	{
 	
 	}*/
-	
+	/**
+	 * function called when component needs to be activated externally (by the volume bar mediator). 
+	 * 
+	 */	
 	public function init():void
 	{
 		sliderContainer.addChild( _volumeSlider );
 		setVolume( 1 );
 	}
-	
+	/**
+	 * function which sets the component's behavior. This function sets the visual aspects of the VolumeBar (the layout mode, colors) and adds the necessary event listeners. 
+	 * 
+	 */	
 	public function initialize():void
 	{
 		if (!height && width)
@@ -280,7 +296,7 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		_volumeSlider.addChild( _slider );
 		
 		_button = new KButton();
-		//if there is a button type definitoin - use dynamic appstudio colors
+		//if there is a button type definition - use dynamic appstudio colors
 		_button.label = "";
 		_button.toggle = true;
 		_button.useHandCursor = true;
@@ -297,7 +313,7 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		}
 
 		this.addEventListener( Event.REMOVED, onRemoved, false, 0, true );
-		this.addEventListener(Event.ADDED, onAdded, false,0,true);
+		//this.addEventListener(Event.ADDED, onAdded, false,0,true);
 	}
 	
 	private function onAdded (e : Event) : void
@@ -309,7 +325,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 			
 		}
 	}
-	
+	/**
+	 * Event handler for Mouse Click on the volume button (not slider!). This function also updates the local flash SharedObject which contains the latest volume the user set. 
+	 * @param evt
+	 * 
+	 */	
 	protected function onButtonClick( evt:MouseEvent ):void
 	{
 		var volumeCookie : SharedObject = SharedObject.getLocal("KalturaVolume");
@@ -333,8 +353,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		}
 	}
 	
-	// TODO make volume slider visible with animation
-	// TODO make rollover area all slider background (not only slider itself)
+	/**
+	 * Handler for the MouseEvent ROLL_OVER. This handler sets the volume slider <code>visible</code> property to <code>true</code>.
+	 * @param evt MouseEvent.ROLL_OVER
+	 * 
+	 */
 	protected function onRollOver( evt:MouseEvent ):void
 	{
 		if(_enable && this.enabled)
@@ -349,7 +372,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		}
 	}
 	
-	// TODO not hide volume bar if still dragging thumb (even if mouse roll out)
+	/**
+	 * Handler for the MouseEvent ROLL_OUT. This handler starts the timer for vanishing the volume slider.
+	 * @param evt - MouseEvent of type ROLL_OUT
+	 * 
+	 */	
 	protected function onRollOut( evt:MouseEvent ):void
 	{
 		if(this.enabled)
@@ -359,7 +386,12 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 			_volumeSliderTimer.start();
 		}
 	}
-	
+	/**
+	 *  Handler for the TimerEvent indicating that the <code>_volumeSliderTimer</code> has finished counting down, and that the volume slider 
+	 * needs to be removed from view.
+	 * @param evt - TimerEvent
+	 * 
+	 */	
 	protected function hideVolumeSlider( evt:TimerEvent=null ):void
 	{
 		_volumeSliderTimer.removeEventListener( TimerEvent.TIMER, hideVolumeSlider );
@@ -393,10 +425,12 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		
 	override protected function draw():void
 	{
-		if(color1!=-1)
+		if(color1 != -1)
 			_slider.color1 = color1;
-		if(color2!=-1)
+		if(color2 != -1)
 			_slider.color2 = color2;
+		if(color6 != -1)
+			_slider.color3 = color6;
 		if( isInvalid(InvalidationType.STYLES,InvalidationType.STATE) )
 		{
 			setStyles();
@@ -495,15 +529,20 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		_button.height = buttonHeight ? buttonHeight : height;
 		_button.width = buttonWidth ? buttonWidth : width;
 	}
-
-	public function set sliderContainer( container:Sprite ):void
+	/**
+	 * this is the container for the volume slider. It must be separate from the volume bar component itself, since the volume slider has to appear
+	 * on a level over the player. 
+	 * @param container UI component that can serve as the container of the volume slider.
+	 * 
+	 */
+	public function set sliderContainer( container:UIComponent ):void
 	{
 		if( !container ) return;
 		_sliderContainer = container;
 		invalidate( InvalidationType.SIZE );
 	}
 	
-	public function get sliderContainer():Sprite
+	public function get sliderContainer():UIComponent
 	{
 		if( _sliderContainer )
 			return( _sliderContainer );
@@ -514,7 +553,9 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 	override public function set visible( value:Boolean ):void
 	{
 		super.visible = value;
-		_volumeSlider.visible = value;
+		
+		trace ("foreground visibility: " + _sliderContainer.visible)
+		//_volumeSlider.visible = value;
 	}
 	
 	override public function set alpha( value:Number ):void
@@ -538,7 +579,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		super.y = value;
 		invalidate( InvalidationType.SIZE );
 	}
-	
+	/**
+	 * This function fires an event to the mediator reporting the volume change. 
+	 * @param volume
+	 * 
+	 */	
 	public function changeVolume( volume:Number ):void
 	{
 		setVolume( volume );
@@ -551,14 +596,18 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		var evt:Event = new Event( KVolumeBar.EVENT_CHANGE, true, true );
 		this.dispatchEvent( evt );
 	}
-	
+	/**
+	 * Function returns the  current volume.
+	 * @return 
+	 * 
+	 */	
 	public function getVolume():Number
 	{
 		return( _slider.value );
 	}
 			
 	/**
-	 * 
+	 * Function sets the volume.
 	 * @param value 0 -> 1 (2 decimal points)
 	 * 
 	 */	
@@ -571,7 +620,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 	}
 	
 
-	
+	/**
+	 * Handler function for the SliderEvent CHANGE. Called when the thumb position on the volume slider has changed. 
+	 * @param evt
+	 * 
+	 */	
 	protected function onSliderChange( evt:SliderEvent ):void
 	{
 		evt.stopPropagation();
@@ -595,13 +648,25 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 			}
 		}
 	}
-	
+	/**
+	 * Override the enabled setter/getter - in case the allowDisable property is set to <code>false</code>. 
+	 * @param arg0 new value for the Volume Bar's <code>enabled</code> property.
+	 * 
+	 */	
 	override public function set enabled(arg0:Boolean):void
 	{
-		_enable =  arg0;
-		_button.enabled = arg0
-		super.enabled = arg0;
+		if ((!arg0 && _allowDisable) || arg0)
+		{
+			_enable =  arg0;
+			_button.enabled = arg0
+			super.enabled = arg0;
+		}
 	}
+	/**
+	 * Handler for the MouseEvent CLICK. Called when user clicks the slider. 
+	 * @param e
+	 * 
+	 */	
 	private function onSliderClick (e:MouseEvent) : void
 	{
 		//Save the selected volume as a shared object (cookie) on the user's computer
@@ -629,6 +694,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		_layoutMode = value;
 	}
 	[Bindable]
+	/**
+	 * Height of the volume button. Default value - height of the whole KVolumeBar. 
+	 * @return 
+	 * 
+	 */	
 	public function get buttonHeight():Number
 	{
 		return _buttonHeight;
@@ -639,6 +709,11 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		_buttonHeight = value;
 	}
 	[Bindable]
+	/**
+	 * Width of the volumebutton. Default value - width of the whole KVolumeBar. 
+	 * @return 
+	 * 
+	 */	
 	public function get buttonWidth():Number
 	{
 		return _buttonWidth;
@@ -672,6 +747,31 @@ public dynamic class KVolumeBar extends UIComponent implements IComponent
 		{
 			_shouldHideSlider = false;
 		}
+	}
+	/**
+	 * The volume slider component of the KVoumeBar component.
+	 * @return 
+	 * 
+	 */
+	public function get volumeSlider():Sprite
+	{
+		return _volumeSlider;
+	}
+
+	public function set volumeSlider(value:Sprite):void
+	{
+		_volumeSlider = value;
+	}
+
+	public function get parentContainer():DisplayObject
+	{
+		return _parentContainer;
+	}
+
+	public function set parentContainer(value:DisplayObject):void
+	{
+		_parentContainer = value;
+		BindingUtils.bindProperty(this,"alpha",_parentContainer, "alpha");
 	}
 
 

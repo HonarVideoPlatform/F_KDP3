@@ -11,7 +11,6 @@ package com.kaltura.kdpfl.model.vo
 	import org.osmf.media.MediaResourceBase;
 	import org.osmf.media.DefaultMediaFactory;
 
-MediaResourceBase;
 	
 	
 	

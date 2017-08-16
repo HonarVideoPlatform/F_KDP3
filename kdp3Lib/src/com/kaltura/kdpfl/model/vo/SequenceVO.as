@@ -48,19 +48,19 @@ package com.kaltura.kdpfl.model.vo
 		 */		
 		public var isAdLoaded : Boolean = false;
 		/**
-		 * 
+		 * Flag indicating whether the post sequence is complete
 		 */		
 		public var postSequenceComplete : Boolean = false;
 		/**
-		 * 
+		 * Flag indicating whether the pre-sequence is complete
 		 */		
 		public var preSequenceComplete : Boolean = false;
 		/**
-		 * 
+		 * Number of pre-sequence ads.
 		 */		
 		public var preSequenceCount : Number = 0;
 		/**
-		 * 
+		 * Number of post-sequence ads.
 		 */		
 		public var postSequenceCount : Number = 0;
 		
