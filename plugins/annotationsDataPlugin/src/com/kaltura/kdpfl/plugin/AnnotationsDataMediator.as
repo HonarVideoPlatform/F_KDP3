@@ -6,6 +6,7 @@ package com.kaltura.kdpfl.plugin
 	import com.kaltura.kdpfl.model.MediaProxy;
 	import com.kaltura.kdpfl.model.ServicesProxy;
 	import com.kaltura.kdpfl.model.type.NotificationType;
+	import com.kaltura.kdpfl.model.type.StreamerType;
 	import com.kaltura.kdpfl.plugin.strings.NotificationStrings;
 	import com.kaltura.kdpfl.plugin.strings.SortOrderString;
 	import com.kaltura.kdpfl.view.media.KMediaPlayerMediator;
@@ -13,6 +14,10 @@ package com.kaltura.kdpfl.plugin
 	import com.kaltura.vo.KalturaAnnotationFilter;
 	import com.kaltura.vo.KalturaFilter;
 	
+	import flash.events.Event;
+	import flash.utils.setTimeout;
+	
+	import org.osmf.events.MediaPlayerCapabilityChangeEvent;
 	import org.osmf.events.TimelineMetadataEvent;
 	import org.osmf.media.MediaPlayer;
 	import org.osmf.metadata.TimelineMarker;
@@ -71,11 +76,11 @@ package com.kaltura.kdpfl.plugin
 						//Basing on the assumption that all the annotation group's annotations must belong to the same entry id.
 						var firstAnnotation : KalturaAnnotation = (viewComponent as AnnotationsDataPluginCode).annotationsGroup[0];
 						(viewComponent as AnnotationsDataPluginCode).activeChapterId = firstAnnotation.id;
-						/*if (_player && _player.media &&  _mediaProxy.vo.entry.id == firstAnnotation.entryId)
+						//Hot Fix for Akmai hd-network plugin
+						if (_player && _player.media &&  _mediaProxy.vo.entry.id == firstAnnotation.entryId && _mediaProxy.vo.deliveryType == StreamerType.HDNETWORK)
 						{
-							initTimelineMetadata();
-							createTimeBasedData();
-						}*/
+							_player.addEventListener(MediaPlayerCapabilityChangeEvent.CAN_SEEK_CHANGE, onCanSeekChange );
+						}
 					}
 					break;
 				case NotificationType.PLAYER_UPDATE_PLAYHEAD:
@@ -94,15 +99,32 @@ package com.kaltura.kdpfl.plugin
 					
 					break;
 				case NotificationType.PLAYER_PLAYED:
-					if (_delayedSkipTime)
+					if (_delayedSkipTime && _mediaProxy.vo.deliveryType != StreamerType.HDNETWORK)
 					{
-						var tempSkipTime : Number = _delayedSkipTime;
-						_delayedSkipTime = 0;
-						sendNotification(NotificationType.DO_SEEK, tempSkipTime);
+						startChapter ();
 						
 					}
 					break;
 			}
+		}
+		
+		private function onCanSeekChange (e : Event) : void
+		{
+			if (_player.media != null )
+			{		
+				if (_mediaProxy.vo.deliveryType == StreamerType.HDNETWORK)
+				{
+					//initialSeekPerformed = true;
+					setTimeout(startChapter, 100 );
+				}
+			}
+		}
+		
+		private function startChapter () : void
+		{
+			var tempSkipTime : Number = _delayedSkipTime;
+			_delayedSkipTime = 0;
+			sendNotification(NotificationType.DO_SEEK, tempSkipTime);
 		}
 		
 		private function initTimelineMetadata () : void

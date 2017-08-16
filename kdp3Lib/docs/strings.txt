@@ -1,7 +1,8 @@
 Following is the list of message strings that can be overriden via the configuration xml or flashvars:
 
-	UNAUTHORIZED_DOMAIN_TITLE  			= "Un authorized domain"
-	UNAUTHORIZED_COUNTRY_TITLE 			= "Un authorized country"
+	UNAUTHORIZED_DOMAIN_TITLE  			= "Unauthorized domain"
+	UNAUTHORIZED_COUNTRY_TITLE 			= "Unauthorized country"
+	UNAUTHORIZED_IP_ADDRESS_TITLE		= "Unauthorized IP address";
 	OUT_OF_SCHEDULING_TITLE    			= "Out of scheduling  "
 	NO_KS_TITLE				 			= "No KS where KS is required "
 	ENTRY_CONVERTING_TITLE     			= "Entry is converting"
@@ -23,6 +24,7 @@ Following is the list of message strings that can be overriden via the configura
 	
 	UNAUTHORIZED_DOMAIN  				= "We're sorry, this content is only available on certain domains."
 	UNAUTHORIZED_COUNTRY				= "We're sorry, this content is only available in certain countries."
+	UNAUTHORIZED_IP_ADDRESS				= "We're sorry, this content is only available for ceratin IP addresses.";
 	OUT_OF_SCHEDULING    				= "We're sorry, this content is currently unavailable."
 	NO_KS  				 				= "We're sorry, access to this content is restricted. "
 	ENTRY_CONVERTING     				= "Media is currently being converted, please try again in a few minutes."

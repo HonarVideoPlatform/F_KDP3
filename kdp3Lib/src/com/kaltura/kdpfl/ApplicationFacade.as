@@ -12,6 +12,7 @@ package com.kaltura.kdpfl
 	import com.kaltura.kdpfl.events.DynamicEvent;
 	import com.kaltura.kdpfl.model.ExternalInterfaceProxy;
 	import com.kaltura.kdpfl.model.type.NotificationType;
+	import com.kaltura.puremvc.as3.core.KView;
 	
 	import flash.display.DisplayObject;
 	
@@ -28,7 +29,7 @@ package com.kaltura.kdpfl
 		 * The current version of the KDP.
 		 */		
 
-		public var kdpVersion : String = "v3.5.7.1";
+		public var kdpVersion : String = "v3.5.7.6";
 
 
 		/**
@@ -131,6 +132,7 @@ package com.kaltura.kdpfl
        
         }
 		
+		
 		/**
 		 * controls the routing of notifications to our controllers, 
 		 * we all know them as commands
@@ -158,6 +160,19 @@ package com.kaltura.kdpfl
 			registerCommand(NotificationType.SEQUENCE_ITEM_PLAY_END, SequenceItemPlayEndCommand);
 			
 			registerCommand(NotificationType.SEQUENCE_SKIP_NEXT, SequenceSkipNextCommand);
+		}
+		
+		override protected function initializeView():void
+		{
+			if ( view != null ) return;
+			view = KView.getInstance();
+		}
+		
+		override protected function initializeFacade():void
+		{
+			initializeView();
+			initializeModel();
+			initializeController();
 		}
 		
 		/**
@@ -207,6 +222,7 @@ package com.kaltura.kdpfl
 		override public function registerProxy(proxy:IProxy):void
 		{
 			bindObject[proxy.getProxyName()] = proxy.getData();
+			
 			super.registerProxy(proxy);
 			
 			//save the proxy name so we can delete it later

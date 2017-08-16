@@ -152,7 +152,7 @@ package com.kaltura.kdpfl.model
 		 * @param args the arguments passed to the js function.
 		 * 
 		 */		
-		public function jsCall(...args):void
+		public function jsCall(...args):*
 		{
 			//Send notification that a js function is called for statistics or to notify other objects that intrest in 
 			//this call (for example edit button is pressed and a statistic plug in want to know about it)
@@ -173,7 +173,7 @@ package com.kaltura.kdpfl.model
 			var xml:XML = layoutProxy.vo.layoutXML.javaScript[0];
 			if (xml)
 			{
-				xml = xml.javaScript..children().(attribute("id") == jsFuncName)[0];
+				xml = xml.descendants().(attribute("id") == jsFuncName)[0];
 			
 				if (xml)
 					functionBody = String(xml.children()[0]);
@@ -191,7 +191,14 @@ package com.kaltura.kdpfl.model
 			
 			functionBody += jsFuncName + '(' + argsString + ')';
 			functionBody = functionBody.replace(commentPattern, "");
-			ExternalInterface.call("eval", functionBody);
+			var value : * = ExternalInterface.call( "eval", functionBody );
+			
+			if (value)
+			{
+				return value;
+			}
+			
+			return null;
 		  }
 	}
 }

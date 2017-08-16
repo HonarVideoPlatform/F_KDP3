@@ -3,9 +3,12 @@ package com.kaltura.kdpfl.plugin
 	import com.kaltura.kdpfl.util.KdpEmbeddedData;
 	
 	import flash.display.Loader;
+	import flash.events.AsyncErrorEvent;
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
@@ -117,7 +120,9 @@ package com.kaltura.kdpfl.plugin
 			else
 			{
 				var urlReq : URLRequest = new URLRequest( _url );
+
 				_loader.load( urlReq, context );
+
 			}
 		}
 		
@@ -130,7 +135,7 @@ package com.kaltura.kdpfl.plugin
 			dispatchEvent( event );
 		}
 		
-		protected function onIoError( event : IOErrorEvent ) : void
+		protected function onIoError( event : Event ) : void
 		{
 			 removeLoaderListeners();
 			 dispatchEvent( event );
@@ -142,12 +147,18 @@ package com.kaltura.kdpfl.plugin
 		{
 			_loader.contentLoaderInfo.addEventListener( Event.COMPLETE , onPluginReady );
 			_loader.contentLoaderInfo.addEventListener( IOErrorEvent.IO_ERROR , onIoError );
+			_loader.contentLoaderInfo.addEventListener( SecurityErrorEvent.SECURITY_ERROR, onIoError );
+			_loader.contentLoaderInfo.addEventListener( ErrorEvent.ERROR, onIoError );
+			_loader.contentLoaderInfo.addEventListener( AsyncErrorEvent.ASYNC_ERROR, onIoError );
 		}
 		
 		private function removeLoaderListeners( ) : void
 		{
 			_loader.contentLoaderInfo.removeEventListener( Event.COMPLETE , onPluginReady );
 			_loader.contentLoaderInfo.removeEventListener( IOErrorEvent.IO_ERROR , onIoError );
+			_loader.contentLoaderInfo.removeEventListener( SecurityErrorEvent.SECURITY_ERROR, onIoError );
+			_loader.contentLoaderInfo.removeEventListener( AsyncErrorEvent.ASYNC_ERROR, onIoError );
+			_loader.contentLoaderInfo.removeEventListener( ErrorEvent.ERROR, onIoError );
 		}
 		
 	}

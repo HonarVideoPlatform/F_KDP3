@@ -2,9 +2,15 @@ package com.kaltura.kdpfl.model
 {
 	import com.kaltura.KalturaClient;
 	import com.kaltura.config.KalturaConfig;
+	import com.kaltura.kdpfl.model.vo.ServicesVO;
+	
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	
+	import mx.binding.utils.BindingUtils;
+	
 	import org.puremvc.as3.patterns.proxy.Proxy;
+
 	/**
 	 *  Class ServicesProxy manages the parameters related to Kaltura services, i.e, creating a KalturaClient, KalturaConfig, etc.
 	 * 
@@ -13,9 +19,11 @@ package com.kaltura.kdpfl.model
 	{
 		public static const NAME:String = "servicesProxy";
 		
-		//public static const CONFIG_SERVICE:String = "configService";
+		
+		//DEPRECATED
 		public var kalturaClient : KalturaClient;
 		
+		//public static const CONFIG_SERVICE:String = "configService";
 		private var _configService:URLLoader;
 		/**
 		 * Constructor 
@@ -23,7 +31,7 @@ package com.kaltura.kdpfl.model
 		 */			
 		public function ServicesProxy()
 		{
-			super(NAME, null);
+			super(NAME, new ServicesVO());
 		}
 		/**
 		 * constructs a new KalturaClient based on a KalturaConfig object.
@@ -32,19 +40,21 @@ package com.kaltura.kdpfl.model
 		 */		
 		public function createClient( config : KalturaConfig ) : void
 		{
-			kalturaClient = new KalturaClient( config );
-		}
+			this.vo.kalturaClient = new KalturaClient( config );
+			kalturaClient = this.vo.kalturaClient;
 			
-		public function getConfigService():URLLoader
+		}
+		
+		public function get vo () : ServicesVO
 		{
-			if(!_configService)
-			{
-				var path:String = "config.xml";
-				_configService = new URLLoader(new URLRequest(path));
-			}
-			
-			return _configService;
+			return this.data as ServicesVO;
 		}
+			
+		
+		
+		
+		
+		
 		
 	}
 }

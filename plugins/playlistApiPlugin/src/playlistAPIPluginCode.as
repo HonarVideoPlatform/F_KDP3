@@ -6,9 +6,11 @@ package {
 	import com.akamai.rss.Media;
 	import com.kaltura.base.types.MediaTypes;
 	import com.kaltura.events.KalturaEvent;
+	import com.kaltura.kdpfl.model.FuncsProxy;
 	import com.kaltura.kdpfl.plugin.IPlugin;
 	import com.kaltura.kdpfl.plugin.component.KDataProvider;
 	import com.kaltura.kdpfl.plugin.component.PlaylistAPIMediator;
+	import com.kaltura.kdpfl.util.Functor;
 	import com.kaltura.utils.KConfigUtil;
 	import com.kaltura.vo.KalturaPlayableEntry;
 	
@@ -399,6 +401,12 @@ package {
 			
 			// notify the world that the playlists list is ready: 
 			_playlistAPIMediator.sendNotification(playlistAPIPlugin.PLAYLISTS_LISTED);
+			
+			// This is added in order to compensate for the fact the playlist mrss contains the rank*1000.
+			Functor.globalsFunctionsObject.divide = function (value : Number, divideBy : Number) : int
+			{
+				return Math.round(value/divideBy);
+			}
 		}
 		
 		override public function toString():String {

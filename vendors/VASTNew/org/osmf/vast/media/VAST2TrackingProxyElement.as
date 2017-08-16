@@ -521,7 +521,7 @@ package org.osmf.vast.media
 			}
 		}
 		
-		private function fireEventOfType(eventType:VASTTrackingEventType, cbShared:Boolean = true):void
+		override protected function fireEventOfType(eventType:VASTTrackingEventType, cbShared:Boolean = true):void
 		{
 			var vastEvent:VASTTrackingEvent = eventsMap[eventType] as VASTTrackingEvent;
 			
@@ -577,42 +577,7 @@ package org.osmf.vast.media
 			return browserEngine;
 		}		
 		
-		private function onPlayheadTimer(event:TimerEvent):void
-		{
-			// Check for 25%, 50%, and 75%.
-			var percent:Number = this.percentPlayback;
-			
-			if (percent >= 25 && firstQuartileReached == false)
-			{
-				firstQuartileReached = true;
-				
-				fireEventOfType(VASTTrackingEventType.FIRST_QUARTILE);
-			}
-			else if (percent >= 50 && midpointReached == false)
-			{
-				midpointReached = true;
-				
-				fireEventOfType(VASTTrackingEventType.MIDPOINT);
-			}
-			else if (percent >= 75 && thirdQuartileReached == false)
-			{
-				thirdQuartileReached = true;
-				
-				fireEventOfType(VASTTrackingEventType.THIRD_QUARTILE);
-			}
-		}
 		
-		private function get percentPlayback():Number
-		{
-			var timeTrait:TimeTrait = getTrait(MediaTraitType.TIME) as TimeTrait;
-			if (timeTrait != null)
-			{
-				var duration:Number = timeTrait.duration;
-				return duration > 0 ? 100 * timeTrait.currentTime / duration : 0;
-			}
-			
-			return 0;
-		}
 		
 		private function onMediaElementClick(e:MouseEvent):void
 		{

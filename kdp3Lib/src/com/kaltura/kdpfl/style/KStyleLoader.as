@@ -59,7 +59,10 @@ package com.kaltura.kdpfl.style
 		{
 			//if this isn't a debug Mode use the same securty domain to load style
 			if(!byPass)
+			{
 				_context.securityDomain = SecurityDomain.currentDomain;
+				_context.checkPolicyFile = true;
+			}
 			
 			var ba:ByteArray = KdpEmbeddedData.getData(url);
 			if (ba) // if bytes are supplied, then load the bytes instead of loading from the url.
@@ -86,12 +89,13 @@ package com.kaltura.kdpfl.style
 			dispatchEvent( new StyleEvent(  StyleEvent.COMPLETE ) );
 		}
 		
-		//We must implement IO Eroor to any case somwone is closing the browser in the middle of
+		//We must implement IO Error to any case somwone is closing the browser in the middle of
 		//Loading, if not it might crash the browser.
 		private function onIOError( event : IOErrorEvent ) : void
 		{
 			//TODO: Report, Log and Alert the user...
 			trace("skin loaded error");
+			dispatchEvent( new StyleEvent(  StyleEvent.ERROR ) );
 		}
 		
 

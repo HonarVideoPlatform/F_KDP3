@@ -20,19 +20,24 @@ package com.kaltura.kdpfl.view.media
 	import fl.events.ComponentEvent;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.setTimeout;
 	
 	import org.osmf.events.AudioEvent;
 	import org.osmf.events.BufferEvent;
 	import org.osmf.events.DisplayObjectEvent;
 	import org.osmf.events.DynamicStreamEvent;
 	import org.osmf.events.LoadEvent;
+	import org.osmf.events.MediaElementEvent;
 	import org.osmf.events.MediaErrorEvent;
+	import org.osmf.events.MediaPlayerCapabilityChangeEvent;
 	import org.osmf.events.MediaPlayerStateChangeEvent;
 	import org.osmf.events.TimeEvent;
 	import org.osmf.media.MediaPlayer;
 	import org.osmf.media.MediaPlayerState;
 	import org.osmf.traits.DynamicStreamTrait;
+	import org.osmf.traits.MediaTraitBase;
 	import org.osmf.traits.MediaTraitType;
 	import org.osmf.traits.TimeTrait;
 	import org.puremvc.as3.interfaces.INotification;
@@ -225,7 +230,8 @@ package com.kaltura.kdpfl.view.media
 				    LiveStreamCommand.LIVE_STREAM_READY,
 					NotificationType.LIVE_ENTRY,
 					NotificationType.PLAYER_SEEK_START,
-					NotificationType.ENTRY_READY
+					NotificationType.ENTRY_READY,
+					NotificationType.PLAYER_PLAYED
 				   ];
 		}
 		
@@ -350,6 +356,8 @@ package com.kaltura.kdpfl.view.media
 							_mediaProxy.vo.singleAutoPlay = true;
 							return;		
 						}
+						
+						
 						
 						playContent();
 					}
@@ -589,19 +597,27 @@ package com.kaltura.kdpfl.view.media
 		private function onPlayerStateChange( event : MediaPlayerStateChangeEvent ) : void
 		{	
 			sendNotification( NotificationType.PLAYER_STATE_CHANGE , event.state );
+			var sequenceProxy : SequenceProxy = facade.retrieveProxy(SequenceProxy.NAME) as SequenceProxy;
 			//trace(event.state)
 			switch( event.state )
 			{
+				case MediaPlayerState.LOADING:
+					
+					// The following if-statement provides a work-around for using the mediaPlayFrom parameter for http-streaming content. Currently
+					//  a bug exists in the Akamai Advanced Streaming plugin which prevents a more straight-forward implementation.
+					if (_mediaProxy.vo.mediaPlayFrom && !sequenceProxy.vo.isInSequence && _mediaProxy.vo.deliveryType == StreamerType.HDNETWORK)
+					{
+						player.addEventListener(MediaPlayerCapabilityChangeEvent.CAN_SEEK_CHANGE, onCanSeekChange);
+					}
+					break;
 				case MediaPlayerState.READY: 
 					if(! player.hasEventListener(TimeEvent.COMPLETE))
 						player.addEventListener( TimeEvent.COMPLETE , onTimeComplete );
-					//The OSMF has some problem that sometimes it sents Media Player ready more then once while playing
+					
 					if(!_playerReadyOrEmptyFlag)
 					{
 						_playerReadyOrEmptyFlag = true;
-						var playerStatusProxy : PlayerStatusProxy = facade.retrieveProxy(PlayerStatusProxy.NAME) as PlayerStatusProxy;
-						
-						
+						var playerStatusProxy : PlayerStatusProxy = facade.retrieveProxy(PlayerStatusProxy.NAME) as PlayerStatusProxy;	
 					}
 					else
 					{
@@ -616,13 +632,17 @@ package com.kaltura.kdpfl.view.media
 				    break;
 
 				case MediaPlayerState.PLAYING: 
-					 var sequenceProxy : SequenceProxy = facade.retrieveProxy(SequenceProxy.NAME) as SequenceProxy;
+					
 					 
 				     if(!_hasPlayed){
 				     	_hasPlayed = true;
 				     }
-				     
-				     //If the player is playing a rtmp entry and the user switched bitrates before the entry started playing
+					 
+					 if (player.media != null && _mediaProxy.vo.mediaPlayFrom && !sequenceProxy.vo.isInSequence && _mediaProxy.vo.deliveryType != StreamerType.HDNETWORK)
+					 {				
+						 startClip();
+					 }
+				     //If the player is playing RTMP content and the user switched bitrates before the entry started playing
 				     // it causes a OSMF bug.  the bug is fixed by saving the switch until the play button is pressed
 				     if(player.isDynamicStream)
 				     {
@@ -632,6 +652,7 @@ package com.kaltura.kdpfl.view.media
 				     		sendNotification(NotificationType.DO_SWITCH, _mediaProxy.vo.preferedFlavorBR);
 				     	}
 				     }
+					 
 					//if this is Audio and not blocked entry countinue to show the Thumbnail
 					if(_mediaProxy.vo.entry.mediaType==KalturaMediaType.AUDIO && !_blockThumb &&!sequenceProxy.vo.isInSequence)
 						kMediaPlayer.showThumbnail();
@@ -645,13 +666,53 @@ package com.kaltura.kdpfl.view.media
 						sendNotification(NotificationType.DO_PAUSE);
 						_prevState ="";
 					}
+					
+					
 				break;
 				case MediaPlayerState.PLAYBACK_ERROR:
-					trace("osmf mediaplayer playback error.");
+					if (_flashvars.debugMode == "true")
+					{
+						trace("KMediaPlayerMediator :: onPlayerStateChange >> osmf mediaplayer playback error.");
+					}
 				break;
+				
 				
 			}
 		}
+		
+		//////////////////////////////////////////////////////////
+		/* The following block of code is a work-around for */
+		/* using the mediaPlayFrom parameter for http-streaming
+		 * content. It will be removed when the Akamai Advanced
+		 * streaming plugin will be fixed to support this scenario.*/
+	
+		private function onCanSeekChange(event:MediaPlayerCapabilityChangeEvent):void
+		{	
+			//player.removeEventListener (MediaPlayerCapabilityChangeEvent.CAN_SEEK_CHANGE, onCanSeekChange);
+			if (player.media != null && _mediaProxy.vo.mediaPlayFrom)
+			{		
+				if (_mediaProxy.vo.deliveryType == StreamerType.HDNETWORK)
+				{
+					
+					setTimeout(startClip, 100 );
+				}
+			}
+			
+		}
+
+		private function startClip () : void
+		{
+			if (_mediaProxy.vo.mediaPlayFrom)
+			{
+				var temp : Number = _mediaProxy.vo.mediaPlayFrom;
+				_mediaProxy.vo.mediaPlayFrom = 0;
+				sendNotification( NotificationType.DO_SEEK, temp );
+				
+			}
+		}
+		//////////////////////////////////////////////////////////////////////
+		
+	
 		
 		/**
 		 * Dispatched when a MediaPlayer's ability to expose its media as a DisplayObject has changed
@@ -700,6 +761,16 @@ package com.kaltura.kdpfl.view.media
 				{
 					_currentTime=event.time;
 				}
+				
+				if (_mediaProxy.vo.mediaPlayTo)
+				{
+					if (_mediaProxy.vo.mediaPlayTo <= event.time)
+					{
+						_mediaProxy.vo.mediaPlayTo = 0;
+						sendNotification(NotificationType.DO_PAUSE );
+					}
+				}
+				
 				if( _mediaProxy.vo.entryExtraData && 
 					!_mediaProxy.vo.entryExtraData.isAdmin && 
 					_mediaProxy.vo.entryExtraData.isSessionRestricted && 
@@ -716,8 +787,8 @@ package com.kaltura.kdpfl.view.media
 					//show alert
 					sendNotification( NotificationType.ALERT , {message: MessageStrings.getString('FREE_PREVIEW_END'), title: MessageStrings.getString('FREE_PREVIEW_END_TITLE')} );
 					//call the page with the entry is in sig
-					var extProxy : ExternalInterfaceProxy = facade.retrieveProxy( ExternalInterfaceProxy.NAME ) as ExternalInterfaceProxy;
-					extProxy.call( NotificationType.FREE_PREVIEW_END , _mediaProxy.vo.entry.id );
+					//var extProxy : ExternalInterfaceProxy = facade.retrieveProxy( ExternalInterfaceProxy.NAME ) as ExternalInterfaceProxy;
+					sendNotification( NotificationType.FREE_PREVIEW_END , _mediaProxy.vo.entry.id );
 					//disable GUI
 					//sendNotification( NotificationType.ENABLE_GUI , {guiEnabled : false , enableType : EnableType.CONTROLS} );
 					
@@ -790,6 +861,8 @@ package com.kaltura.kdpfl.view.media
 				_duration=event.time
 				sendNotification( NotificationType.DURATION_CHANGE , {newValue:_duration});
 			}
+			
+			
 		}
 		/**
 		 * Dispatched when the position  of a trait that implements the ITemporal interface first matches its duration. 
@@ -846,7 +919,8 @@ package com.kaltura.kdpfl.view.media
 		}
 		
 		/**
-		 * 
+		 * Function which removed the current media element from the 
+		 * OSMF media player.
 		 * 
 		 */		
 		public function cleanMedia():void
@@ -863,9 +937,7 @@ package com.kaltura.kdpfl.view.media
 		   		player.displayObject.height=0;////this is for clear the former clip...
 		  		player.displayObject.width=0;///this is for clear the former clip...
 			}
-						
-			
-			//sendNotification( NotificationType.DO_PAUSE );
+
 						
 			player.media = null;
 		}
@@ -880,7 +952,7 @@ package com.kaltura.kdpfl.view.media
 			return viewComponent as DisplayObjectContainer;	
 		}
 		
-
+		
 		public function get isIntelliSeeking():Boolean
 		{
 			return _isIntelliSeeking;

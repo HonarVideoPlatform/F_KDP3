@@ -92,6 +92,10 @@ Following is a summary of the expressions the KDP can evaluate.
 		When the function is called the code within the CDATA section is concatenated with the call request
 		and evaluated using the eval javascript function 
 		   
-		//todo - add example of javascript block
+		<javaScript>
+  	 		<jsBlock id="returnDom">
+  	 			function returnDom(){ return document.domain }
+  			 </jsBlock>
+  		</javaScript>
 		
 		   

@@ -208,6 +208,8 @@ package com.kaltura.kdpfl.plugin.component
 												"doDownload",
 												"watermarkClick",
 												"doReplay",
+												"doPause",
+												"doPlay",
 												"kdpReady",
 												"doSeek"
 											];
@@ -345,7 +347,17 @@ package com.kaltura.kdpfl.plugin.component
 				case "doReplay":
 					sendGeneralNotification(REPLAY_EVENT); //TODO, fix the seek event being sent after replay. at the current this relies on the replay command happening before the seek  
 					_isReplay = true;
-				break;	
+				break;
+				case "doPlay":
+					s.Media.play(_mediaName,_playheadPosition);
+				break;
+				case "doPause":
+					s.Media.stop(_mediaName,_playheadPosition);
+				break;
+				
+				
+				
+				
 				default:
 					//make sure we use the default only to the custome events
 					for (var o:Object in customEvents)

@@ -17,6 +17,8 @@ package com.kaltura.kdpfl.view
 	public class EditAnnotationForm extends KVBox
 	{
 		
+		private var prevText : String = "";
+		
 		public function EditAnnotationForm(configuration:Array=null)
 		{
 			super(configuration);
@@ -32,10 +34,12 @@ package com.kaltura.kdpfl.view
 			var n_config :Object = new Object();
 			n_config.target = n_annotation;
 			n_config.percentWidth = 100;
-			
+			n_config.percentHeight = 100;
 			var a : Array = this.configuration.concat();
 			a.push(n_config);
 			this.configuration = a;
+			
+			prevText = n_annotation.annotationText;
 		}
 		
 		public function returnValidAnnotation (currentTime : Number) : Annotation
@@ -55,6 +59,7 @@ package com.kaltura.kdpfl.view
 				var currAnnotation : Annotation = annotation;
 				KAstraAdvancedLayoutUtil.removeFromLayout(this, annotation);
 				currAnnotation.viewMode = AnnotationStrings.VIEW_MODE;
+				prevText = "";
 				return currAnnotation;
 			}
 			
@@ -63,6 +68,8 @@ package com.kaltura.kdpfl.view
 		public function canceledAnnotation () : Annotation
 		{
 			var currAnnotation : Annotation = annotation;
+			currAnnotation.annotationText = prevText;
+			prevText = "";
 			KAstraAdvancedLayoutUtil.removeFromLayout(this, annotation);
 			currAnnotation.viewMode = AnnotationStrings.VIEW_MODE;
 			return currAnnotation;

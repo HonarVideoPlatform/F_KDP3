@@ -1,14 +1,11 @@
 package com.kaltura.kdpfl.model
 {
-	import __AS3__.vec.Vector;
-	
 	import com.kaltura.kdpfl.model.strings.MessageStrings;
-	import com.kaltura.kdpfl.model.type.EnableType;
 	import com.kaltura.kdpfl.model.type.NotificationType;
-	import com.kaltura.kdpfl.model.type.SequenceContextType;
 	import com.kaltura.kdpfl.model.type.SourceType;
 	import com.kaltura.kdpfl.model.type.StreamerType;
 	import com.kaltura.kdpfl.model.vo.MediaVO;
+	import com.kaltura.kdpfl.util.KTextParser;
 	import com.kaltura.kdpfl.util.URLUtils;
 	import com.kaltura.osmf.buffering.DualThresholdBufferingProxyElement;
 	import com.kaltura.osmf.events.KSwitchingProxyEvent;
@@ -33,14 +30,11 @@ package com.kaltura.kdpfl.model
 	import org.osmf.media.MediaElement;
 	import org.osmf.media.MediaResourceBase;
 	import org.osmf.media.URLResource;
-	import org.osmf.metadata.Metadata;
 	import org.osmf.net.DynamicStreamingItem;
 	import org.osmf.net.DynamicStreamingResource;
-	import org.osmf.net.NetLoader;
 	import org.osmf.net.NetStreamCodes;
 	import org.osmf.net.StreamType;
 	import org.osmf.net.StreamingURLResource;
-	import org.osmf.net.rtmpstreaming.RTMPDynamicStreamingNetLoader;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
@@ -106,12 +100,52 @@ package com.kaltura.kdpfl.model
 					{
 						var b64 : Base64Encoder = new Base64Encoder();
 						b64.encode( _flashvars.referrer );
-						
+						_flashvars.b64Referrer = b64.toString();
 					}
 					
 					//Media Manifest construction
-					//TODO: add more flashvars for the subclipping functionality.
-					var entryManifestUrl : String  = _flashvars.httpProtocol + _flashvars.host + "/p/" + _flashvars.partnerId + "/sp/" + _flashvars.subpId + "/playManifest/entryId/" + vo.entry.id + ((vo.deliveryType == StreamerType.HTTP && vo.selectedFlavorId) ? "/flavorId/" + vo.selectedFlavorId : "") + (seekFrom ? "/seekFrom/" + seekFrom*1000 : "") + "/format/" + (vo.deliveryType != StreamerType.LIVE ? vo.deliveryType : "rtmp") + "/protocol/" + (vo.mediaProtocol) + (_flashvars.cdnHost ? "/cdnHost/" + _flashvars.cdnHost : "") + (_flashvars.storageId ? "/storageId/" + _flashvars.storageId : "") + (_flashvars.ks ? "/ks/" + _flashvars.ks : "") + (b64 ? "/referrer/" + b64 : "") + "/a/a.f4m";
+					var entryManifestUrl : String;
+					entryManifestUrl  = _flashvars.httpProtocol + _flashvars.host + "/p/" + _flashvars.partnerId + "/sp/" + _flashvars.subpId + "/playManifest/entryId/" + vo.entry.id + ((_flashvars.deliveryCode) ? "/deliveryCode/" + _flashvars.deliveryCode : "") + ((vo.deliveryType == StreamerType.HTTP && vo.selectedFlavorId) ? "/flavorId/" + vo.selectedFlavorId : "") + (seekFrom ? "/seekFrom/" + seekFrom*1000 : "") + "/format/" + (vo.deliveryType != StreamerType.LIVE ? vo.deliveryType : "rtmp") + "/protocol/" + (vo.mediaProtocol) + (_flashvars.cdnHost ? "/cdnHost/" + _flashvars.cdnHost : "") + (_flashvars.storageId ? "/storageId/" + _flashvars.storageId : "") + (_flashvars.ks ? "/ks/" + _flashvars.ks : "") + (_flashvars.b64Referrer ? "/referrer/" + _flashvars.b64Referrer : "") + "/a/a.f4m";
+					
+					//In case partner has defined a template for the manifest URL
+					if (_flashvars.manifestTemplate && _flashvars.manifestTemplate.indexOf("{") != -1)
+					{
+						var currVar : String = "";
+						var replacedTemplate : String =_flashvars.manifestTemplate;
+						var ccVarValue : Object = new Object();
+						try{
+							for (var i : int =0; i < _flashvars.manifestTemplate.length; i++)
+							{
+								if (_flashvars.manifestTemplate.charAt(i) == "{")
+								{
+									currVar = currVar.concat(_flashvars.manifestTemplate.charAt(i));
+								}
+								else if (_flashvars.manifestTemplate.charAt(i) == "}")
+								{
+									currVar = currVar.concat(_flashvars.manifestTemplate.charAt(i));
+									
+									ccVarValue = KTextParser.evaluate(facade["bindObject"], currVar );
+									replacedTemplate = replacedTemplate.replace( currVar, ccVarValue );
+									
+									currVar = "";
+								}
+								else 
+								{
+									if (currVar != "" )
+									{
+										currVar = currVar.concat( _flashvars.manifestTemplate.charAt(i) );
+									}
+								}
+							}
+							
+							entryManifestUrl =  replacedTemplate;
+						}
+						catch(e : Error)
+						{
+							
+						}
+						
+					}
 					resource = new StreamingURLResource (entryManifestUrl);
 					
 					var f4mLoader : F4MLoader = new F4MLoader(vo.mediaFactory);
@@ -161,7 +195,7 @@ package com.kaltura.kdpfl.model
 							
 							//Create resource for live streaming entry
 							var liveStreamUrl : String = vo.entry.dataUrl;
-							resource = new DynamicStreamingResource(liveStreamUrl, StreamType.LIVE);
+							resource = new StreamingURLResource(liveStreamUrl, StreamType.LIVE);
 							
 							break;
 						case StreamerType.RTMP:
@@ -180,6 +214,7 @@ package com.kaltura.kdpfl.model
 							{
 								resource = new StreamingURLResource(rtmpUrl,StreamType.RECORDED);
 							}
+							
 							break;
 						case StreamerType.HTTP:
 							var resourceUrl : String = vo.entry.dataUrl;
@@ -195,7 +230,7 @@ package com.kaltura.kdpfl.model
 					break;
 				case SourceType.F4M:
 					var manifestUrl : String  = vo.entry.dataUrl;
-					resource = new URLResource(manifestUrl);
+					resource = new StreamingURLResource(manifestUrl);
 					
 					var f4mElement : F4MElement = new F4MElement (resource as URLResource, new F4MLoader(vo.mediaFactory));
 					var dtbpElement : DualThresholdBufferingProxyElement = new DualThresholdBufferingProxyElement((vo.deliveryType == StreamerType.LIVE ? vo.initialLiveBufferTime : vo.initialBufferTime), (vo.deliveryType == StreamerType.LIVE ? vo.expandedLiveBufferTime : vo.expandedBufferTime), f4mElement);

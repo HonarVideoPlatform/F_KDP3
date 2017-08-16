@@ -24,6 +24,7 @@ package com.kaltura.kdpfl.style
 		{
 			_styleLoader = KStyleLoader.getInstance();
 			_styleLoader.addEventListener(StyleEvent.COMPLETE, onSkinLoaded);
+			_styleLoader.addEventListener(StyleEvent.ERROR, onSkinLoadError);
 			
 			var layoutProxy : LayoutProxy = _facade.retrieveProxy( LayoutProxy.NAME ) as LayoutProxy;
 			var flashvars : Object = (_facade.retrieveProxy( ConfigProxy.NAME ) as ConfigProxy).vo.flashvars;
@@ -60,6 +61,11 @@ package com.kaltura.kdpfl.style
 		private function onSkinLoaded( event :StyleEvent ):void
 		{
 			_responder.result(null);
+		}
+		
+		private function onSkinLoadError ( event : StyleEvent ) : void
+		{
+			_responder.fault( null );
 		}
 	}
 }

@@ -90,7 +90,7 @@ package com.kaltura.kdpfl.controller.media
 			setFlavorFromCookie(note);
 		}
 		/**
-		 * This function selects the prefered bitrate for the requested entry 
+		 * This function selects the preferred bitrate for the requested entry 
 		 * @param note
 		 * 
 		 */		

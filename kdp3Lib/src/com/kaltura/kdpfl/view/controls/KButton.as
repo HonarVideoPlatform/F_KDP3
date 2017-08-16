@@ -321,12 +321,18 @@ package com.kaltura.kdpfl.view.controls
 						if(mouseState == "over" || mouseState == "down")
 						{
 							KColorUtil.colorDisplayObject(child,color2);
-							child.alpha = 2 ; 						
+							if (buttonType == ICON_BUTTON)
+							{
+								child.alpha =2 ;
+							}
 						}
 						else
 						{
 							KColorUtil.colorDisplayObject(child,color1);
-							child.alpha = 1 ; 						
+							if (buttonType == ICON_BUTTON)
+							{
+								child.alpha = 1 ;
+							}					
 							
 						}
 					}				
@@ -349,7 +355,10 @@ package com.kaltura.kdpfl.view.controls
 						if(itemClassName.indexOf("con") > -1 || itemClassName.indexOf("ext") > -1)
 						{
 							KColorUtil.colorDisplayObject(child,color5);
-							child.alpha = 2;
+							if(itemClassName.indexOf("con") > -1)
+							{
+								child.alpha = 2;
+							}
 						}	
 						//found a skin - up is color 3, over is color 4
 						if(itemClassName.indexOf("kin") > -1)

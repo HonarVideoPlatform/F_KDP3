@@ -378,16 +378,7 @@ package com.kaltura.kdpfl.controller.media
 		
 		override protected function commandComplete():void
 		{
-			if (! _mediaProxy.vo.isMediaDisabled)
-			{
-				sendNotification(NotificationType.ENABLE_GUI, {guiEnabled : true , enableType : EnableType.CONTROLS});
-				if (_mediaProxy.vo.entry is KalturaLiveStreamEntry || _flashvars.streamerType == StreamerType.LIVE)
-				{
-					_mediaProxy.prepareMediaElement();
-					sendNotification(NotificationType.ENABLE_GUI, {guiEnabled : false , enableType : EnableType.CONTROLS});
-					sendNotification(NotificationType.LIVE_ENTRY, _mediaProxy.vo.resource);
-				}
-			}
+			
 			super.commandComplete();
 		}
 		

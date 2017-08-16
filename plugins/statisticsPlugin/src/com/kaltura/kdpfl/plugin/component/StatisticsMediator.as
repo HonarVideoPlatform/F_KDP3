@@ -302,7 +302,7 @@ package com.kaltura.kdpfl.plugin.component {
 					break;
 
 				case "durationChange":
-					if (_isNewLoad) {
+					if (_lastId != kse.entryId) {
 						_hasSeeked = false;
 						_p25Once = false;
 						_p50Once = false;
@@ -311,17 +311,6 @@ package com.kaltura.kdpfl.plugin.component {
 					}
 					return;
 					break;
-
-				case "fastForward":
-					_inFF = true;
-					return;
-					break;
-
-				case "stopFastForward":
-					_inFF = false;
-					return;
-					break;
-
 
 				case "playerSeekEnd":
 					_inSeek = false;

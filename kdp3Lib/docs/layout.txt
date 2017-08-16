@@ -63,6 +63,8 @@ Following is a summary of the layout building process within the KDP
 									onDemand - plugin must only be loaded if a specific component in the KDP demands it.
 									noWait- plugin is loaded in a non-synchronized way, the GUI becomes enabled even if the plugin has not yet loaded.
 									preInitialize - plugin is loaded before GUI is created.
+		{Plugin name}.asyncInit = [true/false] - flag indicating whether the plugin initialization process involves a-synchronous processes. If == true -> the plugin is required to report
+											that its initialization is complete (or failed) by firing the KPluginEvent.ASYNC_INIT_COMPLETE (KPluginEvent.ASYNC_INIT_FAILED).
 		{Plugin name}.{any additional attribute} = {value} - setting any additional attribute specific to the plugin
 		
 		The .plugin attribute instructs the KDP that the specific variable container is a plugin.

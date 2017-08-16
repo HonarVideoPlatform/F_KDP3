@@ -1,8 +1,14 @@
 package com.kaltura.kdpfl.plugin.component
 {
+	import com.kaltura.kdpfl.model.type.NotificationType;
 	import com.kaltura.kdpfl.view.controls.KButton;
 	
+	import fl.core.UIComponent;
+	
 	import flash.display.DisplayObject;
+	import flash.display.Stage;
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -10,6 +16,8 @@ package com.kaltura.kdpfl.plugin.component
 	public class Shortcuts508Mediator extends Mediator
 	{
 		public static const NAME:String = "shortcuts508Mediator";
+		
+		private var _shortcutsMap : Object;
 
 		public function Shortcuts508Mediator(viewComponent:Object=null)
 		{
@@ -19,8 +27,7 @@ package com.kaltura.kdpfl.plugin.component
 		override public function listNotificationInterests():Array
 		{
 			return  [
-						"setClosedCaptionsToOff",
-						"setAudioDescriptionToOff"
+						NotificationType.LAYOUT_READY
 					];
 		}
 		
@@ -34,35 +41,42 @@ package com.kaltura.kdpfl.plugin.component
 			switch (eventName)
 			{
 				// this means that the main container will be 100% X 100% always
-				case "setClosedCaptionsToOff":
-					(view as Shortcuts508).setClosedCaptionsToOff ();
-				break;
-
-				case "setAudioDescriptionToOff":
-					(view as Shortcuts508).setAudioDescriptionToOff ();
-				break;
+				case NotificationType.LAYOUT_READY:
+					setButtons();
+					break;
 			}
 		}
 		
-		public function get view() : DisplayObject
-		{
-			return viewComponent as DisplayObject;
-		}
-		
-		public function added() : void  
-		{
-			(view as Shortcuts508).added(facade);
-		}
-		
-		public function setScreenSize( w:Number, h:Number) : void  
-		{
-			// Call when video player window changes size (example fullscreen)
-			(view as Shortcuts508).setSize(w,h);
-		}
 
-		public function setButtons(playBtn:KButton, backBtn:KButton, fwdBtn:KButton, muteBtn:KButton, volDownBtn:KButton, volUpBtn:KButton, fsBtn:KButton, ccBtn:KButton, adBtn:KButton):void
+		
+	
+		
+		
+		
+
+		public function setButtons():void
 		{
-			(view as Shortcuts508).setButtons(playBtn, backBtn, fwdBtn, muteBtn, volDownBtn, volUpBtn, fsBtn, ccBtn, adBtn);
+			var stage : Stage = (viewComponent as Shortcuts508PluginCode).stage;
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			_shortcutsMap = new Object();
+			for (var prop : String in (viewComponent as Shortcuts508PluginCode))
+			{
+				if (prop.indexOf("kbtn_") != -1)
+				{
+					_shortcutsMap[(viewComponent as Shortcuts508PluginCode)[prop]] = prop.replace("kbtn_", "");
+				}
+			}
 		}
+		
+		private function onKeyDown (e : KeyboardEvent) : void
+		{
+			if (_shortcutsMap[e.keyCode.toString()] && !(viewComponent as Shortcuts508PluginCode).disableShortcuts)
+			{
+				( facade["bindObject"][_shortcutsMap[e.keyCode.toString()]] as UIComponent).setFocus();
+				(facade["bindObject"][_shortcutsMap[e.keyCode.toString()]] as UIComponent).dispatchEvent(new MouseEvent(MouseEvent.CLICK) );
+			}
+		}
+		
+		
 	}
 }

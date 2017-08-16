@@ -8,6 +8,7 @@ package com.kaltura.kdpfl.view
 	import fl.events.ComponentEvent;
 	
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.text.TextField;
@@ -31,10 +32,18 @@ package com.kaltura.kdpfl.view
 		
 		private var annotationTextFormat : TextFormat = new TextFormat("Arial", 11);
 		
+		public static var maxChars : int = 0;
+		
+		
 		public function Annotation(n_viewMode:String, n_inTime : Number=-1, n_annotationText : String= ANNOTATION_PROMPT, n_entryId : String = "" ,n_kalturaAnnotation : KalturaAnnotation = null)
 		{
 			//annotationTextField.setTextFormat(annotationTextFormat);
 			annotationTextField.defaultTextFormat = annotationTextFormat;
+			annotationTextField.maxChars = maxChars;
+			if (maxChars)
+			{
+				annotationTextField.addEventListener(KeyboardEvent.KEY_DOWN, onUserTypeAttempt);
+			}
 			if (! n_kalturaAnnotation)
 			{
 				_kalturaAnnotation = new KalturaAnnotation();
@@ -108,7 +117,7 @@ package com.kaltura.kdpfl.view
 			var intime : String = "<B><font color='#0051DE'><a href='event:intime'>" + parseInTimeString() + "</a></font></B>";
 			var edit : String = "";
 			var deleteAnnotation : String = "";//0051DE
-			if (userMode == "reviewer")
+			if (userMode == AnnotationStrings.REVIEWER)
 			{
 				edit = "<B><a href='event:edit'><font color='#0051DE'>Edit</font></a></B>";
 				deleteAnnotation = "<B><font color='#0051DE'><a href='event:delete'>Delete</a></font></B>";
@@ -126,11 +135,21 @@ package com.kaltura.kdpfl.view
 			}
 		}
 		
+		
 		private function onTextFieldEdit (e : Event) : void
 		{
+
 			if (annotationTextField.textHeight != this.height)
 			{
 				this.height = this.annotationTextField.textHeight;
+			}
+		}
+		
+		private function onUserTypeAttempt (e : KeyboardEvent) : void
+		{
+			if (annotationTextField.length >= maxChars)
+			{
+				dispatchEvent( new AnnotationEvent (AnnotationEvent.MAX_LENGTH_REACHED , this ) );
 			}
 		}
 		
@@ -204,6 +223,8 @@ package com.kaltura.kdpfl.view
 		{
 			return _kalturaAnnotation;
 		}
+
+
 		
 
 	}

@@ -38,7 +38,7 @@ package com.kaltura.kdpfl.controller
 		public function fault(data:Object):void
 		{
 			facade.sendNotification( NotificationType.SKIN_LOAD_FAILED );
-			commandComplete();
+			//commandComplete();
 		}
 
 	}

@@ -168,16 +168,10 @@ package com.kaltura.kdpfl.controller
 				var ssws : SessionStartWidgetSession = new SessionStartWidgetSession( _flashvars.widgetId );
 				mr.addAction( ssws );
 				
-				//use the ks result in Start Widget Session in the next 3 calls
+				//use the ks result in Start Widget Session in the next 2 calls
 				mr.addRequestParam("2:ks","{1:result:ks}");
 				mr.addRequestParam("3:ks","{1:result:ks}");
-				mr.addRequestParam("4:ks","{1:result:ks}");
-				mr.addRequestParam("5:ks","{1:result:ks}");
-				mr.addRequestParam("6:ks","{1:result:ks}");
-				if (_flashvars.requiredMetadataFields)
-				{
-					mr.addRequestParam("7:ks","{1:result:ks}");
-				}
+				
 			}
 			else
 			{
@@ -204,50 +198,7 @@ package com.kaltura.kdpfl.controller
 			}
 			
 			mr.addAction( uiconfGet );
-			
-			if(_flashvars.sourceType == SourceType.ENTRY_ID && _flashvars.entryId && _flashvars.entryId != "-1")
-			{
-				//TODO: Change get entry when we will add mix support
-				var getEntry : BaseEntryGet = new BaseEntryGet(_flashvars.entryId);
-				mr.addAction( getEntry );
-				
-				//Get Flavors
- 				var getFlavors:FlavorAssetGetWebPlayableByEntryId= new FlavorAssetGetWebPlayableByEntryId(_flashvars.entryId);
-	            mr.addAction(getFlavors); 
-	            
-	            var keedp : KalturaEntryContextDataParams  = new KalturaEntryContextDataParams();
-	            keedp.referrer = _flashvars.referrer;
-	            var getExtraData : BaseEntryGetContextData = new BaseEntryGetContextData( _flashvars.entryId , keedp );
-	            mr.addAction(getExtraData); 
-				if (_flashvars.requiredMetadataFields)
-				{
-					var metadataAction : KalturaCall;
-					
-					if (_flashvars.metadataProfileId)
-					{
-						metadataAction = new MetadataGet ( _flashvars.metadataProfileId );
-					}
-					else
-					{
-						var metadataFilter : KalturaMetadataFilter = new KalturaMetadataFilter();
-						
-						metadataFilter.metadataObjectTypeEqual = KalturaMetadataObjectType.ENTRY;
-						
-						metadataFilter.orderBy = KalturaMetadataOrderBy.CREATED_AT_ASC;
-						
-						metadataFilter.objectIdEqual = _mediaProxy.vo.entry.id;
-						
-						var metadataPager : KalturaFilterPager = new KalturaFilterPager();
-						
-						metadataPager.pageSize = 1;
-						
-						metadataAction = new MetadataList(metadataFilter,metadataPager);
-					}
-				
-					mr.addAction(metadataAction);
-				}
-	              
-		  	}  	
+ 	
 			
            
 			mr.addEventListener( KalturaEvent.COMPLETE , result );
@@ -315,126 +266,7 @@ package com.kaltura.kdpfl.controller
 				_configProxy.vo.kuiConf = kuiConf;
 			}
 				
-			if(_flashvars.sourceType != SourceType.URL)
-			{
-				if(_flashvars.entryId && _flashvars.entryId != "-1")
-				{
-					if(arr[i] is KalturaError)
-					{
-						++i; //procced anyway
-						trace("Error in Get Entry");
-						//sendNotification( NotificationType.ALERT , {message: MessageStrings.getString(MessageStrings., title: DefaultStrings.SERVICE_ERROR} );
-						//hasError = true;
-					}
-					else
-					{
-						//TODO: if mix...
-						_mediaProxy.vo.entry = arr[i++];
-						_mediaProxy.vo.entryLoadedBeforeChangeMedia = true;
-						if(_mediaProxy.vo.entry is KalturaLiveStreamEntry)
-						{
-							_mediaProxy.vo.deliveryType = StreamerType.LIVE;
-						}
-						else
-						{
-							_mediaProxy.vo.deliveryType = flashvars.streamerType;
-						}
-					}
-					
-		 			if(arr[i] is KalturaError)
-					{
-						++i; //procced anyway
-						trace("Error in Get Flavors");
-						
-						//if this is live entry we will create the flavors using 
-						if( _mediaProxy.vo.entry is KalturaLiveStreamEntry )
-						{
-							var flavorAssetArray : Array = new Array(); 
-							for(var j:int=0; j<_mediaProxy.vo.entry.bitrates.length; j++)
-							{
-								var flavorAsset : KalturaFlavorAsset = new KalturaFlavorAsset();
-								flavorAsset.bitrate = _mediaProxy.vo.entry.bitrates[j].bitrate;
-								flavorAsset.height = _mediaProxy.vo.entry.bitrates[j].height;
-								flavorAsset.width = _mediaProxy.vo.entry.bitrates[j].width;
-								flavorAsset.entryId = _mediaProxy.vo.entry.id;
-								flavorAsset.isWeb = true;
-								flavorAsset.id = j.toString();
-								flavorAsset.partnerId = _mediaProxy.vo.entry.partnerId;
-								flavorAssetArray.push(flavorAsset);
-							}
-							
-							if(j>0)
-								_mediaProxy.vo.kalturaMediaFlavorArray = flavorAssetArray;
-							else
-								_mediaProxy.vo.kalturaMediaFlavorArray = null;
-						}
-						else
-						{
-							_mediaProxy.vo.kalturaMediaFlavorArray = null;
-							//sendNotification( NotificationType.ALERT , {message: DefaultStrings.SERVICE_GET_FLAVORS_ERROR, title: DefaultStrings.SERVICE_ERROR} );
-						}
-					}
-					else
-					{
-						_mediaProxy.vo.kalturaMediaFlavorArray = arr[i++];
-					} 
-					
-					if(arr[i] is KalturaError)
-					{
-						++i; //procced anyway
-						//TODO: Trace, Report, and notify the user
-						trace("Error in Get Extra Params");
-						//sendNotification( NotificationType.ALERT , {message: DefaultStrings.SERVICE_GET_EXTRA_ERROR, title: DefaultStrings.SERVICE_GET_EXTRA_ERROR_TITLE} );
-					}
-					else
-					{
-						_mediaProxy.vo.entryExtraData = arr[i++];
-					} 
-					if (_flashvars.requiredMetadataFields)
-					{
-						if(arr[i] is KalturaError)
-						{
-							++i;
-							trace("Error in Get metadata");
-						}
-						else
-						{
-							var mediaProxy : MediaProxy = facade.retrieveProxy(MediaProxy.NAME) as MediaProxy;
-							
-							mediaProxy.vo.entryMetadata = new Object();
-							
-							var listResponse : KalturaMetadataListResponse = arr[i++] as KalturaMetadataListResponse;
-							if (listResponse && listResponse.objects[listResponse.objects.length - 1])
-							{
-								var metadataXml : XMLList = XML(listResponse.objects[listResponse.objects.length - 1]["xml"]).children();
-								var metaDataObj : Object = new Object();
-								for each (var node : XML in metadataXml)
-								{
-									if (!metaDataObj.hasOwnProperty(node.name().toString()))
-									{
-										metaDataObj[node.name().toString()] = node.valueOf().toString();
-									}
-									else
-									{
-										if (metaDataObj[node.name().toString()] is Array)
-										{
-											(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString());
-										}
-										else
-										{
-											metaDataObj[node.name().toString()] =new Array ( metaDataObj[node.name().toString()]);
-											(metaDataObj[node.name().toString()] as Array).push(node.valueOf().toString() );
-										}
-									}
-								}
-								mediaProxy.vo.entryMetadata = metaDataObj;
-							}
-							sendNotification(NotificationType.METADATA_RECEIVED);
-						}
-					}
-				} 
-				
-			}
+			
 
 			fetchLayout();			
 		}
@@ -838,7 +670,8 @@ package com.kaltura.kdpfl.controller
 					}
 					catch (e: Error)
 					{
-						trace ("LoadConfigCommand::parseAlertManager >> property " +prop.localName()+" not found on " + getQualifiedClassName(manager));
+						if (_flashvars.debugMode="true")
+							trace ("LoadConfigCommand::addAttributesToManager >> property " +prop.localName()+" not found on " + getQualifiedClassName(manager));
 					}
 				}
 			}

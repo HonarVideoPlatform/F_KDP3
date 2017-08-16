@@ -8,6 +8,7 @@ package {
 	import fl.events.ComponentEvent;
 	
 	import flash.display.DisplayObject;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,6 +20,7 @@ package {
 	import flash.utils.setTimeout;
 	
 	import org.puremvc.as3.interfaces.IFacade;
+	import org.puremvc.as3.patterns.facade.Facade;
 
 	public class faderPluginCode extends Sprite implements IPlugin {
 		protected var _target:Object;
@@ -62,19 +64,21 @@ package {
 		
 		private var _isTimerOut : Boolean = false;
 		
+		private var _facade : IFacade;
+		
 		public function faderPluginCode() 
 		{
 		}
 
 
 		public function initializePlugin(facade:IFacade):void {
-			if (_target && hoverTarget != null) {
+			_facade = facade;
+			foreground = (facade.retrieveProxy(LayoutProxy.NAME) as LayoutProxy).vo.foreground;
+			
+			if ( hoverTarget != null) {
 				alpha_dis = 1 / (duration * 30);
 				
-				if (_target is Array)
-					parseDisplayObjectArray(facade);
-				else
-					targetDisplayObjects.push(_target);
+				createDisplayObjectArray();
 				//
 				hoverTarget.addEventListener(MouseEvent.ROLL_OVER, onHoverOver);
 				hoverTarget.addEventListener(MouseEvent.ROLL_OUT, onHoverOut);
@@ -86,8 +90,6 @@ package {
 				hoverTarget.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMove);
 			}
 			
-			foreground = (facade.retrieveProxy(LayoutProxy.NAME) as LayoutProxy).vo.foreground;
-			targetDisplayObjects.push(foreground);
 		}
 		/**
 		 * If we got to this function - it means that we need to hide the target
@@ -124,6 +126,7 @@ package {
 				else {
 					startHoverAnim();
 				}
+				
 			}
 		}
 		public function onMouseMove(evt:MouseEvent) : void
@@ -156,6 +159,7 @@ package {
 				else {
 					startHoverAnim();
 				}
+				
 			}
 		}
 		
@@ -164,7 +168,6 @@ package {
 			removeEventListener(Event.ENTER_FRAME, onFade);
 			addEventListener(Event.ENTER_FRAME, onFade);
 			targetDisplayObjects.visible =  true;
-			
 		}
 
 
@@ -173,23 +176,44 @@ package {
 			
 			if (targetDisplayObjects.alpha <= 0) {
 				targetDisplayObjects.alpha = 0;
-				
 				targetDisplayObjects.visible = false;
 				removeEventListener(Event.ENTER_FRAME, onFade);
+				_facade.sendNotification("fadeOut");
+				
 			}
 			else if (targetDisplayObjects.alpha >= 1) {
 				targetDisplayObjects.alpha = 1;
-				
+				targetDisplayObjects.visible = true;
 				removeEventListener(Event.ENTER_FRAME, onFade);
+				_facade.sendNotification("fadeIn");
 			}
 		}
 		
-		private function parseDisplayObjectArray (facade : IFacade) : void
+		private function parseDisplayObjectArray () : void
 		{
+			var prevTargets : DisplayObjectArray = new DisplayObjectArray();
+			if (targetDisplayObjects.array && targetDisplayObjects.array.length)
+			{
+				prevTargets = targetDisplayObjects;
+			}
+			targetDisplayObjects = new DisplayObjectArray();
 			for (var index:int =0; index < _target.length; index++)
 			{
-				targetDisplayObjects.push(facade["bindObject"][_target[index]]);
+				targetDisplayObjects.array.push(_facade["bindObject"][_target[index]]);
+				if (prevTargets.array && prevTargets.array.length && prevTargets.array.indexOf(_facade["bindObject"][_target[index]]) != -1)
+				{
+					prevTargets.removeDisplayObject(_facade["bindObject"][_target[index]]);
+				}
 			}
+			
+			//Restore complete visibility to the previous targets of the plugin that are not present in the new targets array.
+			if (prevTargets.array && prevTargets.array.length)
+			{
+				prevTargets.visible = true;
+				prevTargets.alpha = 1;
+			}
+			
+			
 		}
 
 		[Bindable]
@@ -209,6 +233,26 @@ package {
 				var displayObjectIdArray : Array = value.split(",");
 				_target = displayObjectIdArray;
 			}
+			
+			createDisplayObjectArray ();
+
+			
+		}
+		
+		private function createDisplayObjectArray () : void
+		{
+			if (_facade)
+			{
+				if (_target is Array) {
+					parseDisplayObjectArray();
+				}
+				else {
+					targetDisplayObjects.array.push(_target);
+				}
+				
+				targetDisplayObjects.array.push(foreground);
+			}
+			
 		}
 
 	}

@@ -239,8 +239,9 @@ package com.kaltura.kdpfl.plugin.component {
 		private function onAdDurationReceived (e : TimeEvent) : void
 		{
 			var sequenceProxy : Object = facade.retrieveProxy("sequenceProxy");
-			if (e.time > 0)
+			if (e.time > 0 && !isNaN(e.time))
 			{
+				sequenceProxy["vo"]["timeRemaining"] = Math.round(e.time);
 				sequenceProxy["vo"]["isAdLoaded"] = true;
 				(e.target as MediaPlayer).removeEventListener(TimeEvent.DURATION_CHANGE, onAdDurationReceived );
 			}

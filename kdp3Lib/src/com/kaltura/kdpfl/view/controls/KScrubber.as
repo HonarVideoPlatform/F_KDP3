@@ -21,8 +21,6 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.utils.getDefinitionByName;
 
-
-[Bindable]
 /**
  * class describing the player's scrubber. 
  * @author Hila
@@ -37,8 +35,11 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 	static public const EVENT_DRAG:String 		= "drag";
 	static public const EVENT_DRAG_END:String 	= "dragEnd";
 	
+	[Bindable]
 	public var color1:Number = -1;
+	[Bindable]
 	public var color2:Number = -1;
+	[Bindable]
 	public var color3:Number=-1;
 	
 //--------------------------------------
@@ -249,7 +250,12 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 	
 	public function initialize():void 
 	{
-
+		tabEnabled = false;
+		tabChildren = false;
+		if (_allowMouseClicks)
+		{
+			allowMouseClicks = "true";
+		}
 	}
 	
 	override protected function configUI():void
@@ -260,7 +266,8 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 		// the rest of the UI is added in draw since 
 		// they are not based yet on UIComponents due 
 		// to originating from astra scrubber component		
-	}		
+	}
+
 
 	override protected function draw():void
 	{
@@ -355,13 +362,18 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 		if (_allowMouseClicks)
 		{
 			_clickStrip.buttonMode = true;
-			_clickStrip.useHandCursor = true;		
+			_clickStrip.useHandCursor = true;	
+			_thumb.useHandCursor = true;
+			_clickStrip.tabEnabled = false;
+			_thumb.tabEnabled = false;
 			_clickStrip.addEventListener(MouseEvent.MOUSE_DOWN, clickStripHandler);
+			_thumb.addEventListener( MouseEvent.MOUSE_DOWN, scrubButtonMouseDownHandler );
 		}
 		else
 		{
 			_clickStrip.buttonMode = false;
 			_clickStrip.useHandCursor = false;
+			_thumb.useHandCursor = false;
 		}
 		addChildAt(_clickStrip, 3);
 				
@@ -403,6 +415,11 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 		
 		if(_thumb && color3!=-1)
 			KColorUtil.colorDisplayObject(_thumb , color3);
+		
+		if (_allowMouseClicks)
+		{
+			_thumb.buttonMode = true;
+		}
 	}
 		
 	/**
@@ -611,28 +628,36 @@ public dynamic class KScrubber extends UIComponent implements IComponent
 		}
 	}
 	
-	
+	/**
+	 * Flag which determines whether the scrubber is mouse-interactive or not. 
+	 * @return String value - "true"/"false"
+	 * 
+	 */	
 	public function get allowMouseClicks():String
 	{
 		return _allowMouseClicks.toString();
 	}
 
-
+	[Bindable]
 	public function set allowMouseClicks(value:String):void
 	{
 		_allowMouseClicks = (value == "true") ? true : false;
 		
 		if (_allowMouseClicks)
 		{
+			_thumb.buttonMode = true;
 			_thumb.useHandCursor = true;
+			_thumb.tabEnabled = false
 			_thumb.addEventListener(MouseEvent.MOUSE_DOWN, scrubButtonMouseDownHandler);
 			
 		}
 		else
 		{
-			_thumb.useHandCursor = false;
+			_thumb.buttonMode = false;
 			if (_thumb.hasEventListener(MouseEvent.MOUSE_DOWN) )
 				_thumb.removeEventListener(MouseEvent.MOUSE_DOWN, scrubButtonMouseDownHandler);
+			if (_clickStrip.hasEventListener(MouseEvent.MOUSE_DOWN) )
+				_clickStrip.removeEventListener(MouseEvent.MOUSE_DOWN, clickStripHandler );
 		}
 		
 		

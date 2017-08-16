@@ -185,7 +185,7 @@ package org.osmf.vast.media
 			}
 		}
 		
-		private function fireEventOfType(eventType:VASTTrackingEventType):void
+		protected function fireEventOfType(eventType:VASTTrackingEventType, cbShared:Boolean = true):void
 		{
 			var vastEvent:VASTTrackingEvent = eventsMap[eventType] as VASTTrackingEvent;
 			if (vastEvent != null)
@@ -202,7 +202,7 @@ package org.osmf.vast.media
 			}
 		}
 		
-		private function onPlayheadTimer(event:TimerEvent):void
+		protected function onPlayheadTimer(event:TimerEvent):void
 		{
 			// Check for 25%, 50%, and 75%.
 			var percent:Number = this.percentPlayback;
@@ -227,7 +227,7 @@ package org.osmf.vast.media
 			}
 		}
 		
-		private function get percentPlayback():Number
+		protected function get percentPlayback():Number
 		{
 			var timeTrait:TimeTrait = getTrait(MediaTraitType.TIME) as TimeTrait;
 			if (timeTrait != null)

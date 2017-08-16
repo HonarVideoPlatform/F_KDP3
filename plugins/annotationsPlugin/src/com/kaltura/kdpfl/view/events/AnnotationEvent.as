@@ -26,7 +26,11 @@ package com.kaltura.kdpfl.view.events
 		/**
 		 * String of the event fired when an annotation in-time was clicked
 		 */		
-		public static const SEEK_TO_ANNOTATION : String = "seekToAnnotation"
+		public static const SEEK_TO_ANNOTATION : String = "seekToAnnotation";
+		/**
+		 * String for event fired when annotations text length has reached maximum allowed value. 
+		 */		
+		public static const MAX_LENGTH_REACHED : String = "maxLengthReached";
 		/**
 		 * Constructor of the AnnotationEvent 
 		 * @param type - inherited

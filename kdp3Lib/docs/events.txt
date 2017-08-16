@@ -192,7 +192,14 @@ Each bullet lists the as3 constant name of the event and its actual string value
 	The scrubber had stopped being dragged
 
 62.	ALERT - alert
-	Pop up an alert. arguments: message, title
+	Pop up an alert. arguments: message, title, buttons, callbackFunction, iconClass
+	
+	message - string containing the message to display in the alert
+	title - string containing the title of the alert
+	buttons - array of strings for the alert button labels
+	callbackFunction - the function which handles an alert button being clicked.
+	iconClass - string containing the name of the export class of the icon that the alert should display (should exist in the skin.swf file).
+	
 	
 63.	BUMPER_PLAY_END - bumperPlayEnd - DEPRECATED
 	notification sent when a bumper (kaltura entry that plays as part of a sequence) has finished playback.

@@ -576,6 +576,7 @@ package org.osmf.elements.f4mClasses
 			{
 				resource.clipStartTime = streamingManifestResource.clipStartTime;
 				resource.clipEndTime = streamingManifestResource.clipEndTime;
+				resource.urlIncludesFMSApplicationInstance = streamingManifestResource.urlIncludesFMSApplicationInstance;
 			}
 			
 			// Add metadata to the created resource specifying the resource from

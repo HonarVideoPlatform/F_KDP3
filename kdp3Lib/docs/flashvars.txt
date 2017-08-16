@@ -195,6 +195,8 @@ Loading of plugins can be done in a similar way:
 									onDemand - plugin must only be loaded if a specific component in the KDP demands it.
 									noWait- plugin is loaded in a non-synchronized way, the GUI becomes enabled even if the plugin has not yet loaded.
 									preInitialize - plugin is loaded before GUI is created.
+	{Plugin name}.asyncInit = [true/false] - flag indicating whether the plugin initialization process involves a-synchronous processes. If == true -> the plugin is required to report
+											that its initialization is complete (or failed) by firing the KPluginEvent.ASYNC_INIT_COMPLETE (KPluginEvent.ASYNC_INIT_FAILED).
 	{Plugin name}.{any additional attribute} = {value} - setting any additional attribute specific to the plugin
 
 Built-in components (non plugins) can be loaded as well using flashvars the same way plugins are loaded with the following addition:

@@ -39,6 +39,8 @@ package com.kaltura.kdpfl.plugin.component {
 		private var _width:Number;
 		private var _defaultBookmarkURL:String;
 		
+		private var _flashvars : Object;
+		
 		/**
 		 * The plugin is currently running inside appstudio 
 		 */		
@@ -117,7 +119,7 @@ package com.kaltura.kdpfl.plugin.component {
 		private function _getShareCode(kc:Object):void {
 			var media:Object = facade.retrieveProxy("mediaProxy");
 			var config:Object = facade.retrieveProxy("configProxy");
-			var flashvars:Object = config.getData().flashvars;
+			_flashvars = config.getData().flashvars;
 			if (!uiconfId)
 				uiconfId = config.vo.kuiConf.id;
 
@@ -129,7 +131,7 @@ package com.kaltura.kdpfl.plugin.component {
 			// the uiconf that will be the new widget uiconf
 			kw.uiConfId = int(uiconfId); //kw.uiConfId = int(uiconfId);  
 			kw.sourceWidgetId = config["vo"]["kw"]["id"]; //"_1";// 
-			kw.partnerData = createWidgetPartnerData(flashvars);
+			kw.partnerData = createWidgetPartnerData(_flashvars);
 			kw.securityType = KalturaWidgetSecurityType.NONE;
 
 			//add widget			
@@ -188,6 +190,7 @@ package com.kaltura.kdpfl.plugin.component {
 
 		private function _createGigyaConfig():void {
 			var layout:Object = facade.retrieveProxy("layoutProxy");
+			var media:Object = facade.retrieveProxy("mediaProxy");
 			// Step 2 - Set up security to allow your app to interact with the Share menu 
 			Security.allowDomain("cdn.gigya.com");
 			Security.allowInsecureDomain("cdn.gigya.com");
@@ -199,6 +202,13 @@ package com.kaltura.kdpfl.plugin.component {
 			// so the link would be in the front page of facebook 
 			_cfg['useFacebookMystuff']='false';
 			
+			try{
+				_cfg['facebookPreviewURL3'] = _flashvars.httpProtocol + _flashvars.cdnHost + "/p/" + _flashvars.partnerId + "/thumbnail/width/" + (viewComponent as DisplayObject).width + "/entry_id/" + _currentEntry;
+			}catch (e:Error)
+			{
+				trace(e.message);
+			}
+			
 			var gigyaUi:String;
 			try {
 				gigyaUi = layout["vo"]["layoutXML"]["extraData"]["GigyaUI"]["config"]["0"];
@@ -209,8 +219,8 @@ package com.kaltura.kdpfl.plugin.component {
 			_cfg['UIConfig'] = gigyaUi;
 			_cfg['emailSubject'] = _shareEmailSubject;
 			
-			if(_title)
-				_cfg['widgetTitle'] = _title;
+			//if(_title)
+			_cfg['widgetTitle'] = media["vo"]["entry"]["name"] ? media["vo"]["entry"]["name"] : "";
 			
 			_cfg['emailBody'] = _shareEmailBody;
 			_cfg['partner'] = _gigyaPartnerKey;

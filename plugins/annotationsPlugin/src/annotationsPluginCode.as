@@ -1,5 +1,6 @@
 package
 {
+	import com.kaltura.kdpfl.model.strings.MessageStrings;
 	import com.kaltura.kdpfl.model.type.NotificationType;
 	import com.kaltura.kdpfl.plugin.IPlugin;
 	import com.kaltura.kdpfl.util.KAstraAdvancedLayoutUtil;
@@ -32,6 +33,10 @@ package
 		protected var _isReviewer : Boolean = false;
 		protected var _titleText : String = AnnotationStrings.ANNOTATION_BOX_TITLE;
 		protected var _messageText : String = "";
+		protected var _maxChars : Number = 0;
+		//Added 17.5.2011 - new variable for annotation persistence target
+		protected var _submissionTarget : String = AnnotationStrings.KALTURA;
+		protected var _useSharedObject : Boolean = true;
 		
 		public function annotationsPluginCode()
 		{
@@ -72,12 +77,14 @@ package
 					
 				}
 				annotationsBox.changeAnnotationsViewMode(AnnotationStrings.VIEW_MODE);
+				gotoViewMode();
 			}
 			else
 			{
 				
 				isReviewer = true;
 				annotationsBox.changeAnnotationsViewMode(AnnotationStrings.VIEW_MODE);
+				gotoViewMode();
 			}
 		}
 		
@@ -131,7 +138,7 @@ package
 			inEditMode = true;
 			inViewMode = false;
 			annotationEditForm.visible = true;
-			titleText = "<b>Compose Annotation</b>";
+			titleText = MessageStrings.getString("EDIT_ANNOTATION_FORM_TITLE");
 			messageText = "";
 		}
 		
@@ -140,7 +147,7 @@ package
 			inEditMode = false;
 			inViewMode = true;
 			annotationEditForm.visible = false;
-			titleText = AnnotationStrings.ANNOTATION_BOX_TITLE;
+			titleText = MessageStrings.getString("ANNOTATION_BOX_TITLE");
 		}
 		
 		private function addVisualComponents () : void
@@ -157,13 +164,68 @@ package
 		
 		private function onInvalidAnnotationSaveAttempt (e : Event) : void
 		{
-			messageText = AnnotationStrings.INVALID_ANNOTATION_TEXT_MESSAGE;
+			messageText = MessageStrings.getString("INVALID_ANNOTATION_TEXT_MESSAGE");
 		}
 		
 		private function onInvalidAnnotationIntime (e : Event) : void
 		{
-			messageText = AnnotationStrings.INVALID_ANNOTATION_INTIME_MESSAGE;
+			messageText =  MessageStrings.getString("INVALID_ANNOTATION_INTIME_MESSAGE");;
 		}
+		[Bindable]
+		/**
+		 * Signifies the maximum number of characters per annotation. 
+		 * @return 
+		 * 
+		 */		
+		public function get maxChars():Number
+		{
+			return _maxChars;
+		}
+
+		public function set maxChars(value:Number):void
+		{
+			_maxChars = value;
+			Annotation.maxChars = _maxChars;
+		}
+		[Bindable]
+		/**
+		 * Signifes the location to which the submitted feedback session of annotations
+		 * is persisted. 
+		 * @return 
+		 * 
+		 */		
+		public function get submissionTarget():String
+		{
+			return _submissionTarget;
+		}
+
+		public function set submissionTarget(value:String):void
+		{
+			_submissionTarget = value;
+		}
+		[Bindable]
+		/**
+		 *  
+		 * @return 
+		 * 
+		 */		
+		public function get useSharedObject():String
+		{
+			return _useSharedObject.toString();
+		}
+
+		public function set useSharedObject(value:String):void
+		{
+			if (value == "true")
+			{
+				_useSharedObject = true;
+			}
+			else
+			{
+				_useSharedObject = false;
+			}
+		}
+
 
 	}
 }

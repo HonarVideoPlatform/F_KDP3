@@ -10,8 +10,6 @@ package com.kaltura.kdpfl.view.controls
 	import flash.events.Event;
 	import flash.net.SharedObject;
 	
-	import mx.graphics.RoundedRectangle;
-	
 	import org.puremvc.as3.interfaces.INotification;
 
 	/**

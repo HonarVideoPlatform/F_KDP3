@@ -103,8 +103,14 @@ public class KSlider extends Slider implements IComponent
 		
 		// override thumb size to its upSkin size.
 		// otherwise hardcoded to 13,13 in configUI		
-		var thumbSkin:Sprite = Sprite( getDisplayObjectInstance( getStyleValue("thumbUpSkin") ));
-		thumb.setSize( thumbSkin.width, thumbSkin.height );	
+		try{
+			var thumbSkin:Sprite = Sprite( getDisplayObjectInstance( getStyleValue("thumbUpSkin") ));
+			thumb.setSize( thumbSkin.width, thumbSkin.height );	
+		}
+		catch (e:Error)
+		{
+			
+		}
 				
 		// add support for progress bar		
 		var oldProgress:Sprite = progress;

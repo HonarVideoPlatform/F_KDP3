@@ -232,7 +232,13 @@ package com.kaltura.kdpfl.model.type
 		 */		
 		static public const SCRUBBER_DRAG_END		:String = "scrubberDragEnd";
 		/**
-		 * Pop up an alert. Arguments: new Object = {message:String="",title:String=""}
+		 * Pop up an alert. arguments: message, title, buttons, callbackFunction, iconClass
+	
+		 *message - string containing the message to display in the alert
+		 *title - string containing the title of the alert
+		 *buttons - array of strings for the alert button labels
+		 *callbackFunction - the function which handles an alert button being clicked.
+		 *iconClass - string containing the name of the export class of the icon that the alert should display (should exist in the skin.swf file).
 		 */ 
 		static public const ALERT					:String = "alert";
 		/**

@@ -69,13 +69,17 @@ package com.kaltura.kdpfl.controller.media
 					if(_mediaProxy.vo && _mediaProxy.vo.kalturaMediaFlavorArray)
 					{
 						var dif : Number = preferedFlavorBR;
+
 						for(var i:int=0;i<_mediaProxy.vo.kalturaMediaFlavorArray.length;i++)//this checks the flavorId at the kalturaMediaFlavorArray
 						{
 							// if a selected flavor was set (e.g. kmc preview via flashvars) search for it
-							if (selectedFlavorId && selectedFlavorId == _mediaProxy.vo.kalturaMediaFlavorArray[i].id)
+							if (selectedFlavorId)
 							{
-								foundFlavorBR = _mediaProxy.vo.kalturaMediaFlavorArray[i].bitrate;
-								break;
+								if (selectedFlavorId == _mediaProxy.vo.kalturaMediaFlavorArray[i].id)
+								{
+									foundFlavorBR = _mediaProxy.vo.kalturaMediaFlavorArray[i].bitrate;
+									break;
+								}
 							}
 								// if a prefered bitrate is specified search for the most closest bitrate (lower or equal)
 							else if (preferedFlavorBR != 0) 
@@ -189,6 +193,18 @@ package com.kaltura.kdpfl.controller.media
 		private function configurePlayback () : void
 		{
 			var sequenceProxy : SequenceProxy = facade.retrieveProxy(SequenceProxy.NAME) as SequenceProxy;
+			
+			if (! _mediaProxy.vo.isMediaDisabled)
+			{
+				sendNotification(NotificationType.ENABLE_GUI, {guiEnabled : true , enableType : EnableType.CONTROLS});
+				if (_mediaProxy.vo.entry is KalturaLiveStreamEntry || _flashvars.streamerType == StreamerType.LIVE)
+				{
+					_mediaProxy.prepareMediaElement();
+					sendNotification(NotificationType.ENABLE_GUI, {guiEnabled : false , enableType : EnableType.CONTROLS});
+					sendNotification(NotificationType.LIVE_ENTRY, _mediaProxy.vo.resource);
+				}
+			}
+			
 			if ((_flashvars.autoPlay == "true" || _mediaProxy.vo.singleAutoPlay) && !_mediaProxy.vo.isMediaDisabled && (! sequenceProxy.vo.isInSequence))
 			{
 				if (_mediaProxy.vo.singleAutoPlay)
