@@ -2,13 +2,13 @@
 
 dir
 8923
-svn+ssh://svnread@kelev.kaltura.com/usr/local/kalprod/flash/kdp3/v3.5.6
+svn+ssh://svnread@kelev.kaltura.com/usr/local/kalprod/flash/kdp3/v3.5.7.1
 svn+ssh://svnread@kelev.kaltura.com/usr/local/kalprod
 
 
 
-2011-03-31T16:30:57.929602Z
-5144
+2011-04-13T15:14:54.063002Z
+5204
 hila
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2017-07-03T23:19:30.000000Z
-307cadcc96e76180a386a73b0c121e75
-2011-03-31T16:30:57.929602Z
-5144
+2017-07-03T23:21:09.000000Z
+bfaa035df06ae843a428c25760109a1b
+2011-04-13T08:21:06.016412Z
+5198
 hila
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-252045
+318988
 
 plugins
 dir
